@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MainButton from './components/common/mainButton/'
+import MainButtonOutlined from './components/common/mainButtonOutlined/'
 import SecondaryButton from './components/common/secondaryButton/'
 import ThirdButton from './components/common/thirdButton/'
 
@@ -28,6 +29,9 @@ function App() {
         <br/>
         <br/>
         <ThirdButton />
+        <br/>
+        <br/>
+        <MainButtonOutlined />
       </header>
     </div>
   );

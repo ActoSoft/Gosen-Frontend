@@ -3,7 +3,7 @@ import './index.scss'
 
 const MainButtonOutlined = ( props ) =>(
     <button className="main-button-outlined">
-        Botón Terciario
+        { props.text ? props.text : null }
     </button>
 )
 

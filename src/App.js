@@ -1,10 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import MainButton from './components/common/mainButton/'
-import MainButtonOutlined from './components/common/mainButtonOutlined/'
-import SecondaryButton from './components/common/secondaryButton/'
-import ThirdButton from './components/common/thirdButton/'
 
 function App() {
   return (
@@ -22,16 +18,6 @@ function App() {
         >
           Learn React
         </a>
-        <MainButton />
-        <br/>
-        <br/>
-        <SecondaryButton />
-        <br/>
-        <br/>
-        <ThirdButton />
-        <br/>
-        <br/>
-        <MainButtonOutlined />
       </header>
     </div>
   );

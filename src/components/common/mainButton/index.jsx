@@ -3,7 +3,7 @@ import './index.scss'
 
 const MainButton = ( props ) =>(
     <button className="main-button">
-        botón primario
+        { props.text ? props.text : null }
     </button>
 )
 

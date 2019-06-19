@@ -1,0 +1,13 @@
+@import '../../../variables.scss';
+
+.input-text-component{
+    background: $third;
+    border: none;
+    color: $white;
+    padding: 10px 20px;
+    font-size: 1em;
+    box-shadow: 0px 5px 5px 0 $black;
+    &:focus{
+        outline: none;
+    }
+}

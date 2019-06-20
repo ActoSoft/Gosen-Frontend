@@ -59,3 +59,34 @@
         background-color: $third !important;
     }
 }
+.ant-switch-checked{
+    background: $black;
+}
+.ant-switch{
+    background-color: $black;
+}
+
+.time-picker-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .time-container{
+        margin-right: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        .format-container{
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            span{
+                text-transform: uppercase;
+                font-weight: 100;
+                font-size: 0.5em;
+            }
+        }
+    }
+}

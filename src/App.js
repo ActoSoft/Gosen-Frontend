@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import InputText from './components/common/inputText/'
+import TextArea from './components/common/textArea/'
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           Learn React
         </a>
         <InputText/>
+        <br/>
+        <br/>
+        <TextArea/>
       </header>
     </div>
   );

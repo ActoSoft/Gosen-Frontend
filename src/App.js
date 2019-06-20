@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import InputText from './components/common/inputText/'
 import TextArea from './components/common/textArea/'
+import SelectComponent from './components/common/select/'
 
 function App() {
   return (
@@ -20,10 +21,7 @@ function App() {
         >
           Learn React
         </a>
-        <InputText/>
-        <br/>
-        <br/>
-        <TextArea/>
+        <SelectComponent/>
       </header>
     </div>
   );

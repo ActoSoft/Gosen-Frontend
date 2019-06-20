@@ -1,0 +1,61 @@
+@import '../../../variables.scss';
+
+.ant-time-picker{
+    border-radius: 15px;
+    input{
+        background: $black;
+        color: $white;
+        border-radius: 15px;
+        &:focus, &:hover{
+            border-color: $white;
+        }
+    }
+    .anticon-clock-circle{
+        color: $white;
+    }
+    svg{
+        background: $black;
+        path{
+            fill: $white;
+        }
+    }
+}
+.ant-time-picker-panel{
+    background: transparent;
+    color: $white;
+    div{
+        background: $black;
+    
+        &.ant-time-picker-panel-inner{
+            border-radius: 15px;
+            border: 1px solid $white;
+        }
+        &.ant-time-picker-panel-input-wrap{
+            border-radius: 15px 15px 0 0;
+        }
+        .ant-time-picker-panel-combobox{
+            border-radius: 15px;
+            .ant-time-picker-panel-select{
+                &:first-child{
+                    border-radius: 0 0 0 15px;
+                }
+                &:last-child{
+                    border-radius: 0 0 15px 0;
+                }
+            }
+        }
+    }
+    input{
+        background: $black;
+        color: $white;
+    }
+    
+    li{
+        &:hover{
+            background-color: $third !important;
+        }
+    }
+    li.ant-time-picker-panel-select-option-selected{
+        background-color: $third !important;
+    }
+}

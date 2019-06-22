@@ -1,0 +1,51 @@
+@import '../../../variables.scss';
+
+.calendar-container{
+    width: 50%;
+    border-radius: 15px;
+    border: 1px solid $white;
+    .ant-fullcalendar-header{
+        background-color: $black;
+        border-radius: 15px 15px 0 0;
+        .ant-select-sm .ant-select-selection--single{
+            background: $black;
+            border: 1px solid $white;
+            color: $white;
+            border-radius: 15px 15px;
+            box-shadow: none;
+            svg{
+                color: $white;
+            }
+        }
+    }
+
+    .ant-fullcalendar{
+        background-color: $black;
+        color: $white;
+        border-radius: 0 0 15px 15px;
+        .ant-fullcalendar-value{
+            color: $white;
+            border-radius: 50%;
+            &:hover{
+                background: $primary;
+            }
+            &:active{
+                background: $primary-dark;
+            }
+        }
+        .ant-fullcalendar-calendar-body{
+            border-radius: 0 0 15px 15px;
+        }
+    }
+    .ant-fullcalendar-header .ant-radio-group{
+        display: none;
+    }
+    .ant-fullcalendar-selected-day .ant-fullcalendar-value, .ant-fullcalendar-month-panel-selected-cell .ant-fullcalendar-value{
+        border-radius: 50%;
+        background-color: $primary;
+        color: $black;
+    }
+    .ant-fullcalendar-today .ant-fullcalendar-value, .ant-fullcalendar-month-panel-current-cell .ant-fullcalendar-value{
+        box-shadow: none;
+    }
+}

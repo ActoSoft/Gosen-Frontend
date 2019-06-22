@@ -5,6 +5,7 @@ import InputText from './components/common/inputText/'
 import TextArea from './components/common/textArea/'
 import SelectComponent from './components/common/select/'
 import TimePickerComponent from './components/common/timePicker/'
+import DatePicker from './components/common/datePicker/'
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         >
           Learn React
         </a>
-        <TimePickerComponent/>
+        <DatePicker/>
       </header>
     </div>
   );

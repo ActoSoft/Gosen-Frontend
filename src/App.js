@@ -1,6 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import HeaderText from './components/common/headerText/'
+import TitleText from './components/common/titleText/'
+import SubtitleOne from './components/common/subtitleOne/'
+import SubtitleTwo from './components/common/subtitleTwo/'
 
 function App() {
   return (
@@ -18,6 +22,10 @@ function App() {
         >
           Learn React
         </a>
+        <HeaderText text={"Hola"}/>
+        <TitleText text={"Hola"}/>
+        <SubtitleOne text={"Hola"}/>
+        <SubtitleTwo text={"Hola"}/>
       </header>
     </div>
   );

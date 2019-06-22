@@ -1,13 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import InputText from './components/common/inputText/'
-import TextArea from './components/common/textArea/'
-import SelectComponent from './components/common/select/'
-import TimePickerComponent from './components/common/timePicker/'
-import DatePicker from './components/common/datePicker/'
-import CheckBoxComponent from './components/common/checkBox'
-import RadioButton from './components/common/radioButton'
 
 function App() {
   return (
@@ -25,7 +18,6 @@ function App() {
         >
           Learn React
         </a>
-        <RadioButton/>
       </header>
     </div>
   );

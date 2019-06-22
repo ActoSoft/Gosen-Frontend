@@ -1,0 +1,27 @@
+@import '../../../variables.scss';
+
+.check-box-container{
+    .check-element{
+        color: $white;
+        .ant-checkbox{
+            .ant-checkbox-inner{
+                border-color: $white;
+                background: $black;
+                &:hover, &:visited, &:focus, &:active{
+                    border-color: $white;
+                }
+            }
+            &.ant-checkbox-checked{
+                .ant-checkbox-inner{
+                    background: $white;
+                    border-color: $white;
+                    &::after{
+                        border: 2px solid $black;
+                        border-top: 0;
+                        border-left: 0;
+                    }
+                }
+            }
+        }
+    }
+}

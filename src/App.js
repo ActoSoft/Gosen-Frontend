@@ -6,6 +6,7 @@ import TextArea from './components/common/textArea/'
 import SelectComponent from './components/common/select/'
 import TimePickerComponent from './components/common/timePicker/'
 import DatePicker from './components/common/datePicker/'
+import CheckBoxComponent from './components/common/checkBox'
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
         >
           Learn React
         </a>
-        <DatePicker/>
+        <CheckBoxComponent/>
       </header>
     </div>
   );

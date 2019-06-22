@@ -1,8 +1,8 @@
 import React from 'react'
 import './index.scss'
 
-const InputText = ( props ) =>(
-    <input type="password" className="input-text-component"/>
+const InputPassword = ( props ) =>(
+    <input type="password" className="input-pass-component"/>
 )
 
-export default InputText
+export default InputPassword

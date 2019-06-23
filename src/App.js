@@ -15,8 +15,8 @@ class App extends Component{
     return(
       <div>
         <Switch>
-          <Route exact path = "/login/" Component = { Login }/>
-          <Route exact path = "/forgot_password/" Component = { ForgotPassword }/>
+          <Route exact path = "/login/" component = { Login }/>
+          <Route exact path = "/forgot_password/" component = { ForgotPassword }/>
         </Switch>
       </div>
     )

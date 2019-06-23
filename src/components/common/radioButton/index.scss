@@ -1,0 +1,27 @@
+@import '../../../variables.scss';
+
+.radio-container{
+    .radio-option{
+        color: $white;
+        .ant-radio{
+            .ant-radio-inner{
+                background: $black;
+            }
+            &:hover{
+                .ant-radio-inner{
+                    border-color: $white !important;
+                }
+            }
+        }
+        .ant-radio-checked{
+            .ant-radio-inner{
+                background: $black;
+                border-color: $white;
+                box-shadow: none;
+                &:after{
+                    background-color: $white;
+                }
+            }
+        }
+    }
+}

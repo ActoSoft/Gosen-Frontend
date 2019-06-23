@@ -1,0 +1,14 @@
+@import '../../../variables.scss';
+
+.text-area-component{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    background: $third;
+    border: none;
+    color: $white;
+    box-shadow: 0px 5px 5px 1px $black;
+    &:focus, &:hover{
+        outline: 2px solid $primary;
+    }
+}

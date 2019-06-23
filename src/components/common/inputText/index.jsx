@@ -1,8 +1,9 @@
 import React from 'react'
 import './index.scss'
+import { Input } from 'antd'
 
 const InputText = ( props ) =>(
-    <input type="text" className="input-text-component"/>
+    <Input placeholder={ props.placeholder ? props.placeholder : "" } className="input-text-component"/>
 )
 
 export default InputText

@@ -1,8 +1,9 @@
 import React from 'react'
 import './index.scss'
+import { Input } from 'antd'
 
 const InputPassword = ( props ) =>(
-    <input type="password" className="input-pass-component"/>
+    <Input.Password placeholder={ props.placeholder ? props.placeholder : "" } className="input-pass-component"/>
 )
 
 export default InputPassword

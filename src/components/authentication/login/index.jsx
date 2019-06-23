@@ -15,7 +15,7 @@ class Login extends Component{
         return(
             <div className="login-ui-container">
                 <div className="left-container">
-                    <span>Iniciar sesión</span>
+                    <span className="login-title">Iniciar sesión</span>
                     <div className="form-part">
                         <span>Usuario</span>
                         <input type="text"/>

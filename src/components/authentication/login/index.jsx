@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import './index.scss'
 import GLogo from '../../../assets/icons/gosen_logo.png'
 import GName  from '../../../assets/icons/gosen_name.png'
+import InputText from '../../common/inputText/'
+import InputPassword from '../../common/inputPassword/'
+import MainButton from '../../common/mainButton/'
 
 class Login extends Component{
     constructor(props){
@@ -18,12 +21,12 @@ class Login extends Component{
                     <span className="login-title">Iniciar sesión</span>
                     <div className="form-part">
                         <span>Usuario</span>
-                        <input type="text"/>
+                        <InputText className="inputs-login"/>
                         <span>Contraseña</span>
-                        <input type="password"/>
+                        <InputPassword className="inputs-login"/>
                         <p>¿Olvidaste tu contraseña?</p>
                     </div>
-                    <button>Contraseña</button>
+                    <MainButton text={`Contraseña`}/>
                 </div>
                 <div className="right-container">
                     <img src={ GLogo } alt="Logo Gosen" />

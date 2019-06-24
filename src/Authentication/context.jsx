@@ -1,5 +1,5 @@
 import React, { createContext } from 'react'
-import Authentication from './authentication';
+import Authentication from './authentication'
 
 const AuthContext = createContext(null)
 

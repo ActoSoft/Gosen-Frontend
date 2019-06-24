@@ -9,8 +9,7 @@ class Authentication {
     }
 
     isAuthenticated = () => {
-        console.log(this.token)
-        if(this.token) {
+        if (this.token) {
             return true
         }
         return false
@@ -22,4 +21,4 @@ class Authentication {
 
 }
 
-export default Authentication;
+export default Authentication

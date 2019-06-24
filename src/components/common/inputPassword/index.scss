@@ -2,26 +2,28 @@
 
 .input-pass-component{
     background: $third;
+    position: relative;
     border: none;
     color: $white;
     box-shadow: 0px 5px 5px 0 $black;
-    &:focus{
-        outline: none;
-    }
-    svg{
-        width: 20px;
-    }
     input{
         font-family: 'Roboto', sans-serif;
         font-weight: 300;
-        font-size: 12px;
+        font-size: 18px;
         background: $third;
         border: none;
         color: $white;
+        transition: ease-in-out 0.15s;
         &:focus{
-            outline: none;
-            border:none;
+            outline: 2px solid $primary;
+            border: none;
             box-shadow: none;
         }
+    }
+    svg{
+        position: absolute;
+        height: 90%;
+        bottom: 5%;
+        right: 2%;
     }
 }

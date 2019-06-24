@@ -13,20 +13,25 @@
         height: 94vh;
         width: 94%;
         padding: 3vh 3vw;
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 10% 90%;
         align-items: center;
-        justify-content: flex-start;
+        justify-items: center;
         .title-text{
             color: $white;
-            width: 100%;
+            width: 80%;
             font-style: italic;
+            grid-column: 1/auto;
+            grid-row: 1/auto;
         }
         .form-part{
+            grid-column: 1/auto;
+            grid-row: 1/3;
             width: 80%;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
             height: 50vh;
 
@@ -34,15 +39,33 @@
                 font-size: 16px;
                 text-transform: uppercase;
                 color: $white;
-                margin-top: 5vh;
+                width: 100%;
+                width: 100%;
+                &:nth-child(3){
+                    margin-top: 5vh;
+                }
             }
             .input-text-component, .input-pass-component{
+                width: 100%;
+                margin: 3vh 0 1vh 0;
+                height: 5vh;
+                text-align: center;
+            }
+            .input-pass-component{
                 width: 100%;
                 margin: 3vh 0 1vh 0;
                 height: 5vh;
                 input{
                     width: 90%;
                     height: 90%;
+                    padding-right: 10%;
+                    text-align: center;
+                }
+                span{
+                    width: 10%;
+                    svg{
+                        margin-top: 5px;
+                    }
                 }
             }
             .subtitle-one-text{
@@ -51,6 +74,13 @@
                 width: 100%;
                 text-transform: none;
                 color: $white;
+                cursor: pointer;
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+            .main-button{
+                margin-top: 5vh;
             }
         }
     }

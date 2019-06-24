@@ -21,15 +21,15 @@ class Login extends Component{
         return(
             <div className="login-ui-container">
                 <div className="left-container">
-                    <TitleText text={`Inisiar sesion`}/>
+                    <TitleText text={`Iniciar sesión`}/>
                     <div className="form-part">
                         <SubtitleTwo text={"Usuario"}/>
                         <InputText className="inputs-login"/>
                         <SubtitleTwo text={"Contraseña"}/>
                         <InputPassword className="inputs-login"/>
                         <SubtitleOne text="¿Olvidaste tu contraseña?"/>
+                        <MainButton text={`Iniciar Sesión`}/>
                     </div>
-                    <MainButton text={`Contraseña`}/>
                 </div>
                 <div className="right-container">
                     <img src={ GLogo } alt="Logo Gosen" />

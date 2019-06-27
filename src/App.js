@@ -1,28 +1,20 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom'
-import Login from './components/authentication/login'
-import ForgotPassword from './components/authentication/forgotPassword'
+import React, { Component, Fragment } from 'react';
 import './App.scss'
+import Router from './routes'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component{
-  constructor(props){
-    super(props)
-    this.state = {
 
+    render(){
+        return(
+        <Fragment>
+            <Router />
+            <ToastContainer />
+        </Fragment>
+        )
     }
-  }
-
-  render(){
-    return(
-      <div>
-        <Switch>
-          <Route exact path = "/login/" component = { Login }/>
-          <Route exact path = "/recuperar-contraseña/" component = { ForgotPassword }/>
-        </Switch>
-      </div>
-    )
-  }
 
 }
 
-export default App;
+export default App

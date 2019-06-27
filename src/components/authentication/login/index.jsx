@@ -9,7 +9,7 @@ import TitleText from '../../common/titleText/'
 import SubtitleOne from '../../common/subtitleOne'
 import SubtitleTwo from '../../common/subtitleTwo'
 import { NavLink } from 'react-router-dom'
-import axios from 'axios'
+import { withAuth } from '../../../Authentication'
 
 class Login extends Component {
 
@@ -19,27 +19,16 @@ class Login extends Component {
 			username: '',
 			password: ''
 		}
+		this.login = this.props.auth.handleLogin
 	}
 
 	onChangeForm = (e) => {
 		const { name, value } = e.target
-		console.log(name)
-		console.log(value)
 		this.setState(prevState => {
 			const newState = { ...prevState };
 			newState[name] = value;
 			return newState
 		})
-	}
-
-	handleLogin = async () => {
-		try {
-			let loginRequest = await axios.post('http://localhost:8000/token-auth/', this.state)
-			console.log(loginRequest.data)
-		} catch (error) {
-			console.log('Algo falló')
-			console.log(error)
-		}
 	}
 
 	render() {
@@ -51,11 +40,11 @@ class Login extends Component {
 						<SubtitleTwo text={'Usuario'} />
 						<InputText className="inputs-login" name="username" onChange={this.onChangeForm} />
 						<SubtitleTwo text={'Contraseña'} />
-						<InputPassword className="inputs-login" name="password" onChange={(e)=>this.onChangeForm(e)} />
+						<InputPassword className="inputs-login" name="password" onChange={this.onChangeForm} />
 						<NavLink to="/recuperar-contraseña/" className="navlink">
 							<SubtitleOne text="¿Olvidaste tu contraseña?" />
 							</NavLink>
-						<MainButton text={`Iniciar Sesión`} onClick={this.handleLogin} />
+						<MainButton text={`Iniciar Sesión`} onClick={(e)=>this.login(this.state, e)} />
 					</div>
 				</div>
 				<div className="right-container">
@@ -67,4 +56,4 @@ class Login extends Component {
 	}
 }
 
-export default Login
+export default withAuth(Login)

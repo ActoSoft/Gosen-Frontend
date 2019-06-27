@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import Login from './components/authentication/login'
 import ForgotPassword from './components/authentication/forgotPassword'
+import './App.scss'
 
 class App extends Component{
   constructor(props){
@@ -16,7 +17,7 @@ class App extends Component{
       <div>
         <Switch>
           <Route exact path = "/login/" component = { Login }/>
-          <Route exact path = "/forgot_password/" component = { ForgotPassword }/>
+          <Route exact path = "/recuperar-contraseña/" component = { ForgotPassword }/>
         </Switch>
       </div>
     )

@@ -43,6 +43,9 @@
                 &:nth-child(2){
                     text-align: justify;
                 }
+                &:hover {
+					text-decoration: underline;
+				}
             }
             .bottom-part{
                 display: flex;
@@ -60,7 +63,7 @@
                     &:nth-child(3){
                         text-align: right;
                     }
-                }   
+                }
                 .input-text-component{
                     width: calc(100% - 20px);
                     height: 50px;

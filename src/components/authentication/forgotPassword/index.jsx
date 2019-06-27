@@ -5,13 +5,14 @@ import MainButton from '../../common/mainButton'
 import TitleText from '../../common/titleText'
 import SubtitleOne from '../../common/subtitleOne'
 import InputText from '../../common/inputText'
+import { NavLink } from 'react-router-dom';
 
 class ForgotPassword extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			textForgot:
-				'No te preocupes\nIngresa el correo electronico que tienes ligado a tu cuenta y en unos minutos recibirás un correo electrónico con los pasos necesarios para que puedas recuperarla ;)'
+				'No te preocupes.\nIngresa el correo electrónico que tienes ligado a tu cuenta y en unos minutos recibirás un correo electrónico con los pasos necesarios para que puedas recuperarla 😉'
 		}
 	}
 
@@ -29,7 +30,9 @@ class ForgotPassword extends Component {
 						<div className="bottom-part">
 							<SubtitleOne text={'usuario'} />
 							<InputText placeholder={'user@domain.com'} />
-							<SubtitleOne text={'¿La recordaste? Inicia Sesión'} />
+							<NavLink to="/login/" className="navlink">
+								<SubtitleOne text='¿La recordaste? Inicia Sesión' />
+							</NavLink>
 							<MainButton text={'Recuperar'} />
 						</div>
 					</div>

@@ -10,7 +10,7 @@ const Routes = () => {
         <Fragment>
             <Switch>
                 <Route exact path = "/login/" component = { Login } />
-                <Route exact path = "/forgot_password/" component = { ForgotPassword } />
+                <Route exact path = "/recuperar-contraseña/" component = { ForgotPassword } />
                 <PrivateRoute exact path = '/tu-caca/' component = { Caca } />
             </Switch>
         </Fragment>

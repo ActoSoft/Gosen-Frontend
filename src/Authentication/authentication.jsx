@@ -24,7 +24,6 @@ class Authentication {
     handleLogin = async (data) => {
 		try {
             let response = await axios.post('http://localhost:8000/token-auth/', data)
-            console.log(response)
 			if (response.data) {
                 const { token, user } = response.data
                 const { username, email, first_name, last_name, id } = user
@@ -34,14 +33,17 @@ class Authentication {
 				localStorage.setItem('firstName', first_name)
                 localStorage.setItem('lastName', last_name)
                 localStorage.setItem('userId', id)
-				toast.success('Has iniciado sesión con éxito')
+                toast.success('Has iniciado sesión con éxito')
+                return true
 			}
 			else {
-				toast.error('Algo falló al iniciar sesión')
+                toast.error('Algo falló al iniciar sesión')
+                return false
 			}
 		} catch (error) {
 			console.log(error)
-			toast.error('Algo falló al iniciar sesión')
+            toast.error('Algo falló al iniciar sesión')
+            return false
 		}
     }
 

@@ -31,6 +31,12 @@ class Login extends Component {
 		})
 	}
 
+	onLogin = async () => {
+		if (await this.login(this.state)) {
+			this.props.history.push('/dashboard/')
+		}
+	}
+
 	render() {
 		return (
 			<div className="login-ui-container">
@@ -44,7 +50,7 @@ class Login extends Component {
 						<NavLink to="/recuperar-contraseña/" className="navlink">
 							<SubtitleOne text="¿Olvidaste tu contraseña?" />
 							</NavLink>
-						<MainButton text={`Iniciar Sesión`} onClick={(e)=>this.login(this.state, e)} />
+						<MainButton text={`Iniciar Sesión`} onClick={this.onLogin} />
 					</div>
 				</div>
 				<div className="right-container">

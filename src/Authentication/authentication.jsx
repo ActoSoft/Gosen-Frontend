@@ -58,6 +58,17 @@ class Authentication {
         }
     }
 
+    handleResetPasswordConfirm = async (data) =>{
+        try {
+            let response = axios.post('http://localhost:8000/accounts/password_reset/confirm/', data)
+            if(response.data){
+                console.log(data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 }
 
 export default Authentication

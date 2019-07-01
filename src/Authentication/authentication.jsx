@@ -8,6 +8,7 @@ class Authentication {
         this.email = localStorage.getItem('email')
         this.firstName = localStorage.getItem('first_name')
         this.lastName = localStorage.getItem('last_name')
+        this.API_URL = process.env.REACT_APP_API_URL
     }
 
     isAuthenticated = () => {
@@ -23,7 +24,7 @@ class Authentication {
 
     handleLogin = async (data) => {
 		try {
-            let response = await axios.post('http://localhost:8000/token-auth/', data)
+            let response = await axios.post(`${this.API_URL}/token-auth/`, data)
 			if (response.data) {
                 const { token, user } = response.data
                 const { username, email, first_name, last_name, id } = user
@@ -49,7 +50,7 @@ class Authentication {
 
     handleResetPassword = async (data) => {
         try {
-            let response = axios.post('http://localhost:8000/accounts/password_reset/', data)
+            let response = axios.post(`${this.API_URL}/accounts/password_reset/`, data)
             if (response.data) {
                 console.log(data)
             }
@@ -60,7 +61,7 @@ class Authentication {
 
     handleResetPasswordConfirm = async (data) =>{
         try {
-            let response = axios.post('http://localhost:8000/accounts/password_reset/confirm/', data)
+            let response = axios.post(`${this.API_URL}/accounts/password_reset/confirm/`, data)
             if(response.data){
                 console.log(data)
             }

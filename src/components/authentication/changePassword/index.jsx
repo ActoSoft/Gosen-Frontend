@@ -6,6 +6,7 @@ import SubtitleOne from '../../common/subtitleOne'
 import InputPassword from '../../common/inputPassword'
 import MainButton from '../../common/mainButton'
 import { withAuth } from '../../../Authentication/'
+import { toast } from 'react-toastify'
 
 class ChangePassword extends Component{
     constructor(props){
@@ -32,7 +33,7 @@ class ChangePassword extends Component{
 
         password === confirm_pass_value
         ? this.changePassword(this.state)
-        : alert('Los valores no coinsiden')
+        : toast.error('los valores no coinciden ')
     }
 
     render(){

@@ -1,5 +1,10 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import {
+    loginEndpoint,
+    resetPasswordEndpoint,
+    recoverPasswordEndpoint
+} from '../backendEndpoints'
 class Authentication {
 
     constructor() {
@@ -24,7 +29,7 @@ class Authentication {
 
     handleLogin = async (data) => {
 		try {
-            let response = await axios.post(`${this.API_URL}/token-auth/`, data)
+            let response = await axios.post(loginEndpoint, data)
 			if (response.data) {
                 const { token, user } = response.data
                 const { username, email, first_name, last_name, id } = user
@@ -50,7 +55,7 @@ class Authentication {
 
     handleResetPassword = async (data) => {
         try {
-            let response = axios.post(`${this.API_URL}/accounts/password_reset/`, data)
+            let response = axios.post(resetPasswordEndpoint, data)
             if (response.data) {
                 console.log(data)
             }
@@ -61,7 +66,7 @@ class Authentication {
 
     handleResetPasswordConfirm = async (data) =>{
         try {
-            let response = axios.post(`${this.API_URL}/accounts/password_reset/confirm/`, data)
+            let response = axios.post(recoverPasswordEndpoint, data)
             if(response.data){
                 console.log(data)
             }

@@ -13,6 +13,7 @@ class ChangePassword extends Component{
         super(props)
         this.state = {
             password: '',
+            confirmPassword: '',
             token: this.props.match.params.token
         }
         this.changePassword = this.props.auth.handleResetPasswordConfirm
@@ -27,13 +28,17 @@ class ChangePassword extends Component{
 		})
     }
 
-    equatePassword = () => {
-        const { password } = this.state
-        const confirm_pass_value = document.getElementsByName('confirmPassword').value
+    equatePassword = async () => {
 
-        password === confirm_pass_value
-        ? this.changePassword(this.state)
-        : toast.error('los valores no coinciden ')
+        const { password, confirmPassword, token } = this.state
+        console.log(confirmPassword)
+        if(password === confirmPassword) {
+            await this.changePassword({ password, token })
+            toast.success('Las contraseña se ha actualizado correctamente')
+            setTimeout(()=>this.props.history.push('/login/'), 3000)
+        } else {
+            toast.error('Revisa las contraseñas, no son iguales')
+        }
     }
 
     render(){
@@ -53,14 +58,15 @@ class ChangePassword extends Component{
                         />
 
                         <SubtitleOne text = { "Confirmar tu nueva contraseña" } />
-                        <InputPassword 
+                        <InputPassword
+                         onChange={this.handleChange}
                          placeholder = { "contraseña" }
                          name="confirmPassword"
                         />
 
-                        <MainButton 
-                         text = { "Guardar" } 
-                         onClick={(e) =>this.equatePassword}
+                        <MainButton
+                         text = { "Cambiar contraseña" }
+                         onClick={this.equatePassword}
                         />
                     </div>
                 </div>

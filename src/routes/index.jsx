@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch } from 'react-router-dom'
 import Login from '../components/authentication/login'
 import ForgotPassword from '../components/authentication/forgotPassword'
 import ChangePassword from '../components/authentication/changePassword'
 import Dashboard from '../components/dashboard'
 import PrivateRoute from './privateRoute'
+import PublicRoute from './publicRoute'
 
 
 const Routes = () => {
@@ -13,9 +14,9 @@ const Routes = () => {
             <Switch>
 
                 {/* Public Routes */}
-                <Route exact path = "/login/" component = { Login } />
-                <Route exact path = "/recuperar-contraseña/" component = { ForgotPassword } />
-                <Route exact path = "/restaurar-contrasena/:token/" component = { ChangePassword }/>
+                <PublicRoute exact path = "/login/" component = { Login } />
+                <PublicRoute exact path = "/recuperar-contraseña/" component = { ForgotPassword } />
+                <PublicRoute exact path = "/restaurar-contrasena/:token/" component = { ChangePassword } />
 
                 {/* Private Routes */}
                 <PrivateRoute exact path = '/dashboard/' component = { Dashboard } />

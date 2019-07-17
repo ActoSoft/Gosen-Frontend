@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './index.scss'
-import GLogo from '../../../assets/icons/gosen_logo.png'
-import GName from '../../../assets/icons/gosen_name.png'
+import Logo from '../../../assets/logo_transparencia_white_3x.png'
 import InputText from '../../common/inputText/'
 import InputPassword from '../../common/inputPassword/'
 import MainButton from '../../common/mainButton/'
@@ -54,8 +53,7 @@ class Login extends Component {
 					</div>
 				</div>
 				<div className="right-container">
-					<img src={GLogo} alt="Logo Gosen" />
-					<img src={GName} alt="Nombre Gosen" />
+					<img src={Logo} alt="Logo Gosen" />
 				</div>
 			</div>
 		)

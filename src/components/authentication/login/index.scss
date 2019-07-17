@@ -92,12 +92,7 @@
 		justify-content: center;
 		height: 100vh;
 		img {
-			&:first-child {
-				height: 60vh;
-			}
-			&:last-child {
-				height: 20vh;
-			}
+			height: 100vh;
 		}
 	}
 }

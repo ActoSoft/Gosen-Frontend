@@ -55,18 +55,20 @@ class Authentication {
 
     handleResetPassword = async (data) => {
         try {
-            let response = axios.post(resetPasswordEndpoint, data)
+            const response = await axios.post(resetPasswordEndpoint, data)
             if (response.data) {
+                toast.success('Se ha enviado un correo electrónico con las instrucciones')
                 console.log(data)
             }
         } catch (error) {
             console.log(error)
+            toast.error('Ups, ha ocurrido un error')
         }
     }
 
     handleResetPasswordConfirm = async (data) =>{
         try {
-            let response = axios.post(recoverPasswordEndpoint, data)
+            const response = await axios.post(recoverPasswordEndpoint, data)
             if(response.data){
                 console.log(data)
             }

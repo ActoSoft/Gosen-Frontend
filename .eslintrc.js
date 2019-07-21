@@ -51,6 +51,21 @@ module.exports = {
             }
         ],
         'space-infix-ops': 'error',
-        'no-mixed-spaces-and-tabs': 0
+        'no-mixed-spaces-and-tabs': 0,
+        'no-cond-assign': [
+            'error',
+            'always'
+        ],
+        'no-dupe-args': 'error',
+        'no-dupe-keys': 'error',
+        'no-empty': [
+            'error',
+            {
+                'allowEmptyCatch': true
+            }
+        ],
+        'no-extra-parens': 'error',
+        'no-irregular-whitespace': 'error',
+        'no-template-curly-in-string': 'error'
     }
 }

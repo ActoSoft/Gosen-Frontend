@@ -5,11 +5,17 @@ import { Checkbox } from 'antd'
 const CheckBoxComponent = ( props ) =>(
     <div className="check-box-container">
         {props.options ?
-        props.options.map(( option )=>(
-            <Checkbox className="check-element">{ option }</Checkbox>
-        ))
-        :
-        null}
+            props.options.map(( option, index )=>(
+                <Checkbox
+                    key={index}
+                    className="check-element"
+                >
+                    { option }
+                </Checkbox>
+            ))
+            :
+            null
+        }
     </div>
 )
 

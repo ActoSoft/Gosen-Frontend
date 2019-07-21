@@ -10,21 +10,28 @@ class RadioButton extends Component{
         }
     }
     onChange = (e) =>{
-        console.log('radio checked', e.target.value);
+        console.log('radio checked', e.target.value)
         this.setState({
             value: e.target.value,
-        });
+        })
     }
 
     render(){
         return(
             <Radio.Group value={this.state.value} onChange={this.onChange} className="radio-container">
-                {this.props.options ? 
-                this.props.options.map(( option )=>(
-                    <Radio className="radio-option" value={option}>{option}</Radio>
-                ))
-                :
-                null}
+                {this.props.options ?
+                    this.props.options.map((option, index)=>(
+                        <Radio
+                            key={index}
+                            className="radio-option"
+                            value={option}
+                        >
+                            {option}
+                        </Radio>
+                    ))
+                    :
+                    null
+                }
             </Radio.Group>
         )
     }

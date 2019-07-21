@@ -3,8 +3,11 @@ import { Calendar } from 'antd'
 import './index.scss'
 
 const DatePicker = ( props ) =>(
-    <div className="calendar-container" >
-        <Calendar fullscreen={false} />
+    <div className="calendar-container">
+        <Calendar
+            fullscreen={false}
+            onChange={props.onChange}
+        />
     </div>
 )
 

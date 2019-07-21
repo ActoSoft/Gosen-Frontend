@@ -12,6 +12,7 @@ module.exports = {
         'Atomics': 'readonly',
         'SharedArrayBuffer': 'readonly'
     },
+    'parser': 'babel-eslint',
     'parserOptions': {
         'ecmaFeatures': {
             'jsx': true
@@ -39,6 +40,17 @@ module.exports = {
             'error',
             'never'
         ],
-        'react/jsx-uses-vars': [2]
+        'react/jsx-uses-vars': [2],
+        'react/prop-types': 0,
+        'no-console': 0,
+        'comma-spacing': [
+            'error',
+            {
+                'before': false,
+                'after': true
+            }
+        ],
+        'space-infix-ops': 'error',
+        'no-mixed-spaces-and-tabs': 0
     }
 }

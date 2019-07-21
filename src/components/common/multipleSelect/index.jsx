@@ -6,12 +6,11 @@ class MultipleSelect extends Component{
     constructor(props){
         super(props)
         this.state = {
-            
         }
     }
 
     handleChange = (value) =>{
-        console.log(`selected ${value}`);
+        console.log(`selected ${value}`)
     }
 
     render(){
@@ -27,7 +26,7 @@ class MultipleSelect extends Component{
                 mode="multiple"
                 placeholder="Selecciona"
                 onChange={this.handleChange}
-                >
+            >
                 {children}
             </Select>
         )

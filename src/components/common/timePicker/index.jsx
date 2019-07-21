@@ -16,16 +16,18 @@ class TimePickerComponent extends Component {
             <div className="time-picker-container">
                 <div className="time-container">
                     <TimePicker
-                    format={format} />
+                        format={format}
+                    />
                     <div className="format-container">
                         <span>Horas</span>
                         <span>Minutos</span>
                     </div>
                 </div>
                 <Switch
-                checkedChildren="P.M."
-                unCheckedChildren="A.M."/>
-            </div>            
+                    checkedChildren="P.M."
+                    unCheckedChildren="A.M."
+                />
+            </div>
         )
     }
 }

@@ -1,17 +1,17 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment } from 'react'
 import './App.scss'
 import Router from './routes'
 import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
 
 class App extends Component{
 
     render(){
         return(
-        <Fragment>
-            <Router />
-            <ToastContainer />
-        </Fragment>
+            <Fragment>
+                <Router />
+                <ToastContainer />
+            </Fragment>
         )
     }
 

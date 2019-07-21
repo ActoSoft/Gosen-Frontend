@@ -19,7 +19,7 @@ class ChangePassword extends Component{
         this.changePassword = this.props.auth.handleResetPasswordConfirm
     }
 
-    handleChange = ( e ) =>{
+    handleChange = e =>{
         const { name, value } = e.target
         this.setState(prevState => {
 			const newState = { ...prevState };

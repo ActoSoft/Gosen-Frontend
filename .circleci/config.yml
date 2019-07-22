@@ -43,11 +43,10 @@ jobs:
             ssh $SSH_USER@$SSH_HOST -t bash -ci deploy_frontend_gosen
 
 workflows:
-  version: 2
   deploy:
     jobs:
       - tests:
-          filter:
+          filters:
             branches:
               only: develop
       - build_deploy:

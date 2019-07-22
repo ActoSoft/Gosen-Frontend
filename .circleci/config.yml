@@ -1,0 +1,55 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  tests:
+    docker:
+      - image: circleci/node:8.10
+    working_directory: /home/circleci/project/
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - actosoft-gosen-frontend-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            #- v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          name: Actosoft Frontend Gosen Cache
+          paths:
+            - ./
+          key: actosoft-gosen-frontend-{{ checksum "package.json" }}
+          when: on_success
+
+      # run tests!
+      - run: npm run lint
+
+  build_deploy:
+    machine:
+      enabled: true
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "4a:35:f9:2d:49:68:93:72:22:ae:0a:3d:96:e7:8b:78"
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST -t bash -ci deploy_frontend_gosen
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - tests:
+        filter:
+          branches:
+            only: develop
+      - build_deploy:
+          requires:
+            - tests

@@ -15,14 +15,14 @@ class SelectComponent extends Component{
         return(
             <Select className="select-component">
                 { this.props.options ?
-                    this.props.options.map((option, index) => (
+                    this.props.options.map((option, index) => 
                         <Option
                             key={index}
                             value = {`${option}`}
                         >
                             {option}
                         </Option>
-                    ))
+                    )
                     :
                     null }
             </Select>

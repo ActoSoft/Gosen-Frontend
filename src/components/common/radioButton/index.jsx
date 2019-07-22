@@ -20,7 +20,7 @@ class RadioButton extends Component{
         return(
             <Radio.Group value={this.state.value} onChange={this.onChange} className="radio-container">
                 {this.props.options ?
-                    this.props.options.map((option, index)=>(
+                    this.props.options.map((option, index)=>
                         <Radio
                             key={index}
                             className="radio-option"
@@ -28,7 +28,7 @@ class RadioButton extends Component{
                         >
                             {option}
                         </Radio>
-                    ))
+                    )
                     :
                     null
                 }

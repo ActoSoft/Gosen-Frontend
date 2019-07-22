@@ -51,5 +51,6 @@ workflows:
             branches:
               only: develop
       - build_deploy:
+          context: Stating-Server
           requires:
             - tests

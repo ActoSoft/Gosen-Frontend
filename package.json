@@ -34,7 +34,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "babel-eslint": "^10.0.2"
-  }
+  "devDependencies": {}
 }

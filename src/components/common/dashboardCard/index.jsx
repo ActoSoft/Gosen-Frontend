@@ -1,19 +1,15 @@
 import React from 'react'
 import './index.scss'
-import {Card, Avatar} from 'antd'
+import { Card, Icon } from 'antd'
 
 const { Meta } = Card
 
 const DashboardCardComponent = (props) =>
     <div className="card-container">
-        <Card style={{ width: props.width, marginTop: 10, backgroundColor: "#000" }}>
+        <Card style={{ width: props.width, marginTop: 10, backgroundColor: "#000" }} hoverable={true}>
             <Meta
                 avatar={
-                    <Avatar
-                        shape="square"
-                        icon={props.icon}
-                        size={props.size}
-                    />
+                    <Icon type={props.icon} />
                 }
                 title={props.title}
                 description={props.description}

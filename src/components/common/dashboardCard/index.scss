@@ -1,17 +1,23 @@
+.ant-card-meta {
+    display: flex;
+    align-items: center;
+}
 .ant-card-meta-title {
-    color: black !important;
+    color: white !important;
     font-size: 1.8em !important;
 }
 
 .ant-card-meta-description {
-    color: black !important;
+    color: white !important;
     font-size: 1.2em !important;
 }
 .ant-card-bordered {
     border: solid 1px black !important;
     border-radius: 10px !important;
+    margin: 1vh 1vw !important;
 }
-.ant-avatar {
+.ant-card-meta-avatar {
     background-color: black !important;
+    color: white !important;
     font-size: 60px !important;
 }

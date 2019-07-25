@@ -1,3 +1,6 @@
+.navbar-container {
+    margin: 3vh 0 0 0;
+}
 .dashboard-container {
     width: 100vw;
     height: 100vh;
@@ -7,6 +10,7 @@
 
 body {
     background-color: #171717 !important;
+    overflow: hidden;
 
     .dashboard-body {
         margin: 5vh 15vw;

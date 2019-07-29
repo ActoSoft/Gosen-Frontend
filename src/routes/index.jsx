@@ -4,7 +4,7 @@ import Login from '../components/authentication/login'
 import ForgotPassword from '../components/authentication/forgotPassword'
 import ChangePassword from '../components/authentication/changePassword'
 import Dashboard from '../components/dashboard'
-import PrivateRoute from './privateRoute'
+// import PrivateRoute from './privateRoute'
 import PublicRoute from './publicRoute'
 
 

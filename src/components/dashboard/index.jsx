@@ -23,7 +23,7 @@ class Dashboard extends Component {
                         <DashboardBody />
                     </body>
                 </div>
-                <footer class="footer-container">
+                <footer className="footer-container">
                     <Footer />
                 </footer>
             </div>

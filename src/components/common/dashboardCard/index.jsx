@@ -6,7 +6,7 @@ const { Meta } = Card
 
 const DashboardCardComponent = (props) =>
     <div className="card-container">
-        <Card style={{ width: props.width, marginTop: 10, backgroundColor: "#000" }} hoverable={true}>
+        <Card style={{ width: props.width, marginTop: 10, backgroundColor: '#000' }} hoverable={true}>
             <Meta
                 avatar={
                     <Icon type={props.icon} />

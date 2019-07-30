@@ -2,7 +2,7 @@ import React from 'react'
 import './index.scss'
 import DashboardCardComponent from '../common/dashboardCard'
 
-const DashboardBody = (props) =>
+const DashboardBody = () =>
     <div className="dashboard-body">
         <div className="dasboard-cards-container" >
             <DashboardCardComponent icon='tool' size={64} title='Trabajos' description='Factura para 02 de Julio' width={470} />

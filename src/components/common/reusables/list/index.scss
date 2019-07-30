@@ -1,0 +1,42 @@
+@import '../../../../variables.scss';
+
+.row-table {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ant-table-header-column {
+    color: $primary !important;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.ant-table table {
+    border-radius: 10px !important;
+}
+
+thead, th, tbody {
+    background-color: #000 !important;
+}
+
+th {
+    border-bottom: 0 !important;
+}
+
+tr {
+    color: $white !important;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none !important;
+    &:hover{
+        td {
+            background-color: $primary !important;
+            color: $black !important;
+        }
+    }
+}
+
+td {
+    border-bottom: 0 !important;
+}

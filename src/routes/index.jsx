@@ -4,9 +4,9 @@ import Login from '../components/authentication/login'
 import ForgotPassword from '../components/authentication/forgotPassword'
 import ChangePassword from '../components/authentication/changePassword'
 import Dashboard from '../components/dashboard'
-import PrivateRoute from './privateRoute'
+// import PrivateRoute from './privateRoute'
 import PublicRoute from './publicRoute'
-import List from '../components/common/reusables/list'
+import EmployeesList from '../components/employees/list'
 
 
 const Routes = () => {
@@ -26,7 +26,9 @@ const Routes = () => {
                     LOVE U <3
                 */}
                 <PublicRoute exact path = '/dashboard/' component = { Dashboard } />
-                <PublicRoute exact path = '/list' component = { List } />
+
+                {/* Employees Routes */}
+                <PublicRoute exact path = '/empleados/' component = { EmployeesList } />
 
             </Switch>
         </Fragment>

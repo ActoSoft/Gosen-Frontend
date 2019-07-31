@@ -48,9 +48,9 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        keys:
-          - actosoft-gosen-frontend-npm-deps-{{ checksum "package.json" }}
-          - actosoft-gosen-frontend-npm-deps-
+          keys:
+            - actosoft-gosen-frontend-npm-deps-{{ checksum "package.json" }}
+            - actosoft-gosen-frontend-npm-deps-
       - run:
           name: Install dependencies
           command: npm install

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import './index.scss'
+import DashboardBody from './dashboardBody'
 import Navbar from '../common/navbar'
-
+import Footer from '../common/footer'
 class Dashboard extends Component {
     constructor(props) {
         super(props)
@@ -15,8 +16,12 @@ class Dashboard extends Component {
                 </div>
                 <div className="dashboard-container">
                     <body>
+                        <DashboardBody />
                     </body>
                 </div>
+                <footer className="footer-container">
+                    <Footer />
+                </footer>
             </div>
         )
     }

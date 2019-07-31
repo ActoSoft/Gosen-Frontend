@@ -9,7 +9,10 @@ const Navbar = () =>
             <Icon type="menu" />
         </div>
         <div className="logo-container">
-            <img className="navbar-logo" src={ Logo } alt="Logo Gosen" />
+            <img className="navbar-logo" src={Logo} alt="Logo Gosen" />
+        </div>
+        <div className="bell-container">
+            <Icon type="bell" />
         </div>
     </div>
 

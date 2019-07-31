@@ -15,8 +15,26 @@
     float: left;
     display: flex;
     justify-content: center;
+    img:hover {
+        cursor: pointer;
+    }
+}
+.bell-container {
+    padding-right: 7vw;
+    width: calc(100%/3);
+    display: flex;
+    justify-content: flex-end;
 }
 .anticon-menu {
+    color: white !important;
+    font-size: 2em;
+    display: flex;
+
+    svg:hover {
+        cursor: pointer;
+    }
+}
+.anticon-bell {
     color: white !important;
     font-size: 2em;
     display: flex;

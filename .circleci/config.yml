@@ -55,9 +55,9 @@ jobs:
           name: Install dependencies
           command: npm install
       - save_cache:
-        key: actosoft-gosen-frontend-npm-deps-{{ checksum "package.json" }}
-        paths:
-          - ./node-modules
+          key: actosoft-gosen-frontend-npm-deps-{{ checksum "package.json" }}
+          paths:
+            - ./node-modules
       - run:
           name: React App Build
           command: npm run build

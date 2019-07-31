@@ -59,6 +59,11 @@ jobs:
           paths:
             - ./node-modules
       - run:
+          name: CI to false
+          command: |
+            echo 'export CI=false' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
           name: React App Build
           command: npm run build
       - run:
@@ -76,5 +81,3 @@ workflows:
           context: Stating-Server
           requires:
             - tests
-          environment:
-            CI: false

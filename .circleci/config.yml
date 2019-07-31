@@ -13,7 +13,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - actosoft-gosen-frontend-{{ checksum "package.json" }}
+            - actosoft-gosen-frontend-npm-deps-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             #- v1-dependencies-
 
@@ -23,25 +23,47 @@ jobs:
           name: Actosoft Frontend Gosen Cache
           paths:
             - ./
-          key: actosoft-gosen-frontend-{{ checksum "package.json" }}
+          key: actosoft-gosen-frontend-npm-deps-{{ checksum "package.json" }}
           when: on_success
 
       # run tests!
       - run: npm run lint
 
+  # build_deploy:
+  #   machine:
+  #     enabled: true
+  #   steps:
+  #     - checkout
+  #     - add_ssh_keys:
+  #         fingerprints:
+  #           - "4a:35:f9:2d:49:68:93:72:22:ae:0a:3d:96:e7:8b:78"
+  #     - run:
+  #         name: Deploy Over SSH
+  #         command: |
+  #           ssh $SSH_USER@$SSH_HOST -t bash -ci deploy_frontend_gosen
   build_deploy:
-    machine:
-      enabled: true
+    docker:
+      - image: circleci/node:8.10
+    working_directory: /home/circleci/project/
     steps:
       - checkout
-      - add_ssh_keys:
-          fingerprints:
-            - "4a:35:f9:2d:49:68:93:72:22:ae:0a:3d:96:e7:8b:78"
+      - restore_cache:
+        keys:
+          - actosoft-gosen-frontend-npm-deps-{{ checksum "package.json" }}
+          - actosoft-gosen-frontend-npm-deps-
       - run:
-          name: Deploy Over SSH
-          command: |
-            ssh $SSH_USER@$SSH_HOST -t bash -ci deploy_frontend_gosen
-
+          name: Install dependencies
+          command: npm install
+      - save_cache:
+        key: actosoft-gosen-frontend-npm-deps-{{ checksum "package.json" }}
+        paths:
+          - ./node-modules
+      - run:
+          name: React App Build
+          command: npm run build
+      - run:
+          name: Firebase Deploy
+          command: npm run deploy -- --token "$FIREBASE-TOKEN"
 workflows:
   version: 2
   deploy:

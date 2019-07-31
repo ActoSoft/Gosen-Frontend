@@ -76,3 +76,5 @@ workflows:
           context: Stating-Server
           requires:
             - tests
+          environment:
+            CI: false

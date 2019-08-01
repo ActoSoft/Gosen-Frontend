@@ -11,8 +11,8 @@ class Authentication {
         this.token = localStorage.getItem('token')
         this.username = localStorage.getItem('username')
         this.email = localStorage.getItem('email')
-        this.firstName = localStorage.getItem('first_name')
-        this.lastName = localStorage.getItem('last_name')
+        this.firstName = localStorage.getItem('firstName')
+        this.lastName = localStorage.getItem('lastName')
         this.API_URL = process.env.REACT_APP_API_URL
     }
 
@@ -24,7 +24,7 @@ class Authentication {
     }
 
     getFullName = () => {
-        return `${this.firstName ? this.firstName : 'Nombre'} ${this.lastName ? this.firstName : 'Apellidos'}`
+        return `${this.firstName ? this.firstName : 'Nombre'} ${this.lastName ? this.lastName : 'Apellidos'}`
     }
 
     handleLogin = async (data) => {

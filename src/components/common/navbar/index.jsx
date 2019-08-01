@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './index.scss'
 import { Menu, Icon } from 'antd'
 import Logo from '../../../assets/logo_transparencia_1x.png'
+import { withAuth } from '../../../Authentication'
 
 const { SubMenu } = Menu
 
@@ -12,7 +13,9 @@ class Navbar extends Component {
             collapsed: false,
             expanded: false,
             left: -256,
+            name: 'skeler',
         }
+        this.getFullName = this.props.auth.getFullName
     }
 
     toggleCollapsed = () => {
@@ -23,6 +26,12 @@ class Navbar extends Component {
             : this.setState({
                 left: -256
             })
+    }
+
+    componentDidMount(){
+        this.setState({
+            name: this.getFullName()
+        })
     }
 
     render() {
@@ -81,7 +90,7 @@ class Navbar extends Component {
                             key="8"
                             title={
                                 <span>
-                                    <span>José Ángel Cardenas</span>
+                                    <span>{this.state.name}</span>
                                 </span>
                             }
                         >
@@ -94,4 +103,4 @@ class Navbar extends Component {
         )
     }
 }
-export default Navbar
+export default withAuth(Navbar)

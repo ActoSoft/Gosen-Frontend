@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import './index.scss'
-import { Menu, Icon, Button } from 'antd'
+import { Menu, Icon } from 'antd'
 import Logo from '../../../assets/logo_transparencia_1x.png'
 
-const { SubMenu } = Menu;
+const { SubMenu } = Menu
 
 class Navbar extends Component {
     constructor(props) {
@@ -16,17 +16,17 @@ class Navbar extends Component {
 
     toggleCollapsed = () => {
         this.setState({
-          collapsed: !this.state.collapsed,
-        });
-    };
-    
+            collapsed: !this.state.collapsed,
+        })
+    }
+
     toggleExpanded = () => {
         this.setState({
             expanded: !this.state.expanded
         })
     }
 
-    render () {
+    render() {
         return (
             <div>
                 <div className="navbar">
@@ -34,20 +34,20 @@ class Navbar extends Component {
                         <Icon type="menu" onClick={this.toggleCollapsed} />
                     </div>
                     <div className="logo-container">
-                        <img className="navbar-logo" src={ Logo } alt="Logo Gosen" />
+                        <img className="navbar-logo" src={Logo} alt="Logo Gosen" />
                     </div>
                     <div className="bell-container">
                         <Icon type="bell" />
                     </div>
                 </div>
-                <div style={{ width: 256, visibility:this.state.collapsed ? "hidden" : "visible" }}>
+                <div style={{ width: 256, visibility: this.state.collapsed ? 'hidden' : 'visible' }}>
                     <Menu
                         defaultSelectedKeys={['1']}
                         defaultOpenKeys={['sub1']}
                         mode="inline"
                         theme="dark"
                         inlineCollapsed={this.state.collapsed}
-                        >
+                    >
                         <Menu.Item key="1">
                             <Icon type="pie-chart" />
                             <span>Option 1</span>
@@ -79,10 +79,10 @@ class Navbar extends Component {
                         <SubMenu
                             key="8"
                             title={
-                            <span>
-                                <Icon type="mail" />
-                                <span>José Ángel Cardenas</span>
-                            </span>
+                                <span>
+                                    <Icon type="mail" />
+                                    <span>José Ángel Cardenas</span>
+                                </span>
                             }
                         >
                             <Menu.Item key="sub1">Perfil</Menu.Item>

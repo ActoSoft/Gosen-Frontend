@@ -50,9 +50,32 @@
 .ant-menu {
     background: #F4E38B  !important;
 }
+.cross-container {
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 2vh;
+}
+.anticon-close {
+    padding-right: 1vw;
+    font-size: 1.5em;
+    color: #171717 !important;
+    svg:hover {
+        cursor: pointer;
+    }
+}
+.ant-menu-root {
+    height: 100vh;
+}
+.root-item, .ant-menu-submenu-title {
+    height: 10vh !important;
+}
+.sub-item {
+    height: 7.5vh !important;
+}
 .ant-menu-item,.ant-menu-submenu-title {
     color: #171717 !important;
-    height: 7.5vh !important;
     display: flex;
     align-items: center;
 }

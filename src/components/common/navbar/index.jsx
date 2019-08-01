@@ -30,7 +30,7 @@ class Navbar extends Component {
             <div>
                 <div className="navbar">
                     <div className="icon-container">
-                        <Icon type="menu" onClick={this.toggleCollapsed} />
+                        <Icon type="menu" onClick={this.toggleCollapsed} style={{width: 28}} />
                     </div>
                     <div className="logo-container">
                         <img className="navbar-logo" src={Logo} alt="Logo Gosen" />
@@ -39,39 +39,41 @@ class Navbar extends Component {
                         <Icon type="bell" />
                     </div>
                 </div>
-                <div className="menu-container" style={{ width: 256, position: 'absolute', zIndex: 9999, transition: '0.4s', left: this.state.left }}>
+                <div className="menu-container" style={{ width: 256, position: 'absolute', zIndex: 9999, transition: '0.4s', top: 0, left: this.state.left }}>
                     <Menu
-                        defaultSelectedKeys={['1']}
-                        defaultOpenKeys={['sub1']}
-                        mode="inline"
+                        defaultSelectedKeys={['3']}
+                        mode="vertical"
                         theme="dark"
                         inlineCollapsed={this.state.collapsed}
                     >
-                        <Menu.Item key="1">
+                        <div className="cross-container">
+                            <Icon type="close" onClick={this.toggleCollapsed} />
+                        </div>
+                        <Menu.Item className="root-item" key="1">
                             <Icon type="pie-chart" />
                             <span>Option 1</span>
                         </Menu.Item>
-                        <Menu.Item key="2">
+                        <Menu.Item className="root-item" key="2">
                             <Icon type="desktop" />
                             <span>Option 2</span>
                         </Menu.Item>
-                        <Menu.Item key="3">
+                        <Menu.Item className="root-item" key="3">
                             <Icon type="inbox" />
                             <span>Option 3</span>
                         </Menu.Item>
-                        <Menu.Item key="4">
+                        <Menu.Item className="root-item" key="4">
                             <Icon type="pie-chart" />
                             <span>Option 4</span>
                         </Menu.Item>
-                        <Menu.Item key="5">
+                        <Menu.Item className="root-item" key="5">
                             <Icon type="desktop" />
                             <span>Option 5</span>
                         </Menu.Item>
-                        <Menu.Item key="6">
+                        <Menu.Item className="root-item" key="6">
                             <Icon type="inbox" />
                             <span>Option 6</span>
                         </Menu.Item>
-                        <Menu.Item key="7">
+                        <Menu.Item className="root-item" key="7">
                             <Icon type="inbox" />
                             <span>Option 7</span>
                         </Menu.Item>
@@ -84,8 +86,8 @@ class Navbar extends Component {
                                 </span>
                             }
                         >
-                            <Menu.Item key="sub1">Perfil</Menu.Item>
-                            <Menu.Item key="sub2">Cerrar Sesión</Menu.Item>
+                            <Menu.Item className="sub-item" key="sub1">Perfil</Menu.Item>
+                            <Menu.Item className="sub-item" key="sub2">Cerrar Sesión</Menu.Item>
                         </SubMenu>
                     </Menu>
                 </div>

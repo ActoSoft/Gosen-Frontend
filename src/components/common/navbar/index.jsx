@@ -9,20 +9,19 @@ class Navbar extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            collapsed: true,
+            collapsed: false,
             expanded: false,
+            left: -256,
         }
     }
 
     toggleCollapsed = () => {
-        this.setState({
-            collapsed: !this.state.collapsed,
-        })
-    }
-
-    toggleExpanded = () => {
-        this.setState({
-            expanded: !this.state.expanded
+        this.state.left == -256 ? 
+            this.setState({
+                left: 0
+            })
+        :   this.setState({
+            left: -256
         })
     }
 
@@ -40,7 +39,7 @@ class Navbar extends Component {
                         <Icon type="bell" />
                     </div>
                 </div>
-                <div style={{ width: 256, visibility: this.state.collapsed ? 'hidden' : 'visible' }}>
+                <div className="menu-container" style={{ width: 256, position:'absolute', zIndex:9999,transition:'0.4s' ,left:this.state.left }}>
                     <Menu
                         defaultSelectedKeys={['1']}
                         defaultOpenKeys={['sub1']}

@@ -15,8 +15,27 @@
     float: left;
     display: flex;
     justify-content: center;
+
+    img:hover {
+        cursor: pointer;
+    }
+}
+.bell-container {
+    padding-right: 7vw;
+    width: calc(100%/3);
+    display: flex;
+    justify-content: flex-end;
 }
 .anticon-menu {
+    color: white !important;
+    font-size: 2em;
+    display: flex;
+
+    svg:hover {
+        cursor: pointer;
+    }
+}
+.anticon-bell {
     color: white !important;
     font-size: 2em;
     display: flex;
@@ -28,4 +47,26 @@
 .navbar-logo {
     height: 10vh;
     align-self: center;
+}
+.ant-menu {
+    background: #F4E38B  !important;
+}
+.ant-menu-item,.ant-menu-submenu-title {
+    color: #171717 !important;
+    height: 7.5vh !important;
+    display: flex;
+    align-items: center;
+}
+.ant-menu-item-selected {
+    border-right: none;
+    background-color: #171717 !important;
+    color: #F4E38B !important
+}
+.ant-menu-submenu-arrow {
+    &::before {
+        background: #171717 !important;
+    }
+    &::after {
+        background: #171717 !important;
+    }
 }

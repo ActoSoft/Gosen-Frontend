@@ -50,38 +50,37 @@ class Navbar extends Component {
                             <Icon type="close" onClick={this.toggleCollapsed} />
                         </div>
                         <Menu.Item className="root-item" key="1">
-                            <Icon type="pie-chart" />
-                            <span>Option 1</span>
+                            <Icon type="home" />
+                            <span>Inicio</span>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="2">
-                            <Icon type="desktop" />
-                            <span>Option 2</span>
+                            <Icon type="reconciliation" />
+                            <span>Empleados</span>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="3">
-                            <Icon type="inbox" />
-                            <span>Option 3</span>
+                            <Icon type="user" />
+                            <span>Cliente</span>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="4">
-                            <Icon type="pie-chart" />
-                            <span>Option 4</span>
+                            <Icon type="inbox" />
+                            <span>Productos</span>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="5">
-                            <Icon type="desktop" />
-                            <span>Option 5</span>
+                            <Icon type="customer-service" />
+                            <span>Servicios</span>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="6">
-                            <Icon type="inbox" />
-                            <span>Option 6</span>
+                            <Icon type="tool" />
+                            <span>Trabajos</span>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="7">
-                            <Icon type="inbox" />
-                            <span>Option 7</span>
+                            <Icon type="container" />
+                            <span>Contabilidad</span>
                         </Menu.Item>
                         <SubMenu
                             key="8"
                             title={
                                 <span>
-                                    <Icon type="mail" />
                                     <span>José Ángel Cardenas</span>
                                 </span>
                             }

@@ -3,7 +3,8 @@ import { toast } from 'react-toastify'
 import {
     loginEndpoint,
     resetPasswordEndpoint,
-    recoverPasswordEndpoint
+    recoverPasswordEndpoint,
+    adminsEndpoint
 } from '../backendEndpoints'
 class Authentication {
 
@@ -11,8 +12,8 @@ class Authentication {
         this.token = localStorage.getItem('token')
         this.username = localStorage.getItem('username')
         this.email = localStorage.getItem('email')
-        this.firstName = localStorage.getItem('first_name')
-        this.lastName = localStorage.getItem('last_name')
+        this.firstName = localStorage.getItem('firstName')
+        this.lastName = localStorage.getItem('lastName')
         this.API_URL = process.env.REACT_APP_API_URL
     }
 
@@ -75,6 +76,36 @@ class Authentication {
         } catch (error) {
             console.log(error)
         }
+    }
+
+    handleGetAdmins = async () => {
+        try {
+            const response = await axios.get(adminsEndpoint)
+            if(response.data) {
+                console.log(response.data)
+                return (response.data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    handleCompareData = async (item) => {
+        if(
+            item.user.email === this.email &&
+            item.user.username === this.username &&
+            item.user.first_name === this.firstName &&
+            item.user.last_name === this.lastName
+            ) {
+            console.log(item)
+            return item
+        }
+    }
+
+    handleGetUserData = async () => {
+        let admins = await this.handleGetAdmins()
+
+        await admins.map(this.handleCompareData)
     }
 
 }

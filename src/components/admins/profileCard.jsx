@@ -27,7 +27,7 @@ const ProfileCard = (props) =>
                 <p>Código Postal</p>
             </div>
             <div className="data-column info data-column-info-1">
-                <p></p>
+                <p>uxu_g@gmail.com</p>
                 <p>7723748240</p>
                 <p>Hombre</p>
                 <p>27 Septiembre 7980</p>

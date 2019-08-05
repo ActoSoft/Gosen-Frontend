@@ -68,11 +68,22 @@
 .ant-menu-root {
     height: 100vh;
 }
+
+.root-item:hover {
+    border-right: none;
+    background-color: #171717 !important;
+    color: #F4E38B !important
+}
 .root-item, .ant-menu-submenu-title {
     height: 10vh !important;
 }
 .sub-item {
     height: 7.5vh !important;
+    &:hover {
+        border-right: none;
+        background-color: #171717 !important;
+        color: #F4E38B !important
+    }
 }
 .ant-menu-item,.ant-menu-submenu-title {
     color: #171717 !important;

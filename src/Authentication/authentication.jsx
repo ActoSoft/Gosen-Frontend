@@ -14,6 +14,8 @@ class Authentication {
         this.email = localStorage.getItem('email')
         this.firstName = localStorage.getItem('firstName')
         this.lastName = localStorage.getItem('lastName')
+        this.adminId = localStorage.getItem('adminId')
+        this.userId = localStorage.getItem('userId')
         this.API_URL = process.env.REACT_APP_API_URL
     }
 
@@ -25,21 +27,22 @@ class Authentication {
     }
 
     getFullName = () => {
-        return `${this.firstName ? this.firstName : 'Nombre'} ${this.lastName ? this.firstName : 'Apellidos'}`
+        return `${this.firstName ? this.firstName : 'Nombre'} ${this.lastName ? this.lastName : 'Apellidos'}`
     }
 
     handleLogin = async (data) => {
         try {
             let response = await axios.post(loginEndpoint, data)
             if (response.data) {
-                const { token, user } = response.data
-                const { username, email, first_name, last_name, id } = user
+                const { token, profile } = response.data
+                const { username, email, first_name, last_name, id } = profile.user
                 localStorage.setItem('token', token)
                 localStorage.setItem('username', username)
                 localStorage.setItem('email', email)
                 localStorage.setItem('firstName', first_name)
                 localStorage.setItem('lastName', last_name)
                 localStorage.setItem('userId', id)
+                localStorage.setItem('adminId', profile.id)
                 toast.success('Has iniciado sesión con éxito')
                 return true
             }

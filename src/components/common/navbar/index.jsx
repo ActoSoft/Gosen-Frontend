@@ -3,6 +3,7 @@ import './index.scss'
 import { Menu, Icon } from 'antd'
 import Logo from '../../../assets/logo_transparencia_1x.png'
 import { withAuth } from '../../../Authentication'
+import { NavLink } from 'react-router-dom'
 
 const { SubMenu } = Menu
 
@@ -13,9 +14,8 @@ class Navbar extends Component {
             collapsed: false,
             expanded: false,
             left: -256,
-            name: 'skeler',
+            name: localStorage.getItem('firstName') + ' ' + localStorage.getItem('lastName')
         }
-        this.getFullName = this.props.auth.getFullName
     }
 
     toggleCollapsed = () => {
@@ -28,12 +28,6 @@ class Navbar extends Component {
             })
     }
 
-    componentDidMount(){
-        this.setState({
-            name: this.getFullName()
-        })
-    }
-
     render() {
         return (
             <div>
@@ -42,7 +36,7 @@ class Navbar extends Component {
                         <Icon type="menu" onClick={this.toggleCollapsed} style={{width: 28}} />
                     </div>
                     <div className="logo-container">
-                        <img className="navbar-logo" src={Logo} alt="Logo Gosen" />
+                        <NavLink to='/dashboard/'><img className="navbar-logo" src={Logo} alt="Logo Gosen" /></NavLink>
                     </div>
                     <div className="bell-container">
                         <Icon type="bell" />
@@ -60,7 +54,7 @@ class Navbar extends Component {
                         </div>
                         <Menu.Item className="root-item" key="1">
                             <Icon type="home" />
-                            <span>Inicio</span>
+                            <NavLink to='/dashboard/' className="perfil-link" > <span>Inicio</span></NavLink>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="2">
                             <Icon type="reconciliation" />
@@ -94,7 +88,7 @@ class Navbar extends Component {
                                 </span>
                             }
                         >
-                            <Menu.Item className="sub-item" key="sub1">Perfil</Menu.Item>
+                            <Menu.Item className="sub-item" key="sub1"><NavLink to="/perfil/" className="perfil-link">Perfil</NavLink></Menu.Item>
                             <Menu.Item className="sub-item" key="sub2">Cerrar Sesión</Menu.Item>
                         </SubMenu>
                     </Menu>

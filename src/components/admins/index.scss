@@ -45,9 +45,17 @@
         p{
             font-size: 1.3em;
         }
+        .input_container{
+            Input {
+                margin-bottom: 1em;
+            }
+        }
     }
     .data-column-info-1{
         margin-right: 3vw;
+    }
+    .data-column-info-2{
+        width: 22vw !important;
     }
     .data-column-2 {
         width: 7vw !important; 
@@ -58,6 +66,7 @@
         }
     }
     .info {
+        width: 17vw;
         p {
             color: white;
         }

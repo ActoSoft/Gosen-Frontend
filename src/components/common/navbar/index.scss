@@ -94,7 +94,7 @@
 .ant-menu-item-selected {
     border-right: none;
     background-color: #171717 !important;
-    color: #F4E38B !important
+    color: #F4E38B !important;
 }
 .ant-menu-submenu-arrow {
     &::before {
@@ -102,5 +102,11 @@
     }
     &::after {
         background: #171717 !important;
+    }
+}
+.perfil-link {
+    color: black !important;
+    &:hover {
+        color:  #F4E38B !important;
     }
 }

@@ -93,22 +93,16 @@ class Authentication {
         }
     }
 
-    handleCompareData = async (item) => {
-        if(
-            item.user.email === this.email &&
-            item.user.username === this.username &&
-            item.user.first_name === this.firstName &&
-            item.user.last_name === this.lastName
-            ) {
-            console.log(item)
-            return item
-        }
-    }
-
     handleGetUserData = async () => {
-        let admins = await this.handleGetAdmins()
-
-        await admins.map(this.handleCompareData)
+        try {
+            const response = await axios.get(`${adminsEndpoint}${this.adminId}`)
+            if(response.data) {
+                console.log(response.data)
+                return response.data
+            }
+        } catch(error) {
+            console.log(error)
+        }
     }
 
 }

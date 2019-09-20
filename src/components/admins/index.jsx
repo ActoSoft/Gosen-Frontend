@@ -15,9 +15,11 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            userData: this.getData()
-        })
+        this.getData().then(data =>
+            this.setState({
+                data
+            })    
+        )
     }
 
     render() {
@@ -27,9 +29,9 @@ class Profile extends Component {
                     <Navbar />
                 </div>
                 <div className="body-container">
-                    <body>
-                        <ProfileCard userData={this.state.userData} />
-                    </body>
+                    <div>
+                        <ProfileCard data={this.state.data} />
+                    </div>
                 </div>
                 <div className="footer-container">
                     <Footer />

@@ -9,7 +9,6 @@ class Profile extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            
         }
         this.getData = this.props.auth.handleGetUserData
     }
@@ -18,7 +17,7 @@ class Profile extends Component {
         this.getData().then(data =>
             this.setState({
                 data
-            })    
+            })
         )
     }
 

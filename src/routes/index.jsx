@@ -21,7 +21,16 @@ const Routes = () => {
 
                 {/* Private Routes */ }
                 <PrivateRoute exact path = '/dashboard/' component = { Dashboard } />
-                <PrivateRoute exact path = '/perfil/' component = {Profile} />
+                <PrivateRoute
+                    exact path = '/perfil/'
+                    component = {Profile}
+                    action='detail'
+                />
+                <PrivateRoute
+                    exact path = '/perfil/editar/'
+                    component = {Profile}
+                    action='update'
+                />
 
             </Switch>
         </Fragment>

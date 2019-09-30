@@ -24,8 +24,27 @@ class Profile extends Component {
         )
     }
 
+    handleChangeForm = ({e, intoUser = false}) => {
+
+        const { name, value } = e.target
+        const { data } = this.state
+        if (intoUser) {
+            data.user[name] = value
+            this.setState({ data })
+        } else {
+            data[name] = value
+            this.setState({ data })
+        }
+    }
+
+    handleEvent = (event, params) => {
+        const events = {
+            handleChange: this.handleChangeForm
+        }
+        return events[event](params)
+    }
+
     render() {
-        console.log(this.props)
         return (
             <div className="profile-component-container">
                 <div className="navbar-container">
@@ -38,7 +57,10 @@ class Profile extends Component {
                             : null
                         }
                         {this.props.action === 'update' ?
-                            <ProfileForm data={this.state.data} />
+                            <ProfileForm
+                                data={this.state.data}
+                                events={this.handleEvent}
+                            />
                             : null
                         }
                     </div>

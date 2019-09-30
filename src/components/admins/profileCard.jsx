@@ -1,6 +1,7 @@
 import React from 'react'
 import MainButtonOutlined from '../common/mainButtonOutlined'
 import { Skeleton } from 'antd'
+import { Link } from 'react-router-dom'
 
 
 const ProfileCard = ({ data }) =>
@@ -11,10 +12,11 @@ const ProfileCard = ({ data }) =>
                     <div className="header-text-container">
                         <div>
                             <span className="user-fullname">{`${data.user.first_name} ${data.user.last_name}`}</span>
-                            <MainButtonOutlined
-                                text='Editar'
-                                // onClick={() => setEdit(prevState => ({editable: !prevState.editable}))}
-                            />
+                            <Link to = '/perfil/editar/'>
+                                <MainButtonOutlined
+                                    text='Editar'
+                                />
+                            </Link>
                             <MainButtonOutlined
                                 className='delete-button'
                                 text='Eliminar'

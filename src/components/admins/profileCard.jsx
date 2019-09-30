@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './index.scss'
 import MainButtonOutlined from '../common/mainButtonOutlined'
 import { Input, Skeleton } from 'antd'
+import SecondaryButton from '../common/secondaryButton/'
 
 
 const ProfileCard = ({ data }) => {
@@ -36,6 +37,10 @@ const ProfileCard = ({ data }) => {
                                         text='Editar'
                                         onClick={() => setEdit(prevState => ({editable: !prevState.editable}))}
                                     />
+                                    <MainButtonOutlined
+                                        className='delete-button'
+                                        text='Eliminar'
+                                    />
                                 </div>
                                 <div>
                                     <span className="username">{state.user.username}</span>
@@ -54,7 +59,7 @@ const ProfileCard = ({ data }) => {
                                 <p>Código Postal</p>
                             </div>
                             <div className="data-column info data-column-info-1">
-                                {edit.editable === true ?
+                                {/* {edit.editable === true ?
                                     <div className='input_container'>
                                         <Input value={state.user.email} />
                                         <Input value={state.phone_number} />
@@ -62,15 +67,15 @@ const ProfileCard = ({ data }) => {
                                         <Input value={state.birth_date} />
                                         <Input value={state.zip_code} />
                                     </div>
-                                    :
-                                    <div>
-                                        <p>{state.user.email}</p>
-                                        <p>{state.phone_number}</p>
-                                        <p>{state.gender}</p>
-                                        <p>{state.birth_date}</p>
-                                        <p>{state.zip_code}</p>
-                                    </div>
-                                }
+                                    : */}
+                                <div>
+                                    <p>{state.user.email}</p>
+                                    <p>{state.phone_number}</p>
+                                    <p>{state.gender}</p>
+                                    <p>{state.birth_date}</p>
+                                    <p>{state.zip_code}</p>
+                                </div>
+                                {/* } */}
                             </div>
                             <div className="data-column labels data-column-2">
                                 <p>Calle</p>
@@ -79,21 +84,21 @@ const ProfileCard = ({ data }) => {
                                 <p>País</p>
                             </div>
                             <div className="data-column info data-column-info-2">
-                                {edit.editable === true ?
+                                {/* {edit.editable === true ?
                                     <div className='input_container'>
                                         <Input value={state.street} />
                                         <Input value={state.city} />
                                         <Input value={state.state} />
                                         <Input value={state.country} />
                                     </div>
-                                    :
-                                    <div>
-                                        <p>{state.street}</p>
-                                        <p>{state.city}</p>
-                                        <p>{state.state}</p>
-                                        <p>{state.country}</p>
-                                    </div>
-                                }
+                                    : */}
+                                <div>
+                                    <p>{state.street}</p>
+                                    <p>{state.city}</p>
+                                    <p>{state.state}</p>
+                                    <p>{state.country}</p>
+                                </div>
+                                {/* } */}
                             </div>
                         </div>
                     </div>

@@ -58,7 +58,7 @@
         width: 22vw !important;
     }
     .data-column-2 {
-        width: 7vw !important; 
+        width: 7vw !important;
     }
     .labels {
         p{
@@ -79,4 +79,9 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+}
+
+.delete-button {
+    margin-left: 1vw !important;
+    color: red !important;
 }

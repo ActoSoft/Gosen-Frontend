@@ -37,9 +37,17 @@ class Profile extends Component {
         }
     }
 
+    handleChangeDatePicker = ({moment}) => {
+        const dateFormatted = moment.format('YYYY-MM-DD')
+        const { data } = this.state
+        data.birth_date = dateFormatted
+        this.setState({ data })
+    }
+
     handleEvent = (event, params) => {
         const events = {
-            handleChange: this.handleChangeForm
+            handleChange: this.handleChangeForm,
+            handleChangeDate: this.handleChangeDatePicker
         }
         return events[event](params)
     }

@@ -101,6 +101,7 @@
 }
 
 .form {
+    margin-top: 5vh;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -121,10 +122,18 @@
             justify-content: center;
             align-items: flex-start;
             p {
-                width: 30%;
+                width: 50%;
                 color: #F4E38B;
                 font-size: 1.3em;
                 margin-right: 1vw;
+            }
+            .radio-gender {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                margin-top: 5px;
             }
         }
     }

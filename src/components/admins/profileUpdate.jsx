@@ -1,9 +1,12 @@
 import React from 'react'
-import { Input, Radio, Select, Skeleton } from 'antd'
+import { Skeleton } from 'antd'
 import MainButton from '../common/mainButton'
 import SecondaryButton from '../common/secondaryButton'
 import { Link } from 'react-router-dom'
-import InputText from '../common/inputText/'
+import InputText from '../common/inputText'
+// import SelectComponent from '../common/select'
+import DatePicker from '../common/datePicker'
+import RadioButton from '../common/radioButton'
 
 const ProfileForm = ({data, events }) =>
     <div className="profile-container">
@@ -63,6 +66,46 @@ const ProfileForm = ({data, events }) =>
                             name='phone_number'
                             onChange={ (e) => events('handleChange', {e})}
                         />
+                        <InputGroup
+                            label='Nacimiento'
+                            value={data.birth_date}
+                            onChange={moment => events('handleChangeDate', {moment})}
+                            type='datePicker'
+                        />
+                    </div>
+                    <div className="column">
+                        <InputGroup
+                            label='Calle'
+                            value={data.street}
+                            onChange={e => events('handleChange', {e})}
+                            placeholder='Dirección'
+                            name='street'
+                        />
+                        <InputGroup
+                            label='Ciudad'
+                            value={data.city}
+                            onChange={e => events('handleChange', {e})}
+                            placeholder='Ciudad'
+                            name='city'
+                        />
+                        <InputGroup
+                            label='Género'
+                            type='radio'
+                            name='gender'
+                            value={data.gender}
+                            className='radio-gender'
+                            options={[
+                                {
+                                    value: 'masculino',
+                                    readable: 'Masculino'
+                                },
+                                {
+                                    value: 'femenino',
+                                    readable: 'Femenino'
+                                }
+                            ]}
+                            onChange={(e)=>events('handleChange', {e})}
+                        />
                     </div>
                 </div>
             </div>
@@ -76,12 +119,31 @@ const ProfileForm = ({data, events }) =>
 const InputGroup = (props) =>
     <div className="form-group">
         <p>{props.label}</p>
-        <InputText
-            value={props.value}
-            placeholder={props.placeholder}
-            name={props.name}
-            onChange={props.onChange}
-        />
+        {
+            !props.type ?
+                <InputText
+                    value={props.value}
+                    placeholder={props.placeholder}
+                    name={props.name}
+                    onChange={props.onChange}
+                    className={props.className}
+                />
+                : props.type === 'datePicker' ?
+                    <DatePicker
+                        value={props.value}
+                        onChange={props.onChange}
+                        className={props.className}
+                    />
+                    : props.type === 'radio' ?
+                        <RadioButton
+                            name={props.name}
+                            value={props.value}
+                            options={props.options}
+                            onChange={props.onChange}
+                            className={props.className}
+                        />
+                        : null
+        }
     </div>
 
 export default ProfileForm

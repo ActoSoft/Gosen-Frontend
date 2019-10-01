@@ -1,13 +1,21 @@
 import React from 'react'
-import { Calendar } from 'antd'
+import { DatePicker } from 'antd'
 import './index.scss'
+import moment from 'moment'
 
-const DatePicker = ( props ) =>
-    <div className="calendar-container">
-        <Calendar
-            fullscreen={false}
+const dateFormat = 'DD/MM/YYYY'
+
+const DatePickerComponent = ( props ) =>
+    <div className={`calendar-container
+        ${props.className ? props.className : ''}
+    `}>
+        <DatePicker
+            defaultValue={
+                moment(props.value, 'YYYY-MM-DD')
+            }
+            format={dateFormat}
             onChange={props.onChange}
         />
     </div>
 
-export default DatePicker
+export default DatePickerComponent

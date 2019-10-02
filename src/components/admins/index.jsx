@@ -41,7 +41,6 @@ class Profile extends Component {
 
     handleChangeImage = async ({ file }) => {
         const result = await this.handleSubmitImage(file)
-        console.log('El ressult', result)
         if (!result.hasError) {
             const { data } = this.state
             data.photo = result
@@ -74,7 +73,6 @@ class Profile extends Component {
                 formData
             )
             if(response.data) {
-                console.log(response)
                 toast.success('Imagen actualizada con éxito')
                 return response.data.photo
             } else {

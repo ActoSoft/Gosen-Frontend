@@ -10,7 +10,7 @@ import RadioButton from '../common/radioButton'
 import cities from '../../utils/cities'
 import SelectComponent from '../common/select'
 
-const ProfileForm = ({data, events }) =>
+const ProfileForm = ({data, events, isUploadedImage, temporalImage }) =>
     <div className="profile-container">
         {data ?
             <div>
@@ -28,7 +28,21 @@ const ProfileForm = ({data, events }) =>
                         </div>
                     </div>
                     <div className="header-photo-container">
-                        <img className="profile-photo" src={data.photo} alt="profile-pic" />
+                        <img
+                            className="profile-photo"
+                            src={!isUploadedImage ?
+                                data.photo :
+                                temporalImage
+                            } alt="profile-pic" />
+                        <label className="input-change-file">
+                            Cambiar imagen
+                            <input
+                                type="file"
+                                name='uploadFile'
+                                style={{display: 'none'}}
+                                onChange={({target}) => events('handleChangeImage', {file: target.files[0]})}
+                            />
+                        </label>
                     </div>
                 </div>
                 <div className="form">

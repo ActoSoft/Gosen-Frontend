@@ -20,6 +20,19 @@
     span {
         color:white;
     }
+    .header-photo-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        .input-change-file {
+            color: white;
+            font-size: 1.3em;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
 }
 .user-fullname {
     padding-right: 2vw;

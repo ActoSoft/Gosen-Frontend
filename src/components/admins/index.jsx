@@ -12,6 +12,7 @@ class Profile extends Component {
         console.log('llego')
         super(props)
         this.state = {
+            isUploadedImage: false
         }
         this.getData = this.props.auth.handleGetUserData
     }
@@ -37,6 +38,17 @@ class Profile extends Component {
         }
     }
 
+    handleChangeImage =({file}) => {
+        console.log(file)
+        const { data } = this.state
+        data.photo = file
+        this.setState({
+            data,
+            isUploadedImage: true,
+            temporalImage: URL.createObjectURL(file)
+        })
+    }
+
     handleChangeDatePicker = ({moment}) => {
         const dateFormatted = moment.format('YYYY-MM-DD')
         const { data } = this.state
@@ -54,7 +66,8 @@ class Profile extends Component {
         const events = {
             handleChange: this.handleChangeForm,
             handleChangeDate: this.handleChangeDatePicker,
-            handleChangeSelect: this.handleChangeSelect
+            handleChangeSelect: this.handleChangeSelect,
+            handleChangeImage: this.handleChangeImage
         }
         return events[event](params)
     }
@@ -75,6 +88,8 @@ class Profile extends Component {
                             <ProfileForm
                                 data={this.state.data}
                                 events={this.handleEvent}
+                                isUploadedImage={this.state.isUploadedImage}
+                                temporalImage={this.state.temporalImage}
                             />
                             : null
                         }

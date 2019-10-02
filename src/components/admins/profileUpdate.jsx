@@ -7,6 +7,8 @@ import InputText from '../common/inputText'
 // import SelectComponent from '../common/select'
 import DatePicker from '../common/datePicker'
 import RadioButton from '../common/radioButton'
+import cities from '../../utils/cities'
+import SelectComponent from '../common/select'
 
 const ProfileForm = ({data, events }) =>
     <div className="profile-container">
@@ -75,20 +77,6 @@ const ProfileForm = ({data, events }) =>
                     </div>
                     <div className="column">
                         <InputGroup
-                            label='Calle'
-                            value={data.street}
-                            onChange={e => events('handleChange', {e})}
-                            placeholder='Dirección'
-                            name='street'
-                        />
-                        <InputGroup
-                            label='Ciudad'
-                            value={data.city}
-                            onChange={e => events('handleChange', {e})}
-                            placeholder='Ciudad'
-                            name='city'
-                        />
-                        <InputGroup
                             label='Género'
                             type='radio'
                             name='gender'
@@ -105,6 +93,37 @@ const ProfileForm = ({data, events }) =>
                                 }
                             ]}
                             onChange={(e)=>events('handleChange', {e})}
+                        />
+                        <InputGroup
+                            label='Calle'
+                            value={data.street}
+                            onChange={e => events('handleChange', {e})}
+                            placeholder='Dirección'
+                            name='street'
+                        />
+                        <InputGroup
+                            label='Ciudad'
+                            value={data.city}
+                            onChange={e => events('handleChange', {e})}
+                            placeholder='Ciudad'
+                            name='city'
+                        />
+                        <InputGroup
+                            type='select'
+                            label='Estado'
+                            name='state'
+                            value={data.state}
+                            searchable={true}
+                            options={cities}
+                            onChange={(value) => events('handleChangeSelect', {name: 'state', value})}
+                        />
+                        <InputGroup
+                            type='select'
+                            label='País'
+                            name='country'
+                            value={data.country}
+                            disabled={true}
+                            onChange={(value) => events('handleChangeSelect', {name: 'country', value})}
                         />
                     </div>
                 </div>
@@ -142,7 +161,16 @@ const InputGroup = (props) =>
                             onChange={props.onChange}
                             className={props.className}
                         />
-                        : null
+                        : props.type === 'select' ?
+                            <SelectComponent
+                                name={props.name}
+                                onChange={props.onChange}
+                                value={props.value}
+                                searchable={props.searchable}
+                                options={props.options}
+                                disabled={props.disabled}
+                            />
+                            : null
         }
     </div>
 

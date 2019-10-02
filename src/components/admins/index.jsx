@@ -44,10 +44,17 @@ class Profile extends Component {
         this.setState({ data })
     }
 
+    handleChangeSelect = ({name, value}) => {
+        const { data } = this.state
+        data[name] = value
+        this.setState({ data })
+    }
+
     handleEvent = (event, params) => {
         const events = {
             handleChange: this.handleChangeForm,
-            handleChangeDate: this.handleChangeDatePicker
+            handleChangeDate: this.handleChangeDatePicker,
+            handleChangeSelect: this.handleChangeSelect
         }
         return events[event](params)
     }

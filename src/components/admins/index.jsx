@@ -27,6 +27,20 @@ class Profile extends Component {
         )
     }
 
+    handleDeleteAdmin = async () => {
+        const { data } = this.state
+        try{
+            const response = await axios.delete(`${adminsEndpoint}${data.id}`)
+            if(response.data.message === 'ok')
+                toast.success('Administrador eliminado con éxito')
+            else
+                toast.error('Algo falló')
+        } catch(error) {
+            const { data } = error.response
+            showErrors(data)
+        }
+    }
+
     handleChangeForm = ({ e, intoUser = false }) => {
         const { name, value } = e.target
         const { data } = this.state

@@ -11,7 +11,7 @@ export default class ReusableList extends Component {
         }
     }
 
-    getColumnSearchProps = dataIndex => ({
+    getColumnSearchProps = (dataIndex, title) => ({
         filterDropdown: ({
             setSelectedKeys,
             selectedKeys,
@@ -20,8 +20,8 @@ export default class ReusableList extends Component {
         }) =>
             <div style={{ padding: 8 }}>
                 <Input
-                    ref={ node => this.searchInput = node }
-                    placeholder={`Buscar ${dataIndex}`}
+                    ref={ node => {this.searchInput = node }}
+                    placeholder={`Buscar ${title}`}
                     value={selectedKeys[0]}
                     onChange={e => setSelectedKeys(
                         e.target.value ?
@@ -58,7 +58,8 @@ export default class ReusableList extends Component {
                         this.handleReset(clearFilters)
                     }
                     size="small"
-                    style={{ width: 50 }}
+                    className='clean-button'
+                    style={{ width: 90 }}
                 >
                     Limpiar
                 </Button>
@@ -88,7 +89,7 @@ export default class ReusableList extends Component {
                     backgroundColor: 'ffc069',
                     padding: 0
                 }}
-                searchWords={[text]}
+                searchWords={[this.state.inputText]}
                 autoEscape
                 textToHighlight={text.toString()}
             />
@@ -106,13 +107,15 @@ export default class ReusableList extends Component {
 
     setupColumns = columns => {
         return columns.map(columnData => {
+            const { title, name, width } = columnData
             let obj = {
-                title: columnData.title,
-                dataIndex: columnData.name,
-                key: columnData.name
+                title: title,
+                dataIndex: name,
+                key: name,
+                ...this.getColumnSearchProps(name, title)
             }
-            if (columnData.width) {
-                obj.width = columnData.width
+            if (width) {
+                obj.width = width
             }
             return obj
         })
@@ -129,7 +132,7 @@ export default class ReusableList extends Component {
                             columns={
                                 this.setupColumns(columns)
                             }
-                            rowKey='id'
+                            rowKey={data.first_name}
                         />
                     </Col>
                 </Row>

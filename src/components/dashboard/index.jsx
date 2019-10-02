@@ -4,9 +4,6 @@ import DashboardBody from './dashboardBody'
 import Navbar from '../common/navbar'
 
 class Dashboard extends Component {
-    constructor(props) {
-        super(props)
-    }
 
     render() {
         return (

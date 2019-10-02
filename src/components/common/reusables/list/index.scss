@@ -22,13 +22,13 @@ thead, th, tbody {
 
 th {
     border-bottom: 0 !important;
+    text-align: center !important;
 }
 
 tr {
     color: $white !important;
     font-size: 1rem;
     font-weight: 500;
-    border: none !important;
     &:hover{
         td {
             background-color: $primary !important;
@@ -37,6 +37,51 @@ tr {
     }
 }
 
+tbody:before {
+    content: "";
+    display: block;
+    height: 1vh;
+    width: 100%;
+    background: $main-background;
+}
+
 td {
-    border-bottom: 0 !important;
+    text-align: center;
+    border-bottom: none !important;
+    // border-bottom: 1px solid rgba($primary, 0.5) !important;
+}
+
+.anticon {
+    &:hover, &:focus, &:active, &:visited {
+        background-color: $primary-light !important;
+    }
+}
+
+.ant-table-filter-dropdown {
+    background-color: $third !important;
+    div {
+        input {
+            border-color: $primary-light;
+            background-color: $third !important;
+            color: $primary;
+            &::placeholder {
+                color: rgba($primary, 0.3) !important;
+            }
+            &:focus, &:hover, &:active {
+                border-color: $primary;
+            }
+        }
+
+        .ant-btn-primary {
+            border: 0 !important;
+            background-color: $primary !important;
+            color: $black !important;
+        }
+
+        .clean-button {
+            border: 0 !important;
+            background-color: $black !important;
+            color: $primary !important;
+        }
+    }
 }

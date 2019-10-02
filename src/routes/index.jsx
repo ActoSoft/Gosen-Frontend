@@ -7,6 +7,7 @@ import Dashboard from '../components/dashboard'
 // import PrivateRoute from './privateRoute'
 import PublicRoute from './publicRoute'
 import EmployeesList from '../components/employees/list'
+import { Route } from 'react-router-dom'
 
 
 const Routes = () => {
@@ -28,7 +29,7 @@ const Routes = () => {
                 <PublicRoute exact path = '/dashboard/' component = { Dashboard } />
 
                 {/* Employees Routes */}
-                <PublicRoute exact path = '/empleados/' component = { EmployeesList } />
+                <Route exact path = '/empleados/' component = { EmployeesList } />
 
             </Switch>
         </Fragment>

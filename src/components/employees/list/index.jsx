@@ -10,14 +10,19 @@ export default class EmployeeList extends Component {
         this.state = {
             columns: [
                 {
-                    title: 'Usuario',
-                    name: 'username',
-                    width: '20%'
+                    title: 'Nombre',
+                    name: 'first_name',
+                    // width: '50%'
                 },
                 {
                     title: 'Correo Electrónico',
                     name: 'email',
-                    width: '20%'
+                    // width: '25%'
+                },
+                {
+                    title: 'Usuario',
+                    name: 'username',
+                    // width: '25%'
                 }
             ]
         }

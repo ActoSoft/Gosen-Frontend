@@ -5,14 +5,16 @@ import ProfileCard from './profileCard'
 import Footer from '../common/footer'
 import { withAuth } from '../../Authentication'
 import ProfileForm from './profileUpdate'
+import { adminsEndpoint } from '../../backendEndpoints'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import { showErrors } from '../../utils'
 
 
 class Profile extends Component {
     constructor(props) {
-        console.log('llego')
         super(props)
         this.state = {
-            isUploadedImage: false
         }
         this.getData = this.props.auth.handleGetUserData
     }
@@ -25,8 +27,7 @@ class Profile extends Component {
         )
     }
 
-    handleChangeForm = ({e, intoUser = false}) => {
-
+    handleChangeForm = ({ e, intoUser = false }) => {
         const { name, value } = e.target
         const { data } = this.state
         if (intoUser) {
@@ -38,28 +39,74 @@ class Profile extends Component {
         }
     }
 
-    handleChangeImage =({file}) => {
-        console.log(file)
-        const { data } = this.state
-        data.photo = file
-        this.setState({
-            data,
-            isUploadedImage: true,
-            temporalImage: URL.createObjectURL(file)
-        })
+    handleChangeImage = async ({ file }) => {
+        const result = await this.handleSubmitImage(file)
+        console.log('El ressult', result)
+        if (!result.hasError) {
+            const { data } = this.state
+            data.photo = result
+            this.setState({
+                data
+            })
+        }
     }
 
-    handleChangeDatePicker = ({moment}) => {
+    handleChangeDatePicker = ({ moment }) => {
         const dateFormatted = moment.format('YYYY-MM-DD')
         const { data } = this.state
         data.birth_date = dateFormatted
         this.setState({ data })
     }
 
-    handleChangeSelect = ({name, value}) => {
+    handleChangeSelect = ({ name, value }) => {
         const { data } = this.state
         data[name] = value
         this.setState({ data })
+    }
+
+    handleSubmitImage = async (image) => {
+        let formData = new FormData()
+        formData.append('photo', image)
+        formData.append('id', this.state.data.id)
+        try {
+            const response = await axios.post(
+                `${adminsEndpoint}update_image/`,
+                formData
+            )
+            if(response.data) {
+                console.log(response)
+                toast.success('Imagen actualizada con éxito')
+                return response.data.photo
+            } else {
+                toast.warn('WTF')
+                return {
+                    hasError: true
+                }
+            }
+        } catch (error) {
+            showErrors(error)
+            return {
+                hasError: true
+            }
+        }
+    }
+
+    handleSubmit = async () => {
+        // TODO: Validations
+        const { data } = this.state
+        delete data.photo
+        try {
+            const response = await axios.put(`${adminsEndpoint}${data.id}/`, data)
+            if (response.data) {
+                toast.success('Datos actualizados con éxito')
+                this.props.history.push('/perfil/')
+            } else {
+                toast.error('WTF')
+            }
+        } catch (error) {
+            const { data } = error.response
+            showErrors(data)
+        }
     }
 
     handleEvent = (event, params) => {
@@ -67,7 +114,8 @@ class Profile extends Component {
             handleChange: this.handleChangeForm,
             handleChangeDate: this.handleChangeDatePicker,
             handleChangeSelect: this.handleChangeSelect,
-            handleChangeImage: this.handleChangeImage
+            handleChangeImage: this.handleChangeImage,
+            handleSubmit: this.handleSubmit
         }
         return events[event](params)
     }
@@ -88,8 +136,6 @@ class Profile extends Component {
                             <ProfileForm
                                 data={this.state.data}
                                 events={this.handleEvent}
-                                isUploadedImage={this.state.isUploadedImage}
-                                temporalImage={this.state.temporalImage}
                             />
                             : null
                         }

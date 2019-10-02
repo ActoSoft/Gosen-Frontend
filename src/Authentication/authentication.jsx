@@ -86,7 +86,7 @@ class Authentication {
             const response = await axios.get(adminsEndpoint)
             if(response.data) {
                 console.log(response.data)
-                return (response.data)
+                return response.data
             }
         } catch (error) {
             console.log(error)

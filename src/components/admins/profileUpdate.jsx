@@ -4,13 +4,12 @@ import MainButton from '../common/mainButton'
 import SecondaryButton from '../common/secondaryButton'
 import { Link } from 'react-router-dom'
 import InputText from '../common/inputText'
-// import SelectComponent from '../common/select'
 import DatePicker from '../common/datePicker'
 import RadioButton from '../common/radioButton'
-import cities from '../../utils/cities'
+import { cities, formatURL } from '../../utils'
 import SelectComponent from '../common/select'
 
-const ProfileForm = ({data, events, isUploadedImage, temporalImage }) =>
+const ProfileForm = ({ data, events }) =>
     <div className="profile-container">
         {data ?
             <div>
@@ -18,7 +17,11 @@ const ProfileForm = ({data, events, isUploadedImage, temporalImage }) =>
                     <div className="header-text-container-update">
                         <div>
                             <span className="user-fullname">{`${data.user.first_name} ${data.user.last_name}`}</span>
-                            <MainButton text='Guardar' className="edit-buttons"/>
+                            <MainButton
+                                text='Guardar'
+                                className="edit-buttons"
+                                onClick={e => events('handleSubmit', {e})}
+                            />
                             <Link to='/perfil/'>
                                 <SecondaryButton text='Cancelar' className="edit-buttons cancel-button" />
                             </Link>
@@ -30,17 +33,15 @@ const ProfileForm = ({data, events, isUploadedImage, temporalImage }) =>
                     <div className="header-photo-container">
                         <img
                             className="profile-photo"
-                            src={!isUploadedImage ?
-                                data.photo :
-                                temporalImage
-                            } alt="profile-pic" />
+                            src={formatURL(data.photo)}
+                            alt="profile-pic" />
                         <label className="input-change-file">
                             Cambiar imagen
                             <input
                                 type="file"
-                                name='uploadFile'
                                 style={{display: 'none'}}
-                                onChange={({target}) => events('handleChangeImage', {file: target.files[0]})}
+                                onChange={({target}) =>
+                                    events('handleChangeImage', { file: target.files[0] })}
                             />
                         </label>
                     </div>
@@ -52,40 +53,40 @@ const ProfileForm = ({data, events, isUploadedImage, temporalImage }) =>
                             value={data.user.first_name}
                             placeholder='Nombre'
                             name='first_name'
-                            onChange={ (e) => events('handleChange', {e, intoUser: true})}
+                            onChange={e => events('handleChange', { e, intoUser: true })}
                         />
                         <InputGroup
                             label='Apellidos'
                             value={data.user.last_name}
                             placeholder='Apellidos'
                             name='last_name'
-                            onChange={ (e) => events('handleChange', {e, intoUser: true})}
+                            onChange={e => events('handleChange', { e, intoUser: true })}
                         />
                         <InputGroup
                             label='Usuario'
                             value={data.user.username}
                             placeholder='Usuario'
                             name='username'
-                            onChange={ (e) => events('handleChange', {e, intoUser: true})}
+                            onChange={e => events('handleChange', { e, intoUser: true })}
                         />
                         <InputGroup
                             label='Correo'
                             value={data.user.email}
                             placeholder='Correo'
                             name='email'
-                            onChange={ (e) => events('handleChange', {e, intoUser: true})}
+                            onChange={e=> events('handleChange', { e, intoUser: true })}
                         />
                         <InputGroup
                             label='Teléfono'
                             value={data.phone_number}
                             placeholder='Teléfono'
                             name='phone_number'
-                            onChange={ (e) => events('handleChange', {e})}
+                            onChange={e => events( 'handleChange', { e })}
                         />
                         <InputGroup
                             label='Nacimiento'
                             value={data.birth_date}
-                            onChange={moment => events('handleChangeDate', {moment})}
+                            onChange={moment => events('handleChangeDate', { moment })}
                             type='datePicker'
                         />
                     </div>
@@ -106,19 +107,19 @@ const ProfileForm = ({data, events, isUploadedImage, temporalImage }) =>
                                     readable: 'Femenino'
                                 }
                             ]}
-                            onChange={(e)=>events('handleChange', {e})}
+                            onChange={e => events('handleChange', { e })}
                         />
                         <InputGroup
                             label='Calle'
                             value={data.street}
-                            onChange={e => events('handleChange', {e})}
+                            onChange={e => events('handleChange', { e })}
                             placeholder='Dirección'
                             name='street'
                         />
                         <InputGroup
                             label='Ciudad'
                             value={data.city}
-                            onChange={e => events('handleChange', {e})}
+                            onChange={e => events('handleChange', { e })}
                             placeholder='Ciudad'
                             name='city'
                         />
@@ -129,7 +130,7 @@ const ProfileForm = ({data, events, isUploadedImage, temporalImage }) =>
                             value={data.state}
                             searchable={true}
                             options={cities}
-                            onChange={(value) => events('handleChangeSelect', {name: 'state', value})}
+                            onChange={value => events('handleChangeSelect', { name: 'state', value })}
                         />
                         <InputGroup
                             type='select'
@@ -137,7 +138,7 @@ const ProfileForm = ({data, events, isUploadedImage, temporalImage }) =>
                             name='country'
                             value={data.country}
                             disabled={true}
-                            onChange={(value) => events('handleChangeSelect', {name: 'country', value})}
+                            onChange={value => events('handleChangeSelect', { name: 'country', value })}
                         />
                     </div>
                 </div>

@@ -20,7 +20,7 @@ export default class ReusableList extends Component {
         }) =>
             <div style={{ padding: 8 }}>
                 <Input
-                    ref={ node => {this.searchInput = node }}
+                    ref={ node => { this.searchInput = node }}
                     placeholder={`Buscar ${title}`}
                     value={selectedKeys[0]}
                     onChange={e => setSelectedKeys(
@@ -122,7 +122,7 @@ export default class ReusableList extends Component {
     }
 
     render() {
-        const { data, columns } = this.props
+        const { data, columns, URL } = this.props
         return (
             <Fragment>
                 <Row className="row-table">
@@ -133,6 +133,17 @@ export default class ReusableList extends Component {
                                 this.setupColumns(columns)
                             }
                             rowKey={data.first_name}
+                            pagination={{ pageSize: 15 }}
+                            onRow={(record) => {
+                                return {
+                                    onClick: event => {
+                                        event.preventDefault()
+                                        this.props.history.push(
+                                            `${URL}/${record.id}/`
+                                        )
+                                    }
+                                }
+                            }}
                         />
                     </Col>
                 </Row>

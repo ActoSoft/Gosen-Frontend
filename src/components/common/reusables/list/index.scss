@@ -3,8 +3,9 @@
 .row-table {
     height: 100vh;
     display: flex;
+    margin: 10vh 0;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 .ant-table-header-column {
     color: $primary !important;
@@ -48,7 +49,6 @@ tbody:before {
 td {
     text-align: center;
     border-bottom: none !important;
-    // border-bottom: 1px solid rgba($primary, 0.5) !important;
 }
 
 .anticon {
@@ -83,5 +83,35 @@ td {
             background-color: $black !important;
             color: $primary !important;
         }
+    }
+}
+
+.ant-pagination {
+    .ant-pagination-prev, .ant-pagination-next {
+        a {
+            background-color: $primary !important;
+            color: $black !important;
+            border-color: transparent !important;
+            border-width: 0 !important;
+        }
+    }
+    .ant-pagination-item {
+        border-color: transparent !important;
+        background-color: $third;
+        border-width: 0 !important;
+        a {
+            background-color: $third;
+            color: $primary-light;
+        }
+
+        &:hover, &:active, &:focus {
+            border-width: 1px !important;
+            border-color: $primary !important;
+        }
+    }
+
+    .ant-pagination-item-active {
+        border-width: 1px !important;
+        border-color: $primary !important;
     }
 }

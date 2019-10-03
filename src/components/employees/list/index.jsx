@@ -56,6 +56,8 @@ export default class EmployeeList extends Component {
                     <ReusableList
                         columns={columns}
                         data={data}
+                        URL='/empleados'
+                        history={this.props.history}
                     />
                     :
                     <Skeleton active={true} />

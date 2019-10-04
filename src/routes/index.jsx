@@ -7,6 +7,8 @@ import Dashboard from '../components/dashboard'
 import Profile from '../components/admins'
 import PrivateRoute from './privateRoute'
 import PublicRoute from './publicRoute'
+import EmployeesList from '../components/employees/list'
+import { Route } from 'react-router-dom'
 
 
 const Routes = () => {
@@ -31,6 +33,9 @@ const Routes = () => {
                     component = {Profile}
                     action='update'
                 />
+
+                {/* Employees Routes */}
+                <Route exact path = '/empleados/' component = { EmployeesList } />
 
             </Switch>
         </Fragment>

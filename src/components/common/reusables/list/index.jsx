@@ -122,9 +122,14 @@ export default class ReusableList extends Component {
     }
 
     render() {
-        const { data, columns, URL } = this.props
+        const { data, columns, URL, title } = this.props
         return (
             <Fragment>
+                <Row className="row-title">
+                    <Col span={24}>
+                        <p>{title}</p>
+                    </Col>
+                </Row>
                 <Row className="row-table">
                     <Col span={20}>
                         <Table

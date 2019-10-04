@@ -56,6 +56,7 @@ export default class EmployeeList extends Component {
                     <ReusableList
                         columns={columns}
                         data={data}
+                        title='Empleados'
                         URL='/empleados'
                         history={this.props.history}
                     />

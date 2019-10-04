@@ -1,9 +1,25 @@
 @import '../../../../variables.scss';
 
+.row-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .ant-col {
+        text-align: center;
+        p {
+            color: $white;
+            font-size: 3em;
+            font-weight: 600;
+            margin-top: 10vh;
+        }
+    }
+}
+
 .row-table {
     height: 100vh;
     display: flex;
-    margin: 10vh 0;
     justify-content: center;
     align-items: flex-start;
 }

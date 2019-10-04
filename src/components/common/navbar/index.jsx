@@ -89,6 +89,7 @@ class Navbar extends Component {
                             }
                         >
                             <Menu.Item className="sub-item" key="sub1"><NavLink to="/perfil/" className="perfil-link">Perfil</NavLink></Menu.Item>
+                            <Menu.Item className="sub-item" key="sub1"><NavLink to="/administradores/" className="perfil-link">Administradores</NavLink></Menu.Item>
                             <Menu.Item className="sub-item" key="sub2">Cerrar Sesión</Menu.Item>
                         </SubMenu>
                     </Menu>

@@ -8,6 +8,7 @@ import Profile from '../components/admins'
 import PrivateRoute from './privateRoute'
 import PublicRoute from './publicRoute'
 import EmployeesList from '../components/employees/list'
+import AdminList from '../components/admins/adminsList'
 import { Route } from 'react-router-dom'
 
 
@@ -27,6 +28,10 @@ const Routes = () => {
                     exact path = '/perfil/'
                     component = {Profile}
                     action='detail'
+                />
+                <PrivateRoute
+                    exact path = '/administradores/'
+                    component = {AdminList}
                 />
                 <PrivateRoute
                     exact path = '/perfil/editar/'

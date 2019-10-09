@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import axios from 'axios'
 import { adminsEndpoint } from '../../backendEndpoints'
-import ReusableList from '../common/reusables/list'
+import ReusableList from '../reusables/list'
 import { Skeleton } from 'antd'
-export default class EmployeeList extends Component {
+export default class AdminList extends Component {
 
     constructor(props) {
         super(props)
@@ -41,6 +41,8 @@ export default class EmployeeList extends Component {
             // TODO: Remove nested objects
             //const dataWithOutObjects = Object.keys(m).filter(key => typeof m[key] !== 'object')
             //console.log(dataWithOutObjects)
+            m.user.userId = m.user.id
+            delete m.user.id
             return {
                 ...m,
                 ...m.user

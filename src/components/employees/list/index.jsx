@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import axios from 'axios'
 import { getEmployees } from '../../../backendEndpoints'
-import ReusableList from '../../common/reusables/list/index'
+import ReusableList from '../../reusables/list/index'
 import { Skeleton } from 'antd'
 export default class EmployeeList extends Component {
 

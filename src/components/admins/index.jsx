@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import './index.scss'
-import Navbar from '../common/navbar'
 import ProfileCard from './profileCard'
-import Footer from '../common/footer'
 import { withAuth } from '../../Authentication'
 import ProfileForm from './profileUpdate'
 import { adminsEndpoint } from '../../backendEndpoints'

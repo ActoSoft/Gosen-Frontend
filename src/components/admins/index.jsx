@@ -135,9 +135,6 @@ class Profile extends Component {
     render() {
         return (
             <div className="profile-component-container">
-                <div className="navbar-container">
-                    <Navbar />
-                </div>
                 <div className="body-container">
                     <div>
                         {this.props.action === 'detail' ?
@@ -152,9 +149,6 @@ class Profile extends Component {
                             : null
                         }
                     </div>
-                </div>
-                <div className="footer-container">
-                    <Footer />
                 </div>
             </div>
         )

@@ -1,12 +1,23 @@
 import React from 'react'
 import { withAuth } from '../Authentication/'
 import { Route, Redirect } from 'react-router-dom'
+import Navbar from '../components/common/navbar'
+import Footer from '../components/common/footer'
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => {
     return(
         <Route {...rest} render={ (propsRoute) =>
             auth.isAuthenticated()
-                ? <Component { ...propsRoute } { ...rest } />
+                ?
+                <div>
+                    <div className="navbar-container">
+                        <Navbar />
+                    </div>
+                    <Component { ...propsRoute } { ...rest } />
+                    <footer className="footer-container">
+                        <Footer />
+                    </footer>
+                </div>
                 : <Redirect to="/login" />
         } />
     )

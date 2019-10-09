@@ -78,11 +78,20 @@
     height: 10vh !important;
 }
 .sub-item {
+    color: #171717 !important;
+    a {
+        color: #171717 !important;
+    }
     height: 7.5vh !important;
     &:hover {
         border-right: none;
         background-color: #171717 !important;
-        color: #F4E38B !important
+        color: #F4E38B !important;
+        a {
+        //     border-right: none;
+            // background-color: #171717 !important;
+            color: #F4E38B !important
+        }
     }
 }
 .ant-menu-item,.ant-menu-submenu-title {
@@ -102,11 +111,5 @@
     }
     &::after {
         background: #171717 !important;
-    }
-}
-.perfil-link {
-    color: black !important;
-    &:hover {
-        color:  #F4E38B !important;
     }
 }

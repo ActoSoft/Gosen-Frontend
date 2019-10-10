@@ -7,12 +7,25 @@
     align-items: center;
 
     .ant-col {
+        margin: 3vh 0;
         text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
         p {
+            margin-bottom: 0;
+            margin-top: 0;
             color: $white;
             font-size: 3em;
             font-weight: 600;
-            margin-top: 5vh;
+        }
+        .add-icon {
+            margin-left: 2vw;
+            svg {
+                font-size: 40px;
+                fill: $primary;
+            }
         }
     }
 }
@@ -67,11 +80,11 @@ td {
     border-bottom: none !important;
 }
 
-.anticon {
-    &:hover, &:focus, &:active, &:visited {
-        background-color: $primary-light !important;
-    }
-}
+// .anticon {
+//     &:hover, &:focus, &:active, &:visited {
+//         background-color: $primary-light !important;
+//     }
+// }
 
 .ant-table-filter-dropdown {
     background-color: $third !important;

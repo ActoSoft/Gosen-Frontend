@@ -128,6 +128,11 @@ export default class ReusableList extends Component {
                 <Row className="row-title">
                     <Col span={24}>
                         <p>{title}</p>
+                        <Icon
+                            type="plus-square"
+                            className="add-icon"
+                            onClick={()=>this.props.history.push(`${URL}/crear/`)}
+                        />
                     </Col>
                 </Row>
                 <Row className="row-table">

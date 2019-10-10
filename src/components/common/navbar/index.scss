@@ -72,9 +72,15 @@
 .root-item:hover {
     border-right: none;
     background-color: #171717 !important;
-    color: #F4E38B !important
+    color: #F4E38B !important;
+    a {
+        color: #F4E38B !important;
+    }
 }
 .root-item, .ant-menu-submenu-title {
+    a {
+        color: #171717 !important;
+    }
     height: 10vh !important;
 }
 .sub-item {

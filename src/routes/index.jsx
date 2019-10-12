@@ -10,6 +10,7 @@ import PublicRoute from './publicRoute'
 import EmployeesList from '../components/employees/list'
 import AdminList from '../components/admins/adminsList'
 import AdminDetail from '../components/admins/adminDetail'
+import AdminForm from '../components/admins/adminForm'
 import { Route } from 'react-router-dom'
 
 
@@ -34,6 +35,10 @@ const Routes = () => {
                 <PrivateRoute
                     exact path = '/administradores/'
                     component = {AdminList}
+                />
+                <PrivateRoute
+                    exact path = '/administradores/crear'
+                    component = {AdminForm}
                 />
                 <PrivateRoute
                     exact path = '/administradores/:id'

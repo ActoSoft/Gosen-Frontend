@@ -5,7 +5,7 @@ import {
     resetPasswordEndpoint,
     recoverPasswordEndpoint,
     adminsEndpoint
-} from '../backendEndpoints'
+} from '../utils/backendEndpoints'
 class Authentication {
 
     constructor() {

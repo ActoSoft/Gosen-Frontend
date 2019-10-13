@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import axios from 'axios'
-import { adminsEndpoint } from '../../backendEndpoints'
+import { adminsEndpoint } from '../../utils/backendEndpoints'
 import ReusableList from '../reusables/list'
 import { Skeleton } from 'antd'
 export default class AdminList extends Component {

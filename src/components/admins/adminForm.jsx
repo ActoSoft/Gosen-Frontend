@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { adminsEndpoint } from '../../backendEndpoints'
+import { adminsEndpoint } from '../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
 import FormReusable from '../reusables/form'
 import { showErrors } from '../../utils'

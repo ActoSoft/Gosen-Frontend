@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { adminsEndpoint } from '../../backendEndpoints'
+import { adminsEndpoint } from '../../utils/backendEndpoints'
 import axios from 'axios'
 // import { toast } from 'react-toastify'
 // import { showErrors } from '../../utils'

@@ -21,43 +21,54 @@ class Login extends Component {
         this.login = this.props.auth.handleLogin
     }
 
-	onChangeForm = (e) => {
-	    const { name, value } = e.target
-	    this.setState(prevState => {
-	        const newState = { ...prevState }
-	        newState[name] = value
-	        return newState
-	    })
-	}
+    onChangeForm = (e) => {
+        const { name, value } = e.target
+        this.setState(prevState => {
+            const newState = { ...prevState }
+            newState[name] = value
+            return newState
+        })
+    }
 
-	onLogin = async () => {
-	    if (await this.login(this.state)) {
-	        this.props.history.push('/dashboard/')
-	    }
-	}
+    onLogin = async () => {
+        if (await this.login(this.state)) {
+            this.props.history.push('/dashboard/')
+        }
+    }
 
-	render() {
-	    return (
-	        <div className="login-ui-container">
-	            <div className="left-container">
-	                <TitleText text='Iniciar sesión' />
-	                <div className="form-part">
-	                    <SubtitleTwo text={'Usuario'} />
-	                    <InputText className="inputs-login" name="username" onChange={this.onChangeForm} />
-	                    <SubtitleTwo text={'Contraseña'} />
-	                    <InputPassword className="inputs-login" name="password" onChange={this.onChangeForm} />
-	                    <NavLink to="/recuperar-contraseña/" className="navlink">
-	                        <SubtitleOne text="¿Olvidaste tu contraseña?" />
-	                    </NavLink>
-	                    <MainButton text='Iniciar Sesión' onClick={this.onLogin} />
-	                </div>
-	            </div>
-	            <div className="right-container">
-	                <img src={Logo} alt="Logo Gosen" />
-	            </div>
-	        </div>
-	    )
-	}
+    render() {
+        const { username, password } = this.state
+        return (
+            <div className="login-ui-container">
+                <div className="left-container">
+                    <TitleText text='Iniciar sesión' />
+                    <div className="form-part">
+                        <SubtitleTwo text={'Usuario'} />
+                        <InputText
+                            className="inputs-login"
+                            name="username"
+                            value={username}
+                            onChange={this.onChangeForm}
+                        />
+                        <SubtitleTwo text={'Contraseña'} />
+                        <InputPassword
+                            className="inputs-login"
+                            name="password"
+                            onChange={this.onChangeForm}
+                            value={password}
+                        />
+                        <NavLink to="/recuperar-contraseña/" className="navlink">
+                            <SubtitleOne text="¿Olvidaste tu contraseña?" />
+                        </NavLink>
+                        <MainButton text='Iniciar Sesión' onClick={this.onLogin} />
+                    </div>
+                </div>
+                <div className="right-container">
+                    <img src={Logo} alt="Logo Gosen" />
+                </div>
+            </div>
+        )
+    }
 }
 
 export default withAuth(Login)

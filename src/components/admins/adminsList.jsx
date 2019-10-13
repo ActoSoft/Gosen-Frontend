@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import axios from 'axios'
+import CRUD from '../../services'
 import { adminsEndpoint } from '../../utils/backendEndpoints'
 import ReusableList from '../reusables/list'
 import { Skeleton } from 'antd'
@@ -29,7 +29,7 @@ export default class AdminList extends Component {
     }
 
     componentDidMount = async () => {
-        const response = await axios.get(adminsEndpoint)
+        const response = await CRUD.findAll(adminsEndpoint)
         if(response.data) {
             // this.destructInfo(response.data)
             this.setState({ data: this.destructInfo(response.data), isReady: true })

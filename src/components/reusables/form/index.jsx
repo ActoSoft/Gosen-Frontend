@@ -8,6 +8,7 @@ import DatePicker from '../../common/datePicker'
 import RadioButton from '../../common/radioButton'
 import { cities, formatURL } from '../../../utils'
 import SelectComponent from '../../common/select'
+import './index.scss'
 
 const validateExist = (value) => {
     if(!value) return ''
@@ -39,21 +40,24 @@ const Form = ({ data, events, isCreate }) =>
                             <span className="username">{validateExist(data.user.username)}</span>
                         </div>
                     </div>
-                    <div className="header-photo-container">
-                        <img
-                            className="profile-photo"
-                            src={validateExist(formatURL(data.photo))}
-                            alt="profile-pic" />
-                        <label className="input-change-file">
-                            Cambiar imagen
-                            <input
-                                type="file"
-                                style={{display: 'none'}}
-                                onChange={({target}) =>
-                                    events('handleChangeImage', { file: target.files[0] })}
-                            />
-                        </label>
-                    </div>
+                    {
+                        !isCreate ?
+                            <div className="header-photo-container">
+                                <img
+                                    className="profile-photo"
+                                    src={validateExist(formatURL(data.photo))}
+                                    alt="profile-pic" />
+                                <label className="input-change-file">
+                                    Cambiar imagen
+                                    <input
+                                        type="file"
+                                        style={{display: 'none'}}
+                                        onChange={({target}) =>
+                                            events('handleChangeImage', { file: target.files[0] })}
+                                    />
+                                </label>
+                            </div>
+                            : null}
                 </div>
                 <div className="form">
                     <div className="column">
@@ -94,7 +98,7 @@ const Form = ({ data, events, isCreate }) =>
                         />
                         <InputGroup
                             label='Nacimiento'
-                            value={validateExist(data.birth_date)}
+                            value={data.birth_date ? data.birth_date : '1990-01-01' }
                             onChange={moment => events('handleChangeDate', { moment })}
                             type='datePicker'
                         />

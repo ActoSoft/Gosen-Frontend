@@ -131,11 +131,13 @@ class AdminForm extends Component {
     render() {
         const { isCreate, data } = this.state
         return (
-            <FormReusable
-                events={this.handleEvent}
-                isCreate={isCreate}
-                data={data}
-            />
+            <div className="body-container">
+                <FormReusable
+                    events={this.handleEvent}
+                    isCreate={isCreate}
+                    data={data}
+                />
+            </div>
         )
     }
 }

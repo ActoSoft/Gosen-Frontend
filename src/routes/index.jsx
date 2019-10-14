@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Switch } from 'react-router-dom'
+import { Switch, Redirect } from 'react-router-dom'
 import Login from '../components/authentication/login'
 import ForgotPassword from '../components/authentication/forgotPassword'
 import ChangePassword from '../components/authentication/changePassword'
@@ -12,10 +12,11 @@ import AdminList from '../components/admins/adminsList'
 import AdminDetail from '../components/admins/adminDetail'
 import AdminForm from '../components/admins/adminForm'
 import { Route } from 'react-router-dom'
+import { withAuth } from '../Authentication'
 
 
 
-const Routes = () => {
+const Routes = ({auth}) => {
     return (
         <Fragment>
             <Switch>
@@ -53,9 +54,10 @@ const Routes = () => {
                 {/* Employees Routes */}
                 <Route exact path = '/empleados/' component = { EmployeesList } />
 
+                <Redirect to={ auth.isAuthenticated() ? '/dashboard' : '/login' } />
             </Switch>
         </Fragment>
     )
 }
 
-export default Routes
+export default withAuth(Routes)

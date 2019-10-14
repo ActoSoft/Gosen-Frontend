@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import { adminsEndpoint } from '../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
 import FormReusable from '../reusables/form'
 import { showErrors } from '../../utils'
-
+import './index.scss'
+import CRUD, { post } from '../../services'
 class AdminForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isCreate: false
+            isCreate: false,
+            model: 'Administrador'
         }
     }
 
@@ -25,7 +26,7 @@ class AdminForm extends Component {
         } else {
             const id = this.props.match.params.id || null
             if (!id) toast.error('No se especificó el usuario a modificar')
-            axios.get(`${adminsEndpoint}${id}`)
+            CRUD.findOne(adminsEndpoint, id)
                 .then(({data}) => {
                     this.setState({data})
                 })
@@ -78,7 +79,7 @@ class AdminForm extends Component {
         formData.append('photo', image)
         formData.append('id', this.state.data.id)
         try {
-            const response = await axios.post(
+            const response = await post(
                 `${adminsEndpoint}update_image/`,
                 formData
             )
@@ -92,7 +93,7 @@ class AdminForm extends Component {
                 }
             }
         } catch (error) {
-            showErrors(error)
+            showErrors(error.response.data)
             return {
                 hasError: true
             }
@@ -101,19 +102,26 @@ class AdminForm extends Component {
 
     handleSubmit = async () => {
         // TODO: Validations
-        const { data } = this.state
+        const { data, isCreate } = this.state
         delete data.photo
         try {
-            const response = await axios.put(`${adminsEndpoint}${data.id}/`, data)
+            let response
+            if(isCreate) {
+                data.role = 'admin'
+                response = await CRUD.create(adminsEndpoint, data)
+            } else {
+                response = await CRUD.update(adminsEndpoint, data.id, data)
+            }
             if (response.data) {
                 toast.success('Datos actualizados con éxito')
-                this.props.history.push('/perfil/')
+                this.props.history.push('/administradores/')
             } else {
                 toast.error('WTF')
             }
         } catch (error) {
             const { data } = error.response
-            showErrors(data)
+            console.log(data)
+            // showErrors(data)
         }
     }
 
@@ -129,13 +137,14 @@ class AdminForm extends Component {
     }
 
     render() {
-        const { isCreate, data } = this.state
+        const { isCreate, data, model } = this.state
         return (
             <div className="body-container">
                 <FormReusable
                     events={this.handleEvent}
                     isCreate={isCreate}
                     data={data}
+                    model={model}
                 />
             </div>
         )

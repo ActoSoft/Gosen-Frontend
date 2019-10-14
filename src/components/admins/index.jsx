@@ -4,9 +4,9 @@ import ProfileCard from './profileCard'
 import { withAuth } from '../../Authentication'
 import ProfileForm from './profileUpdate'
 import { adminsEndpoint } from '../../utils/backendEndpoints'
-import axios from 'axios'
 import { toast } from 'react-toastify'
 import { showErrors } from '../../utils'
+import CRUD, { post } from '../../services'
 
 
 class Profile extends Component {
@@ -14,21 +14,24 @@ class Profile extends Component {
         super(props)
         this.state = {
         }
-        this.getData = this.props.auth.handleGetUserData
     }
 
     componentDidMount() {
-        this.getData().then(data =>
-            this.setState({
-                data
+        CRUD.findOne(adminsEndpoint, this.props.auth.adminId)
+            .then(({data}) =>
+                this.setState({
+                    data
+                })
+            )
+            .catch(error => {
+                console.log(error)
             })
-        )
     }
 
     handleDeleteAdmin = async () => {
         const { data } = this.state
         try{
-            const response = await axios.delete(`${adminsEndpoint}${data.id}`)
+            const response = await CRUD.softDelete(adminsEndpoint, data.id)
             if(response.data.message === 'ok')
                 toast.success('Administrador eliminado con éxito')
             else
@@ -80,10 +83,7 @@ class Profile extends Component {
         formData.append('photo', image)
         formData.append('id', this.state.data.id)
         try {
-            const response = await axios.post(
-                `${adminsEndpoint}update_image/`,
-                formData
-            )
+            const response = await post(`${adminsEndpoint}update_image/`, formData)
             if(response.data) {
                 toast.success('Imagen actualizada con éxito')
                 return response.data.photo
@@ -106,7 +106,7 @@ class Profile extends Component {
         const { data } = this.state
         delete data.photo
         try {
-            const response = await axios.put(`${adminsEndpoint}${data.id}/`, data)
+            const response = await CRUD.update(adminsEndpoint, data.id, data)
             if (response.data) {
                 toast.success('Datos actualizados con éxito')
                 this.props.history.push('/perfil/')

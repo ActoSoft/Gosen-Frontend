@@ -15,7 +15,7 @@ const validateExist = (value) => {
     return value
 }
 
-const Form = ({ data, events, isCreate }) =>
+const Form = ({ data, events, isCreate, model = '' }) =>
     <div className="profile-container">
         {!isCreate && data || isCreate ?
             <div>
@@ -25,7 +25,7 @@ const Form = ({ data, events, isCreate }) =>
                             <span className="user-fullname">{
                                 !isCreate
                                     ? `${data.user.first_name} ${data.user.last_name}`
-                                    : 'Agregar nuevo administrador'
+                                    : `Agregar nuevo ${model}`
                             }</span>
                             <MainButton
                                 text='Guardar'

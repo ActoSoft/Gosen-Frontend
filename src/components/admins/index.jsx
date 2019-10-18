@@ -14,6 +14,7 @@ class Profile extends Component {
         super(props)
         this.state = {
         }
+        this.headers = this.props.auth.getAuthHeaders
     }
 
     componentDidMount() {
@@ -83,7 +84,7 @@ class Profile extends Component {
         formData.append('photo', image)
         formData.append('id', this.state.data.id)
         try {
-            const response = await post(`${adminsEndpoint}update_image/`, formData)
+            const response = await post(`${adminsEndpoint}update_image/`, formData, this.headers)
             if(response.data) {
                 toast.success('Imagen actualizada con éxito')
                 return response.data.photo

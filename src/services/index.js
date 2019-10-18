@@ -18,20 +18,20 @@ export const get = (url, config = {}) => {
     return axios.get(url, config)
 }
 
-export const post = (url, data) => {
-    return axios.post(url, data)
+export const post = (url, data, headers = {}) => {
+    return axios.post(url, data, headers)
 }
 
-export const put = (url, data) => {
-    return axios.put(url, data)
+export const put = (url, data, headers = {}) => {
+    return axios.put(url, data, headers)
 }
 
-export const patch = (url, data) => {
-    return axios.patch(url, data)
+export const patch = (url, data, headers = {}) => {
+    return axios.patch(url, data, headers)
 }
 
-export const deleted = url => {
-    return axios.delete(url)
+export const deleted = (url, headers = {}) => {
+    return axios.delete(url, headers)
 }
 
 axios.interceptors.response.use(response => {
@@ -56,16 +56,16 @@ class CRUDService {
         return get(endpoint, config)
     }
     findOne = (endpoint, id) =>{
-        return get(`${endpoint}${id}`)
+        return get(`${endpoint}${id}/`)
     }
     create = (endpoint, data) => {
         return post(endpoint, data)
     }
     update = (endpoint, id, data) => {
-        return put(`${endpoint}${id}`, data)
+        return put(`${endpoint}${id}/`, data)
     }
     softDelete = (endpoint, id) => {
-        return deleted(`${endpoint}${id}`)
+        return deleted(`${endpoint}${id}/`)
     }
 }
 

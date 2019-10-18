@@ -26,6 +26,14 @@ class Authentication {
         return false
     }
 
+    getAuthHeaders = () => {
+        return {
+            headers: {
+                'Authorization': `JWT ${this.token}`
+            }
+        }
+    }
+
     getFullName = () => {
         return `${this.firstName ? this.firstName : 'Nombre'} ${this.lastName ? this.lastName : 'Apellidos'}`
     }

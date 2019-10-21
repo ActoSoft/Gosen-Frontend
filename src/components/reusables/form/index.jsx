@@ -15,7 +15,7 @@ const validateExist = (value) => {
     return value
 }
 
-const Form = ({ data, events, isCreate, model = '' }) =>
+const Form = ({ data, events, isCreate, model = '', goBack }) =>
     <div className="profile-container">
         {!isCreate && data || isCreate ?
             <div>
@@ -32,7 +32,7 @@ const Form = ({ data, events, isCreate, model = '' }) =>
                                 className="edit-buttons"
                                 onClick={e => events('handleSubmit', {e})}
                             />
-                            <Link to='/perfil/'>
+                            <Link to={goBack}>
                                 <SecondaryButton text='Cancelar' className="edit-buttons cancel-button" />
                             </Link>
                         </div>

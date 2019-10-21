@@ -145,6 +145,7 @@ class AdminForm extends Component {
                     isCreate={isCreate}
                     data={data}
                     model={model}
+                    goBack='/administradores/'
                 />
             </div>
         )

@@ -122,3 +122,11 @@
         background: #171717 !important;
     }
 }
+
+.menu-container {
+    width: 256px;
+    position: absolute;
+    z-index: 9999;
+    transition: 0.4s;
+    top: 0;
+}

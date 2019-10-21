@@ -11,7 +11,7 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => {
                 ?
                 <div>
                     <div className="navbar-container">
-                        <Navbar />
+                        <Navbar {...propsRoute} />
                     </div>
                     <Component { ...propsRoute } { ...rest } />
                     <footer className="footer-container">

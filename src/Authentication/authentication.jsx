@@ -3,8 +3,7 @@ import { toast } from 'react-toastify'
 import {
     loginEndpoint,
     resetPasswordEndpoint,
-    recoverPasswordEndpoint,
-    adminsEndpoint
+    recoverPasswordEndpoint
 } from '../utils/backendEndpoints'
 class Authentication {
 
@@ -43,6 +42,7 @@ class Authentication {
             let response = await axios.post(loginEndpoint, data)
             if (response.data) {
                 const { token, profile } = response.data
+                console.log(profile)
                 const { username, email, first_name, last_name, id } = profile.user
                 localStorage.setItem('token', token)
                 localStorage.setItem('username', username)
@@ -89,28 +89,15 @@ class Authentication {
         }
     }
 
-    handleGetAdmins = async () => {
-        try {
-            const response = await axios.get(adminsEndpoint)
-            if(response.data) {
-                console.log(response.data)
-                return response.data
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    handleGetUserData = async () => {
-        try {
-            const response = await axios.get(`${adminsEndpoint}${this.adminId}`)
-            if(response.data) {
-                console.log(response.data)
-                return response.data
-            }
-        } catch(error) {
-            console.log(error)
-        }
+    logout = () => {
+        this.token = ''
+        this.firstName = ''
+        this.lastName = ''
+        this.username = ''
+        this.email = ''
+        this.adminId = ''
+        this.userId = ''
+        localStorage.clear()
     }
 
 }

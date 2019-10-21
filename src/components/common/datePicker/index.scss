@@ -1,5 +1,20 @@
 @import '../../../variables.scss';
 
+.calendar-container {
+    width: 100%;
+    span {
+        width: 100%;
+        div {
+            input {
+                background-color: #20222a;
+                color: white;
+                border: none;
+                width: 100%;
+            }
+        }
+    }
+}
+
 .ant-calendar {
     background-color: $black !important;
     .ant-calendar-panel {
@@ -18,6 +33,9 @@
                 .ant-calendar-my-select {
                     a {
                         color: $white;
+                        &:hover {
+                            color: $primary;
+                        }
                     }
                 }
             }
@@ -27,6 +45,9 @@
             span {
                 a {
                     color: $white;
+                    &:hover {
+                        color: $primary;
+                    }
                 }
             }
         }
@@ -73,6 +94,123 @@
                 background-color: $primary;
                 color: $black !important;
                 font-weight: 600;
+            }
+        }
+
+        .ant-calendar-month-panel {
+            background-color: $black;
+            .ant-calendar-month-panel-header {
+                .ant-calendar-month-panel-year-select {
+                    span {
+                        color: $white;
+                    }
+                }
+            }
+            .ant-calendar-month-panel-body {
+                .ant-calendar-month-panel-table {
+                    tbody {
+                        background-color: $black;
+                        tr {
+                            &:hover {
+                                td {
+                                    background-color: $black !important;
+                                }
+                            }
+                            td {
+                                a:hover {
+                                    background-color: $primary !important;
+                                    color: $black;
+                                }
+                                a {
+                                    color: $white;
+                                }
+                            }
+                            .ant-calendar-month-panel-selected-cell {
+                                a {
+                                    background-color: $primary;
+                                    color: $black;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .ant-calendar-year-panel {
+            background-color: $black;
+            .ant-calendar-year-panel-header {
+                .ant-calendar-year-panel-decade-select {
+                    span {
+                        color: $white;
+                    }
+                }
+            }
+            .ant-calendar-year-panel-body {
+                .ant-calendar-year-panel-table {
+                    tbody {
+                        background-color: $black;
+                        tr {
+                            &:hover {
+                                td {
+                                    background-color: $black !important;
+                                }
+                            }
+                            td {
+                                a:hover {
+                                    background-color: $primary !important;
+                                    color: $black;
+                                }
+                                a {
+                                    color: $white;
+                                }
+                            }
+                            .ant-calendar-year-panel-selected-cell {
+                                a {
+                                    background-color: $primary;
+                                    color: $black;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .ant-calendar-decade-panel {
+            background-color: $black;
+            .ant-calendar-decade-panel-header {
+                .ant-calendar-decade-panel-century {
+                    color: $white;
+                }
+            }
+            .ant-calendar-decade-panel-body {
+                .ant-calendar-decade-panel-table {
+                    tbody {
+                        background-color: $black;
+                        tr {
+                            &:hover {
+                                td {
+                                    background-color: $black !important;
+                                }
+                            }
+                            td {
+                                a:hover {
+                                    background-color: $primary !important;
+                                    color: $black;
+                                }
+                                a {
+                                    color: $white;
+                                }
+                            }
+                            .ant-calendar-decade-panel-selected-cell {
+                                a {
+                                    background-color: $primary;
+                                    color: $black;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

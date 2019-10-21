@@ -6,7 +6,7 @@ import moment from 'moment'
 const dateFormat = 'DD/MM/YYYY'
 
 const DatePickerComponent = ( props ) =>
-    <div className={`calendar-container
+    <div className={`calendar-container 
         ${props.className ? props.className : ''}
     `}>
         <DatePicker

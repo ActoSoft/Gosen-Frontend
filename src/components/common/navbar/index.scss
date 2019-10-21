@@ -1,3 +1,5 @@
+@import "../../../variables.scss";
+
 .navbar {
     width: 100vw;
     display: flex;
@@ -26,7 +28,7 @@
     justify-content: flex-end;
 }
 .anticon-menu {
-    color: white !important;
+    color: $white !important;
     font-size: 2em;
     display: flex;
     svg:hover {
@@ -34,7 +36,7 @@
     }
 }
 .anticon-bell {
-    color: white !important;
+    color: $white !important;
     font-size: 2em;
     display: flex;
     justify-content: flex-start;
@@ -48,7 +50,7 @@
     align-self: center;
 }
 .ant-menu {
-    background: #F4E38B  !important;
+    background: $primary-light !important;
 }
 .cross-container {
     height: 5vh;
@@ -60,7 +62,7 @@
 .anticon-close {
     padding-right: 1vw;
     font-size: 1.5em;
-    color: #171717 !important;
+    color: $main-background !important;
     svg:hover {
         cursor: pointer;
     }
@@ -72,54 +74,54 @@
 .root-item:hover {
     border-right: none;
     background-color: #171717 !important;
-    color: #F4E38B !important;
+    color: $primary-light !important;
     a {
-        color: #F4E38B !important;
+        color: $primary-light !important;
     }
 }
 .root-item, .ant-menu-submenu-title {
     a {
-        color: #171717 !important;
+        color: $main-background !important;
     }
     height: 10vh !important;
 }
 .sub-item {
-    color: #171717 !important;
+    color: $main-background !important;
     a {
-        color: #171717 !important;
+        color: $main-background !important;
     }
     height: 7.5vh !important;
     &:hover {
         border-right: none;
-        background-color: #171717 !important;
-        color: #F4E38B !important;
+        background-color: $main-background !important;
+        color: $primary-light !important;
         a {
         //     border-right: none;
-            // background-color: #171717 !important;
-            color: #F4E38B !important
+            // background-color: $main-background !important;
+            color: $primary-light !important
         }
     }
 }
 .ant-menu-item,.ant-menu-submenu-title {
-    color: #171717 !important;
+    color: $main-background !important;
     display: flex;
     align-items: center;
     padding-left: 3vw !important;
 }
 .ant-menu-item-selected {
     border-right: none;
-    background-color: #171717 !important;
-    color: #F4E38B !important;
+    background-color: $main-background !important;
+    color: $primary-light !important;
     a {
-        color: #F4E38B !important;
+        color: $primary-light !important;
     }
 }
 .ant-menu-submenu-arrow {
     &::before {
-        background: #171717 !important;
+        background: $main-background !important;
     }
     &::after {
-        background: #171717 !important;
+        background: $main-background !important;
     }
 }
 

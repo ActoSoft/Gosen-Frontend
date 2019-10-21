@@ -1,16 +1,78 @@
 @import '../../../variables.scss';
 
-.calendar-container{
-    width: 100%;
-    border-radius: 15px;
-    .ant-calendar-picker {
-        width: 100%;
-        div {
-            .ant-calendar-picker-input {
-                border: 0;
-                background: $third;
-                color: $white;
-                font-size: 18px !important;
+.ant-calendar {
+    background-color: $black !important;
+    .ant-calendar-panel {
+        .ant-calendar-input-wrap {
+            .ant-calendar-date-input-wrap {
+                .ant-calendar-input {
+                    background-color: $black;
+                    color: $white;
+                    text-align: center;
+                }
+            }
+        }
+
+        .ant-calendar-header {
+            div {
+                .ant-calendar-my-select {
+                    a {
+                        color: $white;
+                    }
+                }
+            }
+        }
+
+        .ant-calendar-footer {
+            span {
+                a {
+                    color: $white;
+                }
+            }
+        }
+
+        .ant-calendar-body {
+            .ant-calendar-table {
+                tbody {
+                    tr {
+                        background-color: $black;
+                        &:hover {
+                            td {
+                                background-color: $black !important;
+                            }
+                        }
+                        td {
+                            div {
+                                color: $white;
+                                &:hover {
+                                    color: $black !important;
+                                    background-color: $primary;
+                                }
+                            }
+                        }
+                        .ant-calendar-next-month-btn-day,
+                        .ant-calendar-last-month-cell {
+                            div {
+                                color: $white;
+                                opacity: 0.5;
+                            }
+                        }
+                    }
+                    .ant-calendar-active-week {
+                        td {
+                            div {
+                                color: $primary;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .ant-calendar-selected-date, .ant-calendar-selected-day {
+            div {
+                background-color: $primary;
+                color: $black !important;
+                font-weight: 600;
             }
         }
     }

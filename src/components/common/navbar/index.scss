@@ -110,6 +110,9 @@
     border-right: none;
     background-color: #171717 !important;
     color: #F4E38B !important;
+    a {
+        color: #F4E38B !important;
+    }
 }
 .ant-menu-submenu-arrow {
     &::before {

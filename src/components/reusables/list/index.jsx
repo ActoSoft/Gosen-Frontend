@@ -138,11 +138,11 @@ export default class ReusableList extends Component {
                 <Row className="row-table">
                     <Col span={20}>
                         <Table
+                            rowKey={record => record.id}
                             dataSource={data}
                             columns={
                                 this.setupColumns(columns)
                             }
-                            rowKey={data.first_name}
                             pagination={{ pageSize: 15 }}
                             onRow={(record) => {
                                 return {

@@ -44,17 +44,16 @@ class Navbar extends Component {
                 </div>
                 <div className="menu-container" style={{ width: 256, position: 'absolute', zIndex: 9999, transition: '0.4s', top: 0, left: this.state.left }}>
                     <Menu
-                        defaultSelectedKeys={['3']}
+                        defaultSelectedKeys={['1']}
                         mode="vertical"
                         theme="dark"
-                        inlineCollapsed={this.state.collapsed}
                     >
                         <div className="cross-container">
                             <Icon type="close" onClick={this.toggleCollapsed} />
                         </div>
                         <Menu.Item className="root-item" key="1">
                             <Icon type="home" />
-                            <NavLink to='/dashboard/' className="perfil-link" > <span>Inicio</span></NavLink>
+                            <NavLink to='/dashboard/'> <span>Inicio</span></NavLink>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="2">
                             <Icon type="reconciliation" />
@@ -89,8 +88,8 @@ class Navbar extends Component {
                             }
                         >
                             <Menu.Item className="sub-item" key="sub1"><NavLink to="/perfil/">Perfil</NavLink></Menu.Item>
-                            <Menu.Item className="sub-item" key="sub1"><NavLink to="/administradores/">Administradores</NavLink></Menu.Item>
-                            <Menu.Item className="sub-item" key="sub2">Cerrar Sesión</Menu.Item>
+                            <Menu.Item className="sub-item" key="sub2"><NavLink to="/administradores/">Administradores</NavLink></Menu.Item>
+                            <Menu.Item className="sub-item" key="sub3">Cerrar Sesión</Menu.Item>
                         </SubMenu>
                     </Menu>
                 </div>

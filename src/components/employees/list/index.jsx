@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import axios from 'axios'
-import { getEmployees } from '../../../utils/backendEndpoints'
-import ReusableList from '../../reusables/list/index'
+import CRUD from '../../../services'
+import { employeesEndpoint } from '../../../utils/backendEndpoints'
+import ReusableList from '../../reusables/list'
 import { Skeleton } from 'antd'
-export default class EmployeeList extends Component {
+export default class EmployeesList extends Component {
 
     constructor(props) {
         super(props)
@@ -13,6 +13,10 @@ export default class EmployeeList extends Component {
                     title: 'Nombre',
                     name: 'first_name',
                     // width: '50%'
+                },
+                {
+                    title: 'Apellidos',
+                    name: 'last_name'
                 },
                 {
                     title: 'Correo Electrónico',
@@ -29,7 +33,7 @@ export default class EmployeeList extends Component {
     }
 
     componentDidMount = async () => {
-        const response = await axios.get(getEmployees)
+        const response = await CRUD.findAll(employeesEndpoint)
         if(response.data) {
             // this.destructInfo(response.data)
             this.setState({ data: this.destructInfo(response.data), isReady: true })
@@ -41,6 +45,8 @@ export default class EmployeeList extends Component {
             // TODO: Remove nested objects
             //const dataWithOutObjects = Object.keys(m).filter(key => typeof m[key] !== 'object')
             //console.log(dataWithOutObjects)
+            m.user.userId = m.user.id
+            delete m.user.id
             return {
                 ...m,
                 ...m.user

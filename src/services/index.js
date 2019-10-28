@@ -55,7 +55,7 @@ axios.interceptors.response.use(response => {
     else {
         console.log(error.response)
         toast.error('Algo falló')
-        setTimeout(() => window.location.assign('/'), 3000)
+        // setTimeout(() => window.location.assign('/'), 3000)
     }
     return Promise.reject(error)
 })

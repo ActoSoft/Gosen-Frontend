@@ -7,12 +7,14 @@ import Dashboard from '../components/dashboard'
 import Profile from '../components/admins'
 import PrivateRoute from './privateRoute'
 import PublicRoute from './publicRoute'
-import EmployeesList from '../components/employees/list'
 import AdminList from '../components/admins/adminsList'
 import AdminDetail from '../components/admins/adminDetail'
 import AdminForm from '../components/admins/adminForm'
-import { Route } from 'react-router-dom'
+import EmployeeList from '../components/employees/list/'
+import EmployeeDetail from '../components/employees/detail'
+import EmployeeForm from '../components/employees/form/'
 import { withAuth } from '../Authentication'
+
 
 
 
@@ -28,11 +30,21 @@ const Routes = ({auth}) => {
 
                 {/* Private Routes */ }
                 <PrivateRoute exact path = '/dashboard/' component = { Dashboard } />
+
+                {/* ===== PROFILE ROUTES ====== */}
                 <PrivateRoute
                     exact path = '/perfil/'
                     component = {Profile}
                     action='detail'
                 />
+                <PrivateRoute
+                    exact path = '/perfil/editar/'
+                    component = {Profile}
+                    action='update'
+                />
+                {/* ===== END PROFILE ROUTES ====== */}
+
+                {/* ===== ADMIN ROUTES ====== */}
                 <PrivateRoute
                     exact path = '/administradores/'
                     component = {AdminList}
@@ -49,14 +61,26 @@ const Routes = ({auth}) => {
                     exact path = '/administradores/:id/editar'
                     component = {AdminForm}
                 />
-                <PrivateRoute
-                    exact path = '/perfil/editar/'
-                    component = {Profile}
-                    action='update'
-                />
+                {/* ===== END ADMIN ROUTES ====== */}
 
-                {/* Employees Routes */}
-                <Route exact path = '/empleados/' component = { EmployeesList } />
+                {/* ===== EMPLOYEES ROUTES ====== */}
+                <PrivateRoute
+                    exact path = '/empleados/'
+                    component = {EmployeeList}
+                />
+                <PrivateRoute
+                    exact path = '/empleados/crear'
+                    component = {EmployeeForm}
+                />
+                <PrivateRoute
+                    exact path = '/empleados/:id'
+                    component = {EmployeeDetail}
+                />
+                <PrivateRoute
+                    exact path = '/empleados/:id/editar'
+                    component = {EmployeeForm}
+                />
+                {/* ===== END EMPLOYEES ROUTES ====== */}
 
                 <Redirect to={ auth.isAuthenticated() ? '/dashboard' : '/login' } />
             </Switch>

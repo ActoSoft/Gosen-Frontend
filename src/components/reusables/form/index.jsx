@@ -17,6 +17,7 @@ const validateExist = (value) => {
 
 const Form = ({ data, events, isCreate, model = '', goBack }) =>
     <div className="profile-container">
+        {/* eslint-disable-next-line */}
         {!isCreate && data || isCreate ?
             <div>
                 <div className="header-container">

@@ -3,7 +3,7 @@ import MainButtonOutlined from '../../common/mainButtonOutlined'
 import { Skeleton } from 'antd'
 import { Link } from 'react-router-dom'
 
-const DetailReusable = ({ data, editURL }) =>
+const DetailReusable = ({ data, editURL, handleDelete }) =>
     <div className="profile-container">
         {data ?
             <div>
@@ -19,6 +19,7 @@ const DetailReusable = ({ data, editURL }) =>
                             <MainButtonOutlined
                                 className='delete-button'
                                 text='Eliminar'
+                                onClick={handleDelete}
                             />
                         </div>
                         <div>

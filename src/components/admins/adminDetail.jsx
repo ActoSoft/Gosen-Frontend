@@ -28,6 +28,7 @@ class AdminDetail extends Component {
                 .then(response => {
                     console.log(response.data)
                     toast.success('El administrador ha sido eliminado')
+                    setTimeout(() => this.props.history.push('/administradores/'), 3000)
                 })
                 .catch(error => {
                     console.log(error.response)

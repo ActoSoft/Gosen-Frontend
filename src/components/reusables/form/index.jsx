@@ -153,6 +153,12 @@ const Form = ({ data, events, isCreate, model = '', goBack }) =>
                             disabled={true}
                             onChange={value => events('handleChangeSelect', { name: 'country', value })}
                         />
+                        <InputGroup
+                            label='Código Postal'
+                            name='zip_code'
+                            value={validateExist(data.zip_code)}
+                            onChange={e => events('handleChange', { e })}
+                        />
                     </div>
                 </div>
             </div>

@@ -13,6 +13,9 @@ import AdminForm from '../components/admins/adminForm'
 import EmployeeList from '../components/employees/list/'
 import EmployeeDetail from '../components/employees/detail'
 import EmployeeForm from '../components/employees/form/'
+import ClientList from '../components/clients/list'
+import ClientDetail from '../components/clients/detail'
+import ClientForm from '../components/clients/form'
 import { withAuth } from '../Authentication'
 
 
@@ -79,6 +82,25 @@ const Routes = ({auth}) => {
                 <PrivateRoute
                     exact path = '/empleados/:id/editar'
                     component = {EmployeeForm}
+                />
+                {/* ===== END EMPLOYEES ROUTES ====== */}
+
+                {/* ===== EMPLOYEES ROUTES ====== */}
+                <PrivateRoute
+                    exact path = '/clientes/'
+                    component = {ClientList}
+                />
+                <PrivateRoute
+                    exact path = '/clientes/crear'
+                    component = {ClientForm}
+                />
+                <PrivateRoute
+                    exact path = '/clientes/:id'
+                    component = {ClientDetail}
+                />
+                <PrivateRoute
+                    exact path = '/clientes/:id/editar'
+                    component = {ClientForm}
                 />
                 {/* ===== END EMPLOYEES ROUTES ====== */}
 

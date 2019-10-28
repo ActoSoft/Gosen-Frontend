@@ -85,8 +85,10 @@ class Navbar extends Component {
                             </NavLink>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="3">
-                            <Icon type="user" />
-                            <span>Cliente</span>
+                            <NavLink to="/clientes/">
+                                <Icon type="user" />
+                                <span>Clientes</span>
+                            </NavLink>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="4">
                             <Icon type="inbox" />

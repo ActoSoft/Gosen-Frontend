@@ -15,6 +15,10 @@ export default class AdminList extends Component {
                     // width: '50%'
                 },
                 {
+                    title: 'Apellidos',
+                    name: 'last_name'
+                },
+                {
                     title: 'Correo Electrónico',
                     name: 'email',
                     // width: '25%'

@@ -46,6 +46,10 @@ const Routes = ({auth}) => {
                     component = {AdminDetail}
                 />
                 <PrivateRoute
+                    exact path = '/administradores/:id/editar'
+                    component = {AdminForm}
+                />
+                <PrivateRoute
                     exact path = '/perfil/editar/'
                     component = {Profile}
                     action='update'

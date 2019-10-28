@@ -114,7 +114,9 @@ class AdminForm extends Component {
             }
             if (response.data) {
                 toast.success('Datos actualizados con éxito')
-                this.props.history.push('/administradores/')
+                isCreate ?
+                    this.props.history.push('/administradores/')
+                    : this.props.history.push(`/administradores/${data.id}/`)
             } else {
                 toast.error('WTF')
             }

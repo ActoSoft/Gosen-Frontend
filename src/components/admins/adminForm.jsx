@@ -106,6 +106,7 @@ class AdminForm extends Component {
         delete data.photo
         try {
             let response
+            if(!data.country) data.country = 'México'
             if(isCreate) {
                 data.role = 'admin'
                 response = await CRUD.create(adminsEndpoint, data)

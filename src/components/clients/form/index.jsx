@@ -108,7 +108,7 @@ class ClientForm extends Component {
             let response
             if(!data.country) data.country = 'México'
             if(isCreate) {
-                data.role = 'empleado'
+                data.role = 'cliente'
                 response = await CRUD.create(clientsEndpoint, data)
             } else {
                 response = await CRUD.update(clientsEndpoint, data.id, data)

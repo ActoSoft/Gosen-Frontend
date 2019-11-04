@@ -14,9 +14,16 @@ const validateExist = (value) => {
     if(!value) return ''
     return value
 }
-
-const Form = ({ data, events, isCreate, model = '', goBack }) =>
-    <div className="profile-container">
+const Form = (
+    {
+        data,
+        events,
+        isCreate,
+        model = '',
+        goBack,
+        notProfileContainer = false
+    }) =>
+    <div className={!notProfileContainer ? 'profile-container' : 'null' }>
         {/* eslint-disable-next-line */}
         {!isCreate && data || isCreate ?
             <div>
@@ -100,7 +107,7 @@ const Form = ({ data, events, isCreate, model = '', goBack }) =>
                         <InputGroup
                             label='Nacimiento'
                             value={data.birth_date ? data.birth_date : '1990-01-01' }
-                            onChange={moment => events('handleChangeDate', { moment })}
+                            onChange={moment => events('handleChangeDate', { name: 'birth_date', moment })}
                             type='datePicker'
                         />
                     </div>

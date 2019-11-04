@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { employeesEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
 import FormReusable from '../../reusables/form'
-// import './index.scss'
 import CRUD, { post } from '../../../services'
+import ContractForm from './contractForm'
+import moment from 'moment'
+import { withAuth } from '../../../Authentication'
 
 class EmployeeForm extends Component {
     constructor(props) {
@@ -12,6 +14,7 @@ class EmployeeForm extends Component {
             isCreate: false,
             model: 'Empleado'
         }
+        this.adminId = this.props.auth.adminId
     }
 
     async componentDidMount() {
@@ -19,6 +22,7 @@ class EmployeeForm extends Component {
             const data = {
                 user: {}
             }
+            data.contract_date_start = moment().format('YYYY-MM-DD')
             this.setState({
                 isCreate: true,
                 data
@@ -28,6 +32,7 @@ class EmployeeForm extends Component {
             if (!id) toast.error('No se especificó el usuario a modificar')
             CRUD.findOne(employeesEndpoint, id)
                 .then(({ data }) => {
+                    data.contract_date_start = moment().format('YYYY-MM-DD')
                     this.setState({ data })
                 })
                 .catch(error => {
@@ -60,10 +65,10 @@ class EmployeeForm extends Component {
         }
     }
 
-    handleChangeDatePicker = ({ moment }) => {
+    handleChangeDatePicker = ({ name, moment }) => {
         const dateFormatted = moment.format('YYYY-MM-DD')
         const { data } = this.state
-        data.birth_date = dateFormatted
+        data[name] = dateFormatted
         this.setState({ data })
     }
 
@@ -107,9 +112,9 @@ class EmployeeForm extends Component {
         try {
             let response
             if(!data.country) data.country = 'México'
-            if(data.payment_type === 'Quincenal') data.payment_type = 'quincenal'
             if(isCreate) {
                 data.role = 'empleado'
+                data.contracted_by = this.adminId
                 response = await CRUD.create(employeesEndpoint, data)
             } else {
                 response = await CRUD.update(employeesEndpoint, data.id, data)
@@ -144,16 +149,23 @@ class EmployeeForm extends Component {
         const { isCreate, data, model } = this.state
         return (
             <div className="body-container">
-                <FormReusable
-                    events={this.handleEvent}
-                    isCreate={isCreate}
-                    data={data}
-                    model={model}
-                    goBack='/empleados/'
-                />
+                <div className="profile-container">
+                    <FormReusable
+                        events={this.handleEvent}
+                        isCreate={isCreate}
+                        data={data}
+                        model={model}
+                        goBack='/empleados/'
+                        notProfileContainer={true}
+                    />
+                    <ContractForm
+                        events={this.handleEvent}
+                        data={data}
+                    />
+                </div>
             </div>
         )
     }
 }
 
-export default EmployeeForm
+export default withAuth(EmployeeForm)

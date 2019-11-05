@@ -3,6 +3,7 @@ import { employeesEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
 import DetailReusable from '../../reusables/detail'
 import CRUD from '../../../services'
+import ContractDetail from './contractDetail'
 
 class EmployeeDetail extends Component {
     constructor(props) {
@@ -49,11 +50,17 @@ class EmployeeDetail extends Component {
             <Fragment>
                 <div className="body-container">
                     {isReady ?
-                        <DetailReusable
-                            data={data}
-                            editURL={pathname}
-                            handleDelete={this.handleDelete}
-                        />
+                        <div className="profile-container">
+                            <DetailReusable
+                                data={data}
+                                editURL={pathname}
+                                handleDelete={this.handleDelete}
+                                notProfileContainer={true}
+                            />
+                            <ContractDetail
+                                data={data}
+                            />
+                        </div>
                         : null
                     }
                 </div>

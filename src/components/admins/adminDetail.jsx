@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react'
 import { adminsEndpoint } from '../../utils/backendEndpoints'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-// import { showErrors } from '../../utils'
 import DetailReusable from '../reusables/detail'
 import CRUD from '../../services'
 

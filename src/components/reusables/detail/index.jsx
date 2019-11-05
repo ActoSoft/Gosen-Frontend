@@ -2,9 +2,10 @@ import React from 'react'
 import MainButtonOutlined from '../../common/mainButtonOutlined'
 import { Skeleton } from 'antd'
 import { Link } from 'react-router-dom'
+import { formatDate } from '../../../utils'
 
-const DetailReusable = ({ data, editURL, handleDelete }) =>
-    <div className="profile-container">
+const DetailReusable = ({ data, editURL, handleDelete, notProfileContainer }) =>
+    <div className={!notProfileContainer ? 'profile-container' : ''}>
         {data ?
             <div>
                 <div className="header-container">
@@ -43,7 +44,7 @@ const DetailReusable = ({ data, editURL, handleDelete }) =>
                             <p>{data.user.email}</p>
                             <p>{data.phone_number}</p>
                             <p>{data.gender}</p>
-                            <p>{data.birth_date}</p>
+                            <p>{formatDate(data.birth_date)}</p>
                             <p>{data.zip_code}</p>
                         </div>
                     </div>

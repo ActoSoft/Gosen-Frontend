@@ -3,6 +3,7 @@ import { clientsEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
 import DetailReusable from '../../reusables/detail'
 import CRUD from '../../../services'
+import { withAuth } from '../../../Authentication'
 
 class ClientDetail extends Component {
     constructor(props) {
@@ -12,6 +13,7 @@ class ClientDetail extends Component {
             isReady: false
         }
         this.adminId = this.props.match.params.id
+        this.isStaff = this.props.auth.isStaff
     }
 
     componentDidMount() {
@@ -53,6 +55,7 @@ class ClientDetail extends Component {
                             data={data}
                             editURL={pathname}
                             handleDelete={this.handleDelete}
+                            isStaff={this.isStaff}
                         />
                         : null
                     }
@@ -62,4 +65,4 @@ class ClientDetail extends Component {
     }
 }
 
-export default ClientDetail
+export default withAuth(ClientDetail)

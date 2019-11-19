@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import DetailReusable from '../../reusables/detail'
 import CRUD from '../../../services'
 import ContractDetail from './contractDetail'
+import { withAuth } from '../../../Authentication'
 
 class EmployeeDetail extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class EmployeeDetail extends Component {
             isReady: false
         }
         this.adminId = this.props.match.params.id
+        this.isStaff = this.props.auth.isStaff
     }
 
     componentDidMount() {
@@ -55,6 +57,7 @@ class EmployeeDetail extends Component {
                                 data={data}
                                 editURL={pathname}
                                 handleDelete={this.handleDelete}
+                                isStaff={this.isStaff}
                                 notProfileContainer={true}
                             />
                             <ContractDetail
@@ -69,4 +72,4 @@ class EmployeeDetail extends Component {
     }
 }
 
-export default EmployeeDetail
+export default withAuth(EmployeeDetail)

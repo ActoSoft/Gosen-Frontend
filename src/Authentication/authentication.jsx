@@ -15,6 +15,7 @@ class Authentication {
         this.lastName = localStorage.getItem('lastName')
         this.adminId = localStorage.getItem('adminId')
         this.userId = localStorage.getItem('userId')
+        this.isStaff = localStorage.getItem('isStaff')
         this.API_URL = process.env.REACT_APP_API_URL
     }
 
@@ -43,7 +44,7 @@ class Authentication {
             if (response.data) {
                 const { token, profile } = response.data
                 console.log(profile)
-                const { username, email, first_name, last_name, id } = profile.user
+                const { username, email, first_name, last_name, id, is_staff } = profile.user
                 localStorage.setItem('token', token)
                 localStorage.setItem('username', username)
                 localStorage.setItem('email', email)
@@ -51,6 +52,7 @@ class Authentication {
                 localStorage.setItem('lastName', last_name)
                 localStorage.setItem('userId', id)
                 localStorage.setItem('adminId', profile.id)
+                localStorage.setItem('isStaff', is_staff)
                 toast.success('Has iniciado sesión con éxito')
                 return true
             }

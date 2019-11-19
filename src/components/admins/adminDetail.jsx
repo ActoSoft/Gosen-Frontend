@@ -4,6 +4,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import DetailReusable from '../reusables/detail'
 import CRUD from '../../services'
+import { withAuth } from '../../Authentication'
 
 class AdminDetail extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class AdminDetail extends Component {
             isReady: false
         }
         this.adminId = this.props.match.params.id
+        this.isStaff = this.props.auth.isStaff
     }
 
     componentDidMount() {
@@ -47,6 +49,7 @@ class AdminDetail extends Component {
                             data={data}
                             editURL={pathname}
                             handleDelete={this.handleDelete}
+                            isStaff={this.isStaff}
                         />
                         : null
                     }
@@ -56,4 +59,4 @@ class AdminDetail extends Component {
     }
 }
 
-export default AdminDetail
+export default withAuth(AdminDetail)

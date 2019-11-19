@@ -4,7 +4,7 @@ import { Skeleton } from 'antd'
 import { Link } from 'react-router-dom'
 import { formatDate } from '../../../utils'
 
-const DetailReusable = ({ data, editURL, handleDelete, notProfileContainer }) =>
+const DetailReusable = ({ data, editURL, handleDelete, notProfileContainer, isStaff }) =>
     <div className={!notProfileContainer ? 'profile-container' : ''}>
         {data ?
             <div>
@@ -17,11 +17,15 @@ const DetailReusable = ({ data, editURL, handleDelete, notProfileContainer }) =>
                                     text='Editar'
                                 />
                             </Link>
-                            <MainButtonOutlined
-                                className='delete-button'
-                                text='Eliminar'
-                                onClick={handleDelete}
-                            />
+                            {
+                                isStaff === 'true' ?
+                                    <MainButtonOutlined
+                                        className='delete-button'
+                                        text='Eliminar'
+                                        onClick={handleDelete}
+                                    />
+                                    : null
+                            }
                         </div>
                         <div>
                             <span className="username">{data.user.username}</span>

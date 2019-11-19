@@ -50,6 +50,7 @@ class AdminDetail extends Component {
                             editURL={pathname}
                             handleDelete={this.handleDelete}
                             isStaff={this.isStaff}
+                            isAdmin={true}
                         />
                         : null
                     }

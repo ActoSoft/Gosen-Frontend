@@ -4,7 +4,7 @@ import { Skeleton } from 'antd'
 import { Link } from 'react-router-dom'
 import { formatDate } from '../../../utils'
 
-const DetailReusable = ({ data, editURL, handleDelete, notProfileContainer, isStaff }) =>
+const DetailReusable = ({ data, editURL, handleDelete, notProfileContainer, isStaff, isAdmin }) =>
     <div className={!notProfileContainer ? 'profile-container' : ''}>
         {data ?
             <div>
@@ -57,6 +57,7 @@ const DetailReusable = ({ data, editURL, handleDelete, notProfileContainer, isSt
                         <p>Ciudad</p>
                         <p>Estado</p>
                         <p>País</p>
+                        { isAdmin ? <p>Permisos</p> : null }
                     </div>
                     <div className="data-column info data-column-info-2">
                         <div>
@@ -64,6 +65,7 @@ const DetailReusable = ({ data, editURL, handleDelete, notProfileContainer, isSt
                             <p>{data.city}</p>
                             <p>{data.state}</p>
                             <p>{data.country}</p>
+                            { isAdmin ? <p>{data.user.is_staff ? 'Super Administrador' : 'Administrador'}</p> : null }
                         </div>
                     </div>
                 </div>

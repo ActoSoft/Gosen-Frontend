@@ -38,6 +38,7 @@ class AdminForm extends Component {
     }
 
     handleChangeForm = ({ e, intoUser = false }) => {
+        console.log(e)
         const { name, value } = e.target
         const { data } = this.state
         if (intoUser) {
@@ -68,9 +69,13 @@ class AdminForm extends Component {
         this.setState({ data })
     }
 
-    handleChangeSelect = ({ name, value }) => {
+    handleChangeSelect = ({ name, value, intoUser = false }) => {
         const { data } = this.state
-        data[name] = value
+        if (intoUser) {
+            data.user[name] = value
+        } else {
+            data[name] = value
+        }
         this.setState({ data })
     }
 
@@ -149,6 +154,7 @@ class AdminForm extends Component {
                     data={data}
                     model={model}
                     goBack='/administradores/'
+                    isAdmin={true}
                 />
             </div>
         )

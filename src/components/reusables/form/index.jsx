@@ -21,7 +21,8 @@ const Form = (
         isCreate,
         model = '',
         goBack,
-        notProfileContainer = false
+        notProfileContainer = false,
+        isAdmin
     }) =>
     <div className={!notProfileContainer ? 'profile-container' : 'null' }>
         {/* eslint-disable-next-line */}
@@ -110,6 +111,27 @@ const Form = (
                             onChange={moment => events('handleChangeDate', { name: 'birth_date', moment })}
                             type='datePicker'
                         />
+                        {
+                            isAdmin ?
+                                <InputGroup
+                                    type='radio'
+                                    label='Permisos'
+                                    name='is_staff'
+                                    value={data.user.is_staff ? data.user.is_staff : false}
+                                    options={[
+                                        {
+                                            value: true,
+                                            readable: 'Super Administrador'
+                                        },
+                                        {
+                                            value: false,
+                                            readable: 'Administrador'
+                                        }
+                                    ]}
+                                    onChange={e => events('handleChange', { e, intoUser: true })}
+                                />
+                                : null
+                        }
                     </div>
                     <div className="column">
                         <InputGroup

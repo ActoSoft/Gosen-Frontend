@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { adminsEndpoint } from '../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
-import FormReusable from '../reusables/form'
+import FormReusable from '../userReusables/form'
 import { showErrors } from '../../utils'
 import './index.scss'
 import CRUD, { post } from '../../services'

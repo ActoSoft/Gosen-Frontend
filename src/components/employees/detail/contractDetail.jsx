@@ -26,7 +26,7 @@ const ContractDetail = ({ data }) =>
                     </div>
                     <div className="data-column info data-column-info-2">
                         <div>
-                            <p>{data.salary}</p>
+                            <p>{`$${data.salary}.00 MXN`}</p>
                             <p>{data.vigency}</p>
                             <p>{data.active ? 'SI' : 'NO'}</p>
                         </div>

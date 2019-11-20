@@ -6,3 +6,4 @@ export const recoverPasswordEndpoint = `${API_URL}/accounts/password_reset/confi
 export const adminsEndpoint = `${API_URL}/admins/`
 export const employeesEndpoint = `${API_URL}/employees/`
 export const clientsEndpoint = `${API_URL}/clients/`
+export const servicesEndpoint = `${API_URL}/services/`

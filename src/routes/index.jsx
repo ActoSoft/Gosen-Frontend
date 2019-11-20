@@ -16,6 +16,7 @@ import EmployeeForm from '../components/employees/form/'
 import ClientList from '../components/clients/list'
 import ClientDetail from '../components/clients/detail'
 import ClientForm from '../components/clients/form'
+import ServicesList from '../components/services/list'
 import { withAuth } from '../Authentication'
 
 
@@ -85,7 +86,7 @@ const Routes = ({auth}) => {
                 />
                 {/* ===== END EMPLOYEES ROUTES ====== */}
 
-                {/* ===== EMPLOYEES ROUTES ====== */}
+                {/* ===== CLIENTS ROUTES ====== */}
                 <PrivateRoute
                     exact path = '/clientes/'
                     component = {ClientList}
@@ -103,6 +104,14 @@ const Routes = ({auth}) => {
                     component = {ClientForm}
                 />
                 {/* ===== END EMPLOYEES ROUTES ====== */}
+
+                {/* ===== SERVICES ROUTES ====== */}
+                <PrivateRoute
+                    exact path = '/servicios'
+                    component = {ServicesList}
+                />
+                {/* ===== END SERVICES ROUTES ====== */}
+
 
                 <Redirect to={ auth.isAuthenticated() ? '/dashboard' : '/login' } />
             </Switch>

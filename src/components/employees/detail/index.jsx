@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { employeesEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
-import DetailReusable from '../../userReusables/detail'
+import DetailReusable from '../../reusables/detail'
 import CRUD from '../../../services'
 import ContractDetail from './contractDetail'
 import { withAuth } from '../../../Authentication'

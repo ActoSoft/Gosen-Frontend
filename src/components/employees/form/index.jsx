@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { employeesEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
-import FormReusable from '../../userReusables/form'
+import FormReusable from '../../reusables/form'
 import CRUD, { post } from '../../../services'
 import ContractForm from './contractForm'
 import moment from 'moment'

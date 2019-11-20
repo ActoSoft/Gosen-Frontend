@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import CRUD from '../../services'
 import { adminsEndpoint } from '../../utils/backendEndpoints'
-import ReusableList from '../userReusables/list'
+import ReusableList from '../reusables/list'
 import { Skeleton } from 'antd'
+import { deconstructInfo } from '../../utils' 
 export default class AdminList extends Component {
 
     constructor(props) {
@@ -11,21 +12,21 @@ export default class AdminList extends Component {
             columns: [
                 {
                     title: 'Nombre',
-                    name: 'first_name',
+                    name: 'userFirst_name',
                     // width: '50%'
                 },
                 {
                     title: 'Apellidos',
-                    name: 'last_name'
+                    name: 'userLast_name'
                 },
                 {
                     title: 'Correo Electrónico',
-                    name: 'email',
+                    name: 'userEmail',
                     // width: '25%'
                 },
                 {
                     title: 'Usuario',
-                    name: 'username',
+                    name: 'userUsername',
                     // width: '25%'
                 }
             ]
@@ -36,7 +37,7 @@ export default class AdminList extends Component {
         const response = await CRUD.findAll(adminsEndpoint)
         if(response.data) {
             // this.destructInfo(response.data)
-            this.setState({ data: this.destructInfo(response.data), isReady: true })
+            this.setState({ data: deconstructInfo(response.data), isReady: true })
         }
     }
 

@@ -5,6 +5,7 @@ import CRUD from '../../../services'
 import DetailReusable from './serviceDetailComponent'
 import { Skeleton } from 'antd'
 import { formatDate, formatCosts } from '../../../utils'
+import WorksRelatedService from './worksRelated'
 import './index.scss'
 
 export default class ServiceDetail extends Component {
@@ -67,9 +68,20 @@ export default class ServiceDetail extends Component {
                                     handleDelete={this.handleDelete}
                                     attributes={attributes}
                                 />
-                                <div className="service-detail-works">
-                                    <p>Frepo</p>
-                                </div>
+                                <WorksRelatedService
+                                    data={[
+                                        {
+                                            title: 'Perro',
+                                            user: 'Melo',
+                                            date: '2019-03-21'
+                                        },
+                                        {
+                                            title: 'Martin',
+                                            user: 'Godinex',
+                                            date: '1997-03-21'
+                                        }
+                                    ]}
+                                />
                             </div>
                             :
                             <Skeleton active />

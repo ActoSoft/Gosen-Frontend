@@ -95,8 +95,10 @@ class Navbar extends Component {
                             <span>Productos</span>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="5">
-                            <Icon type="customer-service" />
-                            <span>Servicios</span>
+                            <NavLink to="/servicios/">
+                                <Icon type="customer-service" />
+                                <span>Servicios</span>
+                            </NavLink>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="6">
                             <Icon type="tool" />

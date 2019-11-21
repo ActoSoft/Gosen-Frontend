@@ -17,6 +17,7 @@ import ClientList from '../components/clients/list'
 import ClientDetail from '../components/clients/detail'
 import ClientForm from '../components/clients/form'
 import ServicesList from '../components/services/list'
+import ServicesDetail from '../components/services/detail'
 import { withAuth } from '../Authentication'
 
 
@@ -109,6 +110,10 @@ const Routes = ({auth}) => {
                 <PrivateRoute
                     exact path = '/servicios'
                     component = {ServicesList}
+                />
+                <PrivateRoute
+                    exact path = '/servicios/:id'
+                    component = {ServicesDetail}
                 />
                 {/* ===== END SERVICES ROUTES ====== */}
 

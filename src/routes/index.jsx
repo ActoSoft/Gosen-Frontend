@@ -18,10 +18,8 @@ import ClientDetail from '../components/clients/detail'
 import ClientForm from '../components/clients/form'
 import ServicesList from '../components/services/list'
 import ServicesDetail from '../components/services/detail'
+import ServiceForm from '../components/services/form'
 import { withAuth } from '../Authentication'
-
-
-
 
 const Routes = ({auth}) => {
     return (
@@ -112,8 +110,16 @@ const Routes = ({auth}) => {
                     component = {ServicesList}
                 />
                 <PrivateRoute
+                    exact path = '/servicios/crear'
+                    component = {ServiceForm}
+                />
+                <PrivateRoute
                     exact path = '/servicios/:id'
                     component = {ServicesDetail}
+                />
+                <PrivateRoute
+                    exact path = '/servicios/:id/editar'
+                    component = {ServiceForm}
                 />
                 {/* ===== END SERVICES ROUTES ====== */}
 

@@ -5,7 +5,7 @@ import SecondaryButton from '../../common/secondaryButton'
 import { Link } from 'react-router-dom'
 import InputText from '../../common/inputText'
 import SelectComponent from '../../common/select'
-// import './index.scss'
+import { paymentOptions } from '../../../utils/'
 
 const validateExist = (value) => {
     if(!value) return ''
@@ -19,18 +19,18 @@ const Form = (
         model = '',
         goBack,
     }) =>
-    <div className='profile-container'>
+    <div className='profile-container service-container'>
         {/* eslint-disable-next-line */}
         {!isCreate && data || isCreate ?
             <div>
                 <div className="header-container services">
                     <div className="header-text-container-update">
-                        <div>
-                            <span className="user-fullname">{
-                                !isCreate
-                                    ? data.name
-                                    : `Agregar nuevo ${model}`
-                            }</span>
+                        <p>{
+                            !isCreate
+                                ? `Editar ${data.name}`
+                                : `Agregar nuevo ${model}`
+                        }</p>
+                        <div className="buttons-service-form">
                             <MainButton
                                 text='Guardar'
                                 className="edit-buttons"
@@ -43,7 +43,7 @@ const Form = (
                     </div>
                 </div>
                 <div className="form">
-                    <div className="column">
+                    <div className="column column-services">
                         <InputGroup
                             label='Nombre'
                             value={validateExist(data.name)}
@@ -64,6 +64,18 @@ const Form = (
                             placeholder='$$$'
                             name='cost'
                             onChange={e => events('handleChange', { e })}
+                        />
+                        <InputGroup
+                            type='select'
+                            label='Tipo de pago'
+                            name='payment_type'
+                            value={validateExist(data.payment_type)}
+                            searchable={true}
+                            options={paymentOptions}
+                            onChange={value => events('handleChangeSelect', {
+                                name: 'payment_type',
+                                value
+                            })}
                         />
                     </div>    
                 </div>

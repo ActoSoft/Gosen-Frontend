@@ -2,7 +2,7 @@ import React from 'react'
 import MainButtonOutlined from '../../common/mainButtonOutlined'
 import { Skeleton } from 'antd'
 import { Link } from 'react-router-dom'
-import { formatDate } from '../../../utils'
+import { formatDate, joinUserName } from '../../../utils'
 
 const DetailReusable = ({ data, editURL, handleDelete, notProfileContainer, isStaff, isAdmin }) =>
     <div className={!notProfileContainer ? 'profile-container' : ''}>
@@ -11,7 +11,7 @@ const DetailReusable = ({ data, editURL, handleDelete, notProfileContainer, isSt
                 <div className="header-container">
                     <div className="header-text-container">
                         <div>
-                            <span className="user-fullname">{`${data.user.first_name} ${data.user.last_name}`}</span>
+                            <span className="user-fullname">{joinUserName(data.user)}</span>
                             <Link to = {`${editURL}editar/`}>
                                 <MainButtonOutlined
                                     text='Editar'

@@ -1,21 +1,16 @@
 import React, { Component } from 'react'
-import { formatDate } from '../../../utils'
+import { formatDate, validateExist, joinUserName } from '../../../utils'
 
 export default class WorksRelatedService extends Component {
     constructor(props) {
         super(props)
         this.state = {
             actualIndex: 0,
-            actualItem: {
-                title: '',
-                user: '',
-                date: ''
-            }
-
+            actualItem: null
         }
     }
 
-    componentDidMount = () => {
+    componentDidMount() {
         if(this.props.data) {
             this.renderItem(this.state.actualIndex)
         }
@@ -39,14 +34,14 @@ export default class WorksRelatedService extends Component {
         return(
             <div className="service-detail-works">
                 <p className="works-title">Trabajos vinculados</p>
-                { data && data.length > 0 ?
+                { data && data.length > 0 && actualItem ?
                     <div>
                         <div className="container">
                             <p className="arrow" onClick={() => this.renderItem(actualIndex - 1)} >{'<'}</p>
                             <div className="card-container">
-                                <p className="name">{actualItem.title ? actualItem.title : null}</p>
-                                <p>{actualItem.user ? actualItem.user : null}</p>
-                                <p>{actualItem.date ? formatDate(actualItem.date) : null}</p>
+                                <p className="name">{validateExist(actualItem.service.name)}</p>
+                                <p>{joinUserName(actualItem.client.user)}</p>
+                                <p>{formatDate(actualItem.datetime_start)}</p>
                             </div>
                             <p className="arrow" onClick={() => this.renderItem(actualIndex + 1)} >{'>'}</p>
                         </div>

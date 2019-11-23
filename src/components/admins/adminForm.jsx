@@ -5,6 +5,8 @@ import FormReusable from '../reusables/form'
 import { showErrors } from '../../utils'
 import './index.scss'
 import CRUD, { post } from '../../services'
+import { withAuth } from '../../Authentication'
+
 class AdminForm extends Component {
     constructor(props) {
         super(props)
@@ -12,6 +14,7 @@ class AdminForm extends Component {
             isCreate: false,
             model: 'Administrador'
         }
+        this.isStaff = this.props.auth.isStaff
     }
 
     async componentDidMount() {
@@ -155,10 +158,11 @@ class AdminForm extends Component {
                     model={model}
                     goBack='/administradores/'
                     isAdmin={true}
+                    isStaff={true}
                 />
             </div>
         )
     }
 }
 
-export default AdminForm
+export default withAuth(AdminForm)

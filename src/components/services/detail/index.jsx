@@ -69,18 +69,7 @@ export default class ServiceDetail extends Component {
                                     attributes={attributes}
                                 />
                                 <WorksRelatedService
-                                    data={[
-                                        {
-                                            title: 'Perro',
-                                            user: 'Melo',
-                                            date: '2019-03-21'
-                                        },
-                                        {
-                                            title: 'Martin',
-                                            user: 'Godinex',
-                                            date: '1997-03-21'
-                                        }
-                                    ]}
+                                    data={data.works}
                                 />
                             </div>
                             :

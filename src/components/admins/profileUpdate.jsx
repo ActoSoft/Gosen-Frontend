@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import InputText from '../common/inputText'
 import DatePicker from '../common/datePicker'
 import RadioButton from '../common/radioButton'
-import { cities, formatURL } from '../../utils'
+import { cities, formatURL, joinUserName } from '../../utils'
 import SelectComponent from '../common/select'
 
 const ProfileForm = ({ data, events }) =>
@@ -16,7 +16,7 @@ const ProfileForm = ({ data, events }) =>
                 <div className="header-container">
                     <div className="header-text-container-update">
                         <div>
-                            <span className="user-fullname">{`${data.user.first_name} ${data.user.last_name}`}</span>
+                            <span className="user-fullname">{joinUserName(data.user)}</span>
                             <MainButton
                                 text='Guardar'
                                 className="edit-buttons"

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Skeleton } from 'antd'
-import { formatDate } from '../../../utils'
+import { formatDate, joinUserName } from '../../../utils'
 
 const ContractDetail = ({ data }) =>
     <Fragment>
@@ -10,13 +10,21 @@ const ContractDetail = ({ data }) =>
                     <div className="data-column labels">
                         <p>Inicio de contrato</p>
                         <p>Periodo de pago</p>
-                        <p>Contratado por: </p>
+                        {
+                            data.contracted_by && data.contracted_by.user ?
+                                <p>Contratado por: </p>
+                                : null
+                        }
                     </div>
                     <div className="data-column info data-column-info-1">
                         <div>
                             <p>{formatDate(data.contract_date_start)}</p>
                             <p>{data.payment_type}</p>
-                            <p>{`${data.contracted_by.user.first_name} ${data.contracted_by.user.last_name}`}</p>
+                            {
+                                data.contracted_by && data.contracted_by.user ?
+                                    <p>{joinUserName(data.contracted_by.user)}</p>
+                                    : null
+                            }
                         </div>
                     </div>
                     <div className="data-column labels data-column-2">

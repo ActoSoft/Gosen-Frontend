@@ -59,6 +59,7 @@ class ServiceForm extends Component {
             if(isCreate) {
                 response = await CRUD.create(servicesEndpoint, data)
             } else {
+                delete data.works
                 response = await CRUD.update(servicesEndpoint, data.id, data)
             }
             if (response.data) {

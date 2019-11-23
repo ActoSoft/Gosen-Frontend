@@ -6,11 +6,7 @@ import RadioButton from '../../common/radioButton'
 import { paymentOptions } from '../../../utils'
 import SelectComponent from '../../common/select'
 import moment from 'moment'
-
-const validateExist = (value) => {
-    if(!value) return ''
-    return value
-}
+import { validateExist } from '../../../utils'
 
 const ContractForm = ({ data, events, isCreate }) =>
     <Fragment>

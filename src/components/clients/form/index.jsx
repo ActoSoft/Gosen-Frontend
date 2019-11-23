@@ -10,7 +10,7 @@ class ClientForm extends Component {
         super(props)
         this.state = {
             isCreate: false,
-            model: 'Empleado'
+            model: 'Cliente'
         }
     }
 

@@ -5,6 +5,8 @@ import showErrors from './requestError'
 import formatDate from './parseDate'
 import deconstructInfo from './deconstructObjectsOnArray'
 import formatCosts from './formatCosts'
+import validateExist from './validateExist'
+import joinUserName from './joinUserName'
 export {
     formatURL,
     cities,
@@ -12,5 +14,7 @@ export {
     paymentOptions,
     formatDate,
     deconstructInfo,
-    formatCosts
+    formatCosts,
+    validateExist,
+    joinUserName
 }

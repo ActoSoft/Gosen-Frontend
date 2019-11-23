@@ -5,12 +5,8 @@ import SecondaryButton from '../../common/secondaryButton'
 import { Link } from 'react-router-dom'
 import InputText from '../../common/inputText'
 import SelectComponent from '../../common/select'
-import { paymentOptions } from '../../../utils/'
+import { paymentOptions, validateExist } from '../../../utils/'
 
-const validateExist = (value) => {
-    if(!value) return ''
-    return value
-}
 const Form = (
     {
         data,

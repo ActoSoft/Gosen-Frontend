@@ -6,14 +6,10 @@ import { Link } from 'react-router-dom'
 import InputText from '../../common/inputText'
 import DatePicker from '../../common/datePicker'
 import RadioButton from '../../common/radioButton'
-import { cities, formatURL } from '../../../utils'
+import { cities, formatURL, validateExist, joinUserName } from '../../../utils'
 import SelectComponent from '../../common/select'
 import './index.scss'
 
-const validateExist = (value) => {
-    if(!value) return ''
-    return value
-}
 const Form = (
     {
         data,
@@ -22,7 +18,8 @@ const Form = (
         model = '',
         goBack,
         notProfileContainer = false,
-        isAdmin
+        isAdmin,
+        isStaff
     }) =>
     <div className={!notProfileContainer ? 'profile-container' : 'null' }>
         {/* eslint-disable-next-line */}
@@ -33,7 +30,7 @@ const Form = (
                         <div>
                             <span className="user-fullname">{
                                 !isCreate
-                                    ? `${data.user.first_name} ${data.user.last_name}`
+                                    ? joinUserName(data.user)
                                     : `Agregar nuevo ${model}`
                             }</span>
                             <MainButton
@@ -112,7 +109,7 @@ const Form = (
                             type='datePicker'
                         />
                         {
-                            isAdmin ?
+                            isAdmin && isStaff === 'true' ?
                                 <InputGroup
                                     type='radio'
                                     label='Permisos'

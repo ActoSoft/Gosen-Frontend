@@ -117,6 +117,8 @@ class EmployeeForm extends Component {
                 data.contracted_by = this.adminId
                 response = await CRUD.create(employeesEndpoint, data)
             } else {
+                //Remove contracted_by in put request
+                delete data.contracted_by
                 response = await CRUD.update(employeesEndpoint, data.id, data)
             }
             if (response.data) {

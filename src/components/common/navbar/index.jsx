@@ -47,6 +47,11 @@ class Navbar extends Component {
                             onClick={ this.toggleCollapsed }
                             style={{ width: 28 }}
                         />
+                        <Icon
+                            type="arrow-left"
+                            onClick={ this.props.history.goBack }
+                            style={{ width: 28 }}
+                        />
                     </div>
                     <div className="logo-container">
                         <NavLink to='/dashboard/'>

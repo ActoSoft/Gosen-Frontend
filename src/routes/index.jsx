@@ -129,19 +129,19 @@ const Routes = ({auth}) => {
                     exact path = '/productos'
                     component = {ProductList}
                 />
-                {/* <PrivateRoute
-                    exact path = '/servicios/crear'
+                <PrivateRoute
+                    exact path = '/productos/crear'
                     component = {ServiceForm}
                 />
                 <PrivateRoute
-                    exact path = '/servicios/:id'
+                    exact path = '/productos/:id'
                     component = {ServicesDetail}
                 />
-                <PrivateRoute
+                {/*<PrivateRoute
                     exact path = '/servicios/:id/editar'
                     component = {ServiceForm}
                 /> */}
-                {/* ===== END SERVICES ROUTES ====== */}
+                {/* ===== END PRODUCTOS ROUTES ====== */}
 
 
                 <Redirect to={ auth.isAuthenticated() ? '/dashboard' : '/login' } />

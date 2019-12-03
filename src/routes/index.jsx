@@ -20,6 +20,7 @@ import ServicesList from '../components/services/list'
 import ServicesDetail from '../components/services/detail'
 import ServiceForm from '../components/services/form'
 import { withAuth } from '../Authentication'
+import ProductList from '../components/products/list'
 
 const Routes = ({auth}) => {
     return (
@@ -121,6 +122,25 @@ const Routes = ({auth}) => {
                     exact path = '/servicios/:id/editar'
                     component = {ServiceForm}
                 />
+                {/* ===== END SERVICES ROUTES ====== */}
+
+                {/* ===== PRODUCTS ROUTES ====== */}
+                <PrivateRoute
+                    exact path = '/productos'
+                    component = {ProductList}
+                />
+                {/* <PrivateRoute
+                    exact path = '/servicios/crear'
+                    component = {ServiceForm}
+                />
+                <PrivateRoute
+                    exact path = '/servicios/:id'
+                    component = {ServicesDetail}
+                />
+                <PrivateRoute
+                    exact path = '/servicios/:id/editar'
+                    component = {ServiceForm}
+                /> */}
                 {/* ===== END SERVICES ROUTES ====== */}
 
 

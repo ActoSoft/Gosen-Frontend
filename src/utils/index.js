@@ -7,6 +7,7 @@ import deconstructInfo from './deconstructObjectsOnArray'
 import formatCosts from './formatCosts'
 import validateExist from './validateExist'
 import joinUserName from './joinUserName'
+import validateImageOnItem from './validateImageOnItem'
 export {
     formatURL,
     cities,
@@ -16,5 +17,6 @@ export {
     deconstructInfo,
     formatCosts,
     validateExist,
-    joinUserName
+    joinUserName,
+    validateImageOnItem
 }

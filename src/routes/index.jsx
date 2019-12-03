@@ -21,6 +21,7 @@ import ServicesDetail from '../components/services/detail'
 import ServiceForm from '../components/services/form'
 import { withAuth } from '../Authentication'
 import ProductList from '../components/products/list'
+import ProductDetail from '../components/products/detail'
 
 const Routes = ({auth}) => {
     return (
@@ -135,7 +136,7 @@ const Routes = ({auth}) => {
                 />
                 <PrivateRoute
                     exact path = '/productos/:id'
-                    component = {ServicesDetail}
+                    component = {ProductDetail}
                 />
                 {/*<PrivateRoute
                     exact path = '/servicios/:id/editar'

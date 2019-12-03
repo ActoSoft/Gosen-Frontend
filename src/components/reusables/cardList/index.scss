@@ -37,16 +37,14 @@
                     }
                 }
             }
+
+            .ant-card-meta-description {
+                color: $white !important;
+                padding: 0 10%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
     }
-}
-
-
-
-.ant-card-meta-description {
-    color: $white !important;
-    padding: 0 10%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }

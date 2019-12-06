@@ -50,13 +50,15 @@ export default class ProductDetail extends Component {
     isLeftArrowStockShow = () => {
         const { firstStock, data } = this.state
         const { stocks } = data
+        // eslint-disable-next-line
         if (firstStock < 1 || stocks && data.length < 3)  return false
         return true
     }
 
     isRightArrowStockShow = () => {
         const { lastStock, data } = this.state
-        const { stocks } = data
+        const { stocks } = data
+        // eslint-disable-next-line
         if (lastStock === stocks.length - 1 || stocks && stocks.length < 3)  return false
         return true
     }
@@ -72,6 +74,10 @@ export default class ProductDetail extends Component {
         case 'right':
             firstStock += 1
             lastStock += 1
+            break
+        default: 
+            console.log('Algo está fallando')
+            break
         }
         this.setState({
             firstStock,

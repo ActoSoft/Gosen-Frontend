@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { Switch, Redirect } from 'react-router-dom'
 import Login from '../components/authentication/login'
+import { withAuth } from '../Authentication'
 import ForgotPassword from '../components/authentication/forgotPassword'
 import ChangePassword from '../components/authentication/changePassword'
 import Dashboard from '../components/dashboard'
@@ -19,9 +20,9 @@ import ClientForm from '../components/clients/form'
 import ServicesList from '../components/services/list'
 import ServicesDetail from '../components/services/detail'
 import ServiceForm from '../components/services/form'
-import { withAuth } from '../Authentication'
 import ProductList from '../components/products/list'
 import ProductDetail from '../components/products/detail'
+import ProductForm from '../components/products/form'
 
 const Routes = ({auth}) => {
     return (
@@ -132,16 +133,16 @@ const Routes = ({auth}) => {
                 />
                 <PrivateRoute
                     exact path = '/productos/crear'
-                    component = {ServiceForm}
+                    component = {ProductForm}
                 />
                 <PrivateRoute
                     exact path = '/productos/:id'
                     component = {ProductDetail}
                 />
-                {/*<PrivateRoute
-                    exact path = '/servicios/:id/editar'
-                    component = {ServiceForm}
-                /> */}
+                <PrivateRoute
+                    exact path = '/productos/:id/editar'
+                    component = {ProductForm}
+                />
                 {/* ===== END PRODUCTOS ROUTES ====== */}
 
 

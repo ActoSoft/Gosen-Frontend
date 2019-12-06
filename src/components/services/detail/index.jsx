@@ -43,6 +43,7 @@ export default class ServiceDetail extends Component {
         }
     }
 
+
     render() {
         const { data, isReady } = this.state
         const { pathname } = this.props.location

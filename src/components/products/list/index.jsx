@@ -31,6 +31,21 @@ export default class ProductList extends Component {
         }
     }
 
+    handleDelete = id => {
+        if(window.confirm('¿Deseas realmente eliminar este producto?')) {
+            CRUD.softDelete(productsEndpoint, id)
+                .then(response => {
+                    console.log(response.data)
+                    toast.success('El producto ha sido eliminado')
+                    setTimeout(() => this.props.history.push('/productos/'), 3000)
+                })
+                .catch(error => {
+                    console.log(error.response)
+                    toast.error('Algo fallo al eliminar')
+                })
+        }
+    }
+
     render() {
         const { isReady, data } = this.state
         return (
@@ -41,6 +56,8 @@ export default class ProductList extends Component {
                         title='Productos'
                         URL='/productos'
                         history={this.props.history}
+                        handleDelete={this.handleDelete}
+                        
                     />
                     :
                     <Skeleton active={true} />

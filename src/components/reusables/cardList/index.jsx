@@ -27,6 +27,7 @@ const CardList = props =>
                                 item={item}
                                 history={props.history}
                                 URL={props.URL}
+                                handleDelete={props.handleDelete}
                             />
                         </Col>
                     )
@@ -35,7 +36,7 @@ const CardList = props =>
         </Row>
     </Fragment>
 
-const CardItem = ({item, history, URL}) => 
+const CardItem = ({item, history, URL, handleDelete}) => 
     <Card
         onClick={()=>history.push(`${URL}/${item.id}/`)}
         className="card-item"
@@ -46,8 +47,18 @@ const CardItem = ({item, history, URL}) =>
             />
         }
         actions={[
-            <Icon type="edit" key="edit" />,
-            <Icon type="delete" key="delete" />,
+            <Icon
+                type="edit"
+                key="edit"
+                onClick={
+                    () => history.push(`${URL}/${item.id}/editar`)
+                }
+            />,
+            <Icon
+                type="delete"
+                key="delete"
+                onClick={() => handleDelete(item.id)}
+            />,
         ]}
     >
         <Meta

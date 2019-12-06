@@ -34,7 +34,7 @@ export default class ProductDetail extends Component {
 
     handleDelete = () => {
         if(window.confirm('¿Deseas realmente eliminar este producto?')) {
-            CRUD.softDelete(productsEndpoint, this.serviceId)
+            CRUD.softDelete(productsEndpoint, this.productId)
                 .then(response => {
                     console.log(response.data)
                     toast.success('El producto ha sido eliminado')
@@ -64,7 +64,7 @@ export default class ProductDetail extends Component {
     }
 
  
-    handleMoveStock = (arrowClicked) => {
+    handleMoveStock = arrowClicked => {
         let { firstStock, lastStock } = this.state
         switch (arrowClicked) {
         case 'left':

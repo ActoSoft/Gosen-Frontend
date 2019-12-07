@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { productsEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
 import Form from './form'
-import CRUD from '../../../services'
+import CRUD, { post } from '../../../services'
+import UploadImages from './uploadImages'
 // import './index.scss'
 
 class ProductForm extends Component {
@@ -10,16 +11,17 @@ class ProductForm extends Component {
         super(props)
         this.state = {
             isCreate: false,
-            model: 'Producto'
+            isImagesVisible: false,
+            model: 'Producto',
+            images: [],
+            stocks: [],
+            newProductId: 0
         }
     }
 
     async componentDidMount() {
         if (this.props.match.path.split('/').pop() === 'crear') {
-            const data = {
-                images: [],
-                stocks: []
-            }
+            const data = {}
             this.setState({
                 isCreate: true,
                 data
@@ -52,7 +54,8 @@ class ProductForm extends Component {
         this.setState({ data })
     }
 
-    handleSubmit = async () => {
+
+    handleDataSubmit = async () => {
         // TODO: Validations
         const { data, isCreate } = this.state
         try {
@@ -64,10 +67,11 @@ class ProductForm extends Component {
                 response = await CRUD.update(productsEndpoint, data.id, data)
             }
             if (response.data) {
-                toast.success('Datos actualizados con éxito')
-                isCreate ?
-                    this.props.history.push('/productos/')
-                    : this.props.history.push(`/productos/${data.id}/`)
+                toast.success('Producto creado con éxito')
+                this.setState({
+                    isImagesVisible: true,
+                    newProductId: response.data.id
+                })
             } else {
                 toast.error('WTF')
             }
@@ -81,24 +85,88 @@ class ProductForm extends Component {
     handleEvent = (event, params) => {
         const events = {
             handleChange: this.handleChangeForm,
-            handleChangeDate: this.handleChangeDatePicker,
             handleChangeSelect: this.handleChangeSelect,
-            handleChangeImage: this.handleChangeImage,
-            handleSubmit: this.handleSubmit
+            handleSubmit: this.handleDataSubmit
         }
         return events[event](params)
     }
 
+    handleUploadImage = async ({target}) => {
+        let formData = new FormData()
+        formData.append('id', this.state.newProductId)
+        formData.append('image', target.files[0])
+        try {
+            const response = await post(
+                `${productsEndpoint}upload_image/`,
+                formData
+            )
+
+            if(response.data) {
+                toast.success('Imagen agregada con éxito')
+                this.setState({ images: response.data.images })
+            } else {
+                toast.error('No se pudo agregar imagen')
+            }
+        } catch(error) {
+            toast.error('No se pudo agregar imagen')
+        } 
+    }
+
+    handleSimulateClick = () => {
+        document.querySelector('#input-file-upload-image').click()
+    }
+
+    handleDeleteImage = async (id) => {
+        try {
+            const response = await post(
+                `${productsEndpoint}delete_image/`,
+                { id }
+            )
+
+            if (response.data) {
+                toast.success('Imagen eliminada con éxito')
+                this.setState({ images: response.data.images })
+            } else {
+                toast.error('No se pudo eliminar imagen')
+            }
+        } catch(error) {
+            toast.error('No se pudo eliminar imagen')
+        }
+    }
+
+    finishCreateProduct = () => {
+        this.props.history.push(`/productos/${this.state.newProductId}`)
+    }
+
     render() {
-        const { isCreate, data, model } = this.state
+        const {
+            isCreate,
+            isImagesVisible,
+            data,
+            model,
+            images,
+            newProductId            
+        } = this.state
+        console.log(isImagesVisible)
         return (
             <div className="body-container">
                 <Form
+                    isVisible={!isImagesVisible}
                     events={this.handleEvent}
                     isCreate={isCreate}
                     data={data}
                     model={model}
                     goBack='/productos/'
+                />
+                <UploadImages
+                    isImagesVisible={isImagesVisible}
+                    images={images}
+                    endpoint={productsEndpoint}
+                    productId={newProductId}
+                    handleUploadImage={this.handleUploadImage}
+                    simulateClick={this.handleSimulateClick}
+                    handleDeleteImage={this.handleDeleteImage}
+                    finishCreateProduct={this.finishCreateProduct}
                 />
             </div>
         )

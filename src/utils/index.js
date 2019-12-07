@@ -8,6 +8,7 @@ import formatCosts from './formatCosts'
 import validateExist from './validateExist'
 import joinUserName from './joinUserName'
 import validateImageOnItem from './validateImageOnItem'
+import getBase64File from './getBase64File'
 export {
     formatURL,
     cities,
@@ -18,5 +19,6 @@ export {
     formatCosts,
     validateExist,
     joinUserName,
-    validateImageOnItem
+    validateImageOnItem,
+    getBase64File
 }

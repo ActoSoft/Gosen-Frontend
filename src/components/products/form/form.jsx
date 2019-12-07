@@ -13,11 +13,12 @@ const Form = (
         events,
         isCreate,
         model = '',
+        isVisible,
         goBack,
     }) =>
-    <div className='profile-container service-container'>
+    <div className='profile-container service-container' style={!isVisible ? { display: 'none' } : null}>
         {/* eslint-disable-next-line */}
-        {!isCreate && data || isCreate ?
+        {isVisible ? !isCreate && data || isCreate ?
             <div>
                 <div className="header-container services">
                     <div className="header-text-container-update">
@@ -58,7 +59,7 @@ const Form = (
                             label='Código de Barras'
                             value={validateExist(data.barcode)}
                             placeholder='Barcode'
-                            name='cost'
+                            name='barcode'
                             onChange={e => events('handleChange', { e })}
                         />
                     </div>    
@@ -68,6 +69,7 @@ const Form = (
             <div>
                 <Skeleton active/>
             </div>
+            : null
         }
     </div>
 

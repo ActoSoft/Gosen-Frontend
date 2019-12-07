@@ -1,0 +1,65 @@
+@import "../../../variables.scss";
+
+
+
+.label-images-create {
+    margin-bottom: 0;
+    margin-right: 5vw;
+}
+
+.images-uploaded-container {
+    margin-top: 5vh;
+}
+
+.image-item-src{
+    padding: 10%;
+}
+    
+.image-item-src {
+    position: relative;
+    img {
+        width: 100% !important;
+    }
+}
+.icon-delete-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $white !important;
+}
+
+.no-images {
+    width: 100%;
+    text-align: center;
+    color: $white;
+    font-size: 1.5em;
+}
+
+.upload-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .upload-button-image {
+        width: 100px;
+        height: 100px;
+        background-color: $primary;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        border-radius: 5px;
+        box-shadow: 5px 5px px rgba(0,0,0,0.4);
+        .upload-button-image-icon {
+            color: $black;
+            font-size: 2em;
+        }
+        .upload-button-image-text {
+            color: $black;
+            font-size: 1.2em;
+            font-weight: 600;
+            text-align: center;
+        }
+    }
+}
+

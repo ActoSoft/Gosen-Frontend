@@ -23,7 +23,7 @@ const DetailReusable = ({ data, editURL, handleDelete, attributes }) =>
                                 onClick={handleDelete}
                             />
                         </div>
-                    </div>                   
+                    </div>
                 </div>
                 <div className="data-container">
                     {  attributes && attributes.length > 0 ?

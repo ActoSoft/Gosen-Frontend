@@ -96,26 +96,32 @@ class Navbar extends Component {
                             </NavLink>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="4">
-                            <Icon type="inbox" />
-                            <NavLink to="/productos/">
-                                <span>Productos</span>
-                            </NavLink>
-                        </Menu.Item>
-                        <Menu.Item className="root-item" key="5">
                             <NavLink to="/servicios/">
                                 <Icon type="customer-service" />
                                 <span>Servicios</span>
                             </NavLink>
                         </Menu.Item>
+                        <Menu.Item className="root-item" key="5">
+                            <Icon type="inbox" />
+                            <NavLink to="/productos/">
+                                <span>Productos</span>
+                            </NavLink>
+                        </Menu.Item>
                         <Menu.Item className="root-item" key="6">
+                            <Icon type="inbox" />
+                            <NavLink to="/productos/">
+                                <span>Almacenes</span>
+                            </NavLink>
+                        </Menu.Item>
+                        <Menu.Item className="root-item" key="7">
                             <Icon type="tool" />
                             <span>Trabajos</span>
                         </Menu.Item>
-                        <Menu.Item className="root-item" key="7">
+                        <Menu.Item className="root-item" key="8">
                             <Icon type="container" />
                             <span>Contabilidad</span>
                         </Menu.Item>
-                        <SubMenu key="8" title={this.state.name}>
+                        <SubMenu key="9" title={this.state.name}>
                             <Menu.Item className="sub-item" key="sub1">
                                 <NavLink to="/perfil/">Perfil</NavLink>
                             </Menu.Item>

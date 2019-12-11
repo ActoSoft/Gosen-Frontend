@@ -31,7 +31,12 @@ class ProductForm extends Component {
             if (!id) toast.error('No se especificó el producto a modificar')
             CRUD.findOne(productsEndpoint, id)
                 .then(({ data }) => {
-                    this.setState({ data })
+                    const { images } = data
+                    this.setState({
+                        data,
+                        images,
+                        newProductId: data.id
+                    })
                 })
                 .catch(error => {
                     console.log(error)

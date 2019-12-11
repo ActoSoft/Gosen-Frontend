@@ -63,19 +63,19 @@ export default class ProductDetail extends Component {
         return true
     }
 
- 
+
     handleMoveStock = arrowClicked => {
         let { firstStock, lastStock } = this.state
         switch (arrowClicked) {
         case 'left':
             firstStock -= 1
-            lastStock -= 1    
+            lastStock -= 1
             break
         case 'right':
             firstStock += 1
             lastStock += 1
             break
-        default: 
+        default:
             console.log('Algo está fallando')
             break
         }

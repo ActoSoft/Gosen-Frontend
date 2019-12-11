@@ -2,11 +2,11 @@ import React, { Component, Fragment } from 'react'
 import { Skeleton } from 'antd'
 import CRUD from '../../../services'
 import { productsEndpoint } from '../../../utils/backendEndpoints'
-import { toast } from 'react-toastify' 
+import { toast } from 'react-toastify'
 import CardList from '../../reusables/cardList'
 
 export default class ProductList extends Component {
-    
+
     constructor(props) {
         super(props)
         this.state = {
@@ -57,7 +57,6 @@ export default class ProductList extends Component {
                         URL='/productos'
                         history={this.props.history}
                         handleDelete={this.handleDelete}
-                        
                     />
                     :
                     <Skeleton active={true} />

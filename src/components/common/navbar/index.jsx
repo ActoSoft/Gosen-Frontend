@@ -109,7 +109,7 @@ class Navbar extends Component {
                         </Menu.Item>
                         <Menu.Item className="root-item" key="6">
                             <Icon type="inbox" />
-                            <NavLink to="/productos/">
+                            <NavLink to="/almacenes/">
                                 <span>Almacenes</span>
                             </NavLink>
                         </Menu.Item>

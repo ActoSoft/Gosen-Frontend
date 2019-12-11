@@ -8,3 +8,4 @@ export const employeesEndpoint = `${API_URL}/employees/`
 export const clientsEndpoint = `${API_URL}/clients/`
 export const servicesEndpoint = `${API_URL}/services/`
 export const productsEndpoint = `${API_URL}/products/`
+export const stocksEndpoint = `${API_URL}/stocks/`

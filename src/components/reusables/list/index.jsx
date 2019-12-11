@@ -151,6 +151,7 @@ export default class ReusableList extends Component {
                             onRow={(record) => {
                                 return {
                                     onClick: event => {
+                                        console.log(record.id)
                                         event.preventDefault()
                                         this.props.history.push(
                                             `${URL}/${record.id}/`

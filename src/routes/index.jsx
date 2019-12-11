@@ -23,6 +23,8 @@ import ServiceForm from '../components/services/form'
 import ProductList from '../components/products/list'
 import ProductDetail from '../components/products/detail'
 import ProductForm from '../components/products/form'
+import StocksList from '../components/stocks/list'
+import StockDetail from '../components/stocks/detail'
 
 const Routes = ({auth}) => {
     return (
@@ -143,7 +145,26 @@ const Routes = ({auth}) => {
                     exact path = '/productos/:id/editar'
                     component = {ProductForm}
                 />
-                {/* ===== END PRODUCTOS ROUTES ====== */}
+                {/* ===== END PRODUCTS ROUTES ====== */}
+
+                {/* ===== STOCKS ROUTES ====== */}
+                <PrivateRoute
+                    exact path = '/almacenes'
+                    component = {StocksList}
+                />
+                {/* <PrivateRoute
+                    exact path = '/almaces/crear'
+                    component = {ProductForm}
+                /> */}
+                <PrivateRoute
+                    exact path = '/almacenes/:id'
+                    component = {StockDetail}
+                />
+                {/* <PrivateRoute
+                    exact path = '/almaces/:id/editar'
+                    component = {ProductForm}
+                /> */}
+                {/* ===== END STOCKS ROUTES ====== */}
 
 
                 <Redirect to={ auth.isAuthenticated() ? '/dashboard' : '/login' } />

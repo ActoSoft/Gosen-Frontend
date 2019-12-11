@@ -6,7 +6,7 @@ import defaultProduct from '../../../assets/default-product.png'
 
 const { Meta } = Card
 
-const CardList = props => 
+const CardList = props =>
     <Fragment>
         <Row className="row-title">
             <Col span={24}>
@@ -36,7 +36,7 @@ const CardList = props =>
         </Row>
     </Fragment>
 
-const CardItem = ({item, history, URL, handleDelete}) => 
+const CardItem = ({item, history, URL, handleDelete}) =>
     <Card
         onClick={()=>history.push(`${URL}/${item.id}/`)}
         className="card-item"

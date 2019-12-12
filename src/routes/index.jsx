@@ -161,10 +161,10 @@ const Routes = ({auth}) => {
                     exact path = '/almacenes/:id'
                     component = {StockDetail}
                 />
-                {/* <PrivateRoute
-                    exact path = '/almaces/:id/editar'
-                    component = {ProductForm}
-                /> */}
+                <PrivateRoute
+                    exact path = '/almacenes/:id/editar'
+                    component = {StockForm}
+                />
                 {/* ===== END STOCKS ROUTES ====== */}
 
 

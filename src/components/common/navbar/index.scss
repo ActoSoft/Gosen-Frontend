@@ -74,6 +74,8 @@
 }
 .ant-menu-root {
     height: 100vh;
+    position: fixed;
+    width: 256px;
 }
 
 .root-item:hover {
@@ -88,7 +90,7 @@
     a {
         color: $main-background !important;
     }
-    height: 10vh !important;
+    height: 9vh !important;
 }
 .sub-item {
     color: $main-background !important;

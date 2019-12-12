@@ -144,3 +144,10 @@ td {
         border-color: $primary !important;
     }
 }
+
+.no-data {
+    width: 100%;
+    text-align: center;
+    color: $white;
+    font-size: 2em;
+}

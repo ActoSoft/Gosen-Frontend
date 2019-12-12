@@ -21,11 +21,9 @@ class ForgotPassword extends Component {
 
 	handleChange = (e) => {
 		 const { name, value } = e.target
-	    this.setState(prevState => {
-	        const newState = { ...prevState }
-	        newState[name] = value
-	        return newState
-	    })
+		 this.setState({
+			 [name]: value
+		 })
 	}
 
 	render() {
@@ -44,7 +42,8 @@ class ForgotPassword extends Component {
 	                        <InputText
 	                            placeholder='user@domain.com'
 	                            name="email"
-	                            onChange={this.handleChange}
+								onChange={this.handleChange}
+								value={this.state.email}
 	                        />
 	                        <NavLink to="/login/" className="navlink">
 	                            <SubtitleOne text='¿La recordaste? Inicia Sesión' />

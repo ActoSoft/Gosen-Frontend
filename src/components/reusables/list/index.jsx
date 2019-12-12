@@ -141,25 +141,28 @@ export default class ReusableList extends Component {
                 </Row>
                 <Row className="row-table">
                     <Col span={20}>
-                        <Table
-                            rowKey={record => record.id}
-                            dataSource={data}
-                            columns={
-                                this.setupColumns(columns)
-                            }
-                            pagination={{ pageSize: 15 }}
-                            onRow={(record) => {
-                                return {
-                                    onClick: event => {
-                                        console.log(record.id)
-                                        event.preventDefault()
-                                        this.props.history.push(
-                                            `${URL}/${record.id}/`
-                                        )
-                                    }
+                        {data && data.length > 0 ?
+                            <Table
+                                rowKey={record => record.id}
+                                dataSource={data}
+                                columns={
+                                    this.setupColumns(columns)
                                 }
-                            }}
-                        />
+                                pagination={{ pageSize: 15 }}
+                                onRow={(record) => {
+                                    return {
+                                        onClick: event => {
+                                            console.log(record.id)
+                                            event.preventDefault()
+                                            this.props.history.push(
+                                                `${URL}/${record.id}/`
+                                            )
+                                        }
+                                    }
+                                }}
+                            />
+                            : <p className="no-data">No hay {title} aún</p>
+                        }
                     </Col>
                 </Row>
             </Fragment>

@@ -42,8 +42,8 @@ class ForgotPassword extends Component {
 	                        <InputText
 	                            placeholder='user@domain.com'
 	                            name="email"
-								onChange={this.handleChange}
-								value={this.state.email}
+	                            onChange={this.handleChange}
+	                            value={this.state.email}
 	                        />
 	                        <NavLink to="/login/" className="navlink">
 	                            <SubtitleOne text='¿La recordaste? Inicia Sesión' />

@@ -25,6 +25,7 @@ import ProductDetail from '../components/products/detail'
 import ProductForm from '../components/products/form'
 import StocksList from '../components/stocks/list'
 import StockDetail from '../components/stocks/detail'
+import StockForm from '../components/stocks/form'
 
 const Routes = ({auth}) => {
     return (
@@ -152,10 +153,10 @@ const Routes = ({auth}) => {
                     exact path = '/almacenes'
                     component = {StocksList}
                 />
-                {/* <PrivateRoute
-                    exact path = '/almaces/crear'
-                    component = {ProductForm}
-                /> */}
+                <PrivateRoute
+                    exact path = '/almacenes/crear'
+                    component = {StockForm}
+                />
                 <PrivateRoute
                     exact path = '/almacenes/:id'
                     component = {StockDetail}

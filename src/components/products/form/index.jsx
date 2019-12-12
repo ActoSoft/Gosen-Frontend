@@ -150,7 +150,7 @@ class ProductForm extends Component {
             data,
             model,
             images,
-            newProductId            
+            newProductId
         } = this.state
         console.log(isImagesVisible)
         return (

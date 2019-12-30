@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Skeleton } from 'antd'
-import { formatDate, joinUserName } from '../../../utils'
+import { formatDate, joinUserName, validateExist } from '../../../utils'
 
 const ContractDetail = ({ data }) =>
     <Fragment>
@@ -34,8 +34,8 @@ const ContractDetail = ({ data }) =>
                     </div>
                     <div className="data-column info data-column-info-2">
                         <div>
-                            <p>{`$${data.salary}.00 MXN`}</p>
-                            <p>{data.vigency}</p>
+                            <p>{validateExist(data.salary) === '' ? `${data.salary}.00 MXN` : 'N/A'}</p>
+                            <p>{validateExist(data.vigency)}</p>
                             <p>{data.active ? 'SI' : 'NO'}</p>
                         </div>
                     </div>

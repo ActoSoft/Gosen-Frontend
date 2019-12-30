@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { productsEndpoint } from '../../../utils/backendEndpoints'
+import { productsEndpoint, stocksEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
 import Form from './form'
 import CRUD, { post } from '../../../services'
 import UploadImages from './uploadImages'
+import SetStocks from './setStocks'
+
 // import './index.scss'
 
 class ProductForm extends Component {
@@ -11,18 +13,28 @@ class ProductForm extends Component {
         super(props)
         this.state = {
             isCreate: false,
+            isFormVisible: false,
             isImagesVisible: false,
+            isStocksVisible: true,
             model: 'Producto',
             images: [],
+            productStocks: [],
+            allStocks: [],
             stocks: [],
-            newProductId: 0
+            newProductId: 0,
+            selectedStock: null,
+            newQty: 0
         }
     }
 
     async componentDidMount() {
+        const stocksResponse = await CRUD.findAll(stocksEndpoint)
+        const allStocks = stocksResponse.data
         if (this.props.match.path.split('/').pop() === 'crear') {
             const data = {}
             this.setState({
+                allStocks,
+                stocks: allStocks,
                 isCreate: true,
                 data
             })
@@ -31,10 +43,14 @@ class ProductForm extends Component {
             if (!id) toast.error('No se especificó el producto a modificar')
             CRUD.findOne(productsEndpoint, id)
                 .then(({ data }) => {
-                    const { images } = data
+                    const { images, stocks: productStocks } = data
+                    const stocks = this.excludeStocksOnProduct(allStocks, productStocks)
                     this.setState({
                         data,
                         images,
+                        productStocks,
+                        allStocks,
+                        stocks,
                         newProductId: data.id
                     })
                 })
@@ -72,8 +88,9 @@ class ProductForm extends Component {
                 response = await CRUD.update(productsEndpoint, data.id, data)
             }
             if (response.data) {
-                toast.success('Producto creado con éxito')
+                toast.success(`Producto ${isCreate ? 'creado' : 'editado'} con éxito`)
                 this.setState({
+                    isFormVisible: false,
                     isImagesVisible: true,
                     newProductId: response.data.id
                 })
@@ -85,6 +102,13 @@ class ProductForm extends Component {
             console.log(data)
             // showErrors(data)
         }
+    }
+
+    handleSetStocks = async () => {
+        this.setState({
+            isImagesVisible: false,
+            isStocksVisible: true
+        })
     }
 
     handleEvent = (event, params) => {
@@ -114,7 +138,7 @@ class ProductForm extends Component {
             }
         } catch(error) {
             toast.error('No se pudo agregar imagen')
-        } 
+        }
     }
 
     handleSimulateClick = () => {
@@ -139,6 +163,44 @@ class ProductForm extends Component {
         }
     }
 
+    excludeStocksOnProduct = (stocks, productStocks) => {
+        return stocks.filter(stock => !productStocks.includes(stock))
+    }
+
+    handleSelectNewStock = name => {
+        const { stocks } = this.state
+        const selectedStock = stocks.filter(stock => stock.name === name)[0]
+        this.setState({ selectedStock })
+    }
+
+    handleChangeNewQty = event => {
+        this.setState({
+            newQty: event.target.value
+        })
+    }
+
+    handleSaveProductInStock = async () => {
+        const { selectedStock, newQty, allStocks, newProductId } = this.state
+        const body = {
+            stock: selectedStock.id,
+            qty: parseInt(newQty),
+            product: newProductId
+        }
+
+        try {
+            const response = await post(`${productsEndpoint}save_stock/`, body)
+
+            if (response.data) {
+                toast.success('Producto registrado en almacén con éxito')
+                this.setState({ stocks: this.excludeStocksOnProduct(allStocks, response.data.stocks)})
+            } else {
+                toast.error('Algo falló al registrar producto dentro del almacén')
+            }
+        } catch (error) {
+            toast.error('Algo falló al registrar producto en almacén')
+        }
+    }
+
     finishCreateProduct = () => {
         this.props.history.push(`/productos/${this.state.newProductId}`)
     }
@@ -146,17 +208,23 @@ class ProductForm extends Component {
     render() {
         const {
             isCreate,
+            isFormVisible,
             isImagesVisible,
+            isStocksVisible,
             data,
             model,
             images,
-            newProductId
+            stocks,
+            productStocks,
+            newProductId,
+            selectedStock,
+            newQty
         } = this.state
         console.log(isImagesVisible)
         return (
             <div className="body-container">
                 <Form
-                    isVisible={!isImagesVisible}
+                    isVisible={isFormVisible}
                     events={this.handleEvent}
                     isCreate={isCreate}
                     data={data}
@@ -171,7 +239,18 @@ class ProductForm extends Component {
                     handleUploadImage={this.handleUploadImage}
                     simulateClick={this.handleSimulateClick}
                     handleDeleteImage={this.handleDeleteImage}
+                    handleSetStocks={this.handleSetStocks}
+                />
+                <SetStocks
+                    isStocksVisible={isStocksVisible}
+                    stocks={stocks}
+                    productStocks={productStocks}
+                    newQty={newQty}
+                    selectedStock={selectedStock}
                     finishCreateProduct={this.finishCreateProduct}
+                    handleSelectNewStock={this.handleSelectNewStock}
+                    handleChangeNewQty={this.handleChangeNewQty}
+                    handleSaveProductInStock={this.handleSaveProductInStock}
                 />
             </div>
         )

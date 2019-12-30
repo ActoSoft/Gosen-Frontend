@@ -11,6 +11,7 @@ const InputText = ( props ) =>
         value={props.value}
         name={props.name}
         onChange={props.onChange}
+        disabled={props.disabled ? true : false}
     />
 
 export default InputText

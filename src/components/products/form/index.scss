@@ -14,7 +14,7 @@
 .image-item-src{
     padding: 10%;
 }
-    
+
 .image-item-src {
     position: relative;
     img {
@@ -63,3 +63,11 @@
     }
 }
 
+.product-stocks-add-container {
+    margin: 5vh;
+    p {
+        width: 100%;
+        color: $white;
+        text-align: center;
+    }
+}

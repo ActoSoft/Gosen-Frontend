@@ -10,10 +10,10 @@ const UploadImages = ({
     handleUploadImage,
     simulateClick,
     handleDeleteImage,
-    finishCreateProduct
-}) => 
+    handleSetStocks
+}) =>
     <Fragment>
-        {isImagesVisible ? 
+        {isImagesVisible ?
             <div className='profile-container service-container'>
                 <div className="header-container services">
                     <div className="header-text-container-update">
@@ -23,7 +23,7 @@ const UploadImages = ({
                         <MainButton
                             text='Continuar'
                             className="edit-buttons"
-                            onClick={() => finishCreateProduct()}
+                            onClick={() => handleSetStocks()}
                         />
                     </div>
                 </div>

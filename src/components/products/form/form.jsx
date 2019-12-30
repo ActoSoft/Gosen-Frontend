@@ -29,7 +29,7 @@ const Form = (
                         }</p>
                         <div className="buttons-service-form">
                             <MainButton
-                                text='Guardar'
+                                text='Continuar'
                                 className="edit-buttons"
                                 onClick={e => events('handleSubmit', {e})}
                             />
@@ -62,7 +62,7 @@ const Form = (
                             name='barcode'
                             onChange={e => events('handleChange', { e })}
                         />
-                    </div>    
+                    </div>
                 </div>
             </div>
             :

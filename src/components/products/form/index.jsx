@@ -43,12 +43,13 @@ class ProductForm extends Component {
             if (!id) toast.error('No se especificó el producto a modificar')
             CRUD.findOne(productsEndpoint, id)
                 .then(({ data }) => {
-                    const { images, stocks: productStocks } = data
+                    let { images, stocks: productStocks } = data
+                    productStocks = productStocks.filter(stock => !stock.stock.deleted)
                     const stocks = this.excludeStocksOnProduct(allStocks, productStocks)
                     this.setState({
                         data,
                         images,
-                        productStocks,
+                        productStocks: productStocks.filter(stock => !stock.stock.deleted),
                         allStocks,
                         stocks,
                         newProductId: data.id
@@ -164,7 +165,15 @@ class ProductForm extends Component {
     }
 
     excludeStocksOnProduct = (stocks, productStocks) => {
-        return stocks.filter(stock => !productStocks.includes(stock))
+        productStocks = productStocks.map(productStock => productStock.stock)
+        return stocks.map(stock => {
+            let count = 0
+            productStocks.forEach(productStock => {
+                if (stock.id === productStock.id) count += 1
+            })
+            if (count === 0) return stock
+            return null
+        }).filter(nuevo => nuevo !== null)
     }
 
     handleSelectNewStock = name => {
@@ -192,12 +201,72 @@ class ProductForm extends Component {
 
             if (response.data) {
                 toast.success('Producto registrado en almacén con éxito')
-                this.setState({ stocks: this.excludeStocksOnProduct(allStocks, response.data.stocks)})
+                const productStocks = response.data.stocks.filter(stock => !stock.stock.deleted)
+                this.setState({
+                    stocks: this.excludeStocksOnProduct(allStocks, productStocks),
+                    productStocks,
+                    selectedStock: null,
+                    newQty: 0
+                })
             } else {
                 toast.error('Algo falló al registrar producto dentro del almacén')
             }
         } catch (error) {
             toast.error('Algo falló al registrar producto en almacén')
+        }
+    }
+
+    handleChangeQtyInRegisteredStock = (qty, index) => {
+        const { productStocks } = this.state
+        productStocks[index].qty = qty
+        this.setState({ productStocks })
+    }
+
+    handleUpdateRegisteredStock = async index => {
+        const { productStocks } = this.state
+        const stockToUpdate = productStocks[index]
+        const { id, qty } = stockToUpdate
+        const body = {
+            id,
+            qty: parseInt(qty)
+        }
+        try {
+            const response = await post(`${productsEndpoint}update_qty/`, body)
+            if (response.data) {
+                toast.success('Cantidad actualizada correctamente')
+                productStocks[index] = response.data
+                this.setState({ productStocks })
+            } else {
+                toast.error('Algo falló al actualizar la cantidad')
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error('Algo falló al actualizar la cantidad')
+        }
+    }
+
+    deleteRegisteredStock = async index => {
+        if (window.confirm('¿Estás seguro de eliminar el producto en este stock?')) {
+            const { productStocks, allStocks } = this.state
+            const stockToDelete = productStocks[index]
+            const { id } = stockToDelete
+
+            try {
+                const response = await post(`${productsEndpoint}delete_stock/`, { id })
+                if (response.data) {
+                    toast.success('Cantidad actualizada correctamente')
+                    const productStocks = response.data.stocks.filter(stock => !stock.stock.deleted)
+                    this.setState({
+                        stocks: this.excludeStocksOnProduct(allStocks, productStocks),
+                        productStocks
+                    })
+                } else {
+                    toast.error('Algo falló al eliminar el producto en el almacén')
+                }
+            } catch (error) {
+                console.log(error)
+                toast.error('Algo falló al eliminar el producto en el almacén')
+            }
         }
     }
 
@@ -220,7 +289,6 @@ class ProductForm extends Component {
             selectedStock,
             newQty
         } = this.state
-        console.log(isImagesVisible)
         return (
             <div className="body-container">
                 <Form
@@ -251,6 +319,9 @@ class ProductForm extends Component {
                     handleSelectNewStock={this.handleSelectNewStock}
                     handleChangeNewQty={this.handleChangeNewQty}
                     handleSaveProductInStock={this.handleSaveProductInStock}
+                    handleChangeQtyInRegisteredStock={this.handleChangeQtyInRegisteredStock}
+                    handleUpdateRegisteredStock={this.handleUpdateRegisteredStock}
+                    deleteRegisteredStock={this.deleteRegisteredStock}
                 />
             </div>
         )

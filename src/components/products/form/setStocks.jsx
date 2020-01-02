@@ -13,6 +13,9 @@ const SetInStocks = ({
     handleSelectNewStock,
     handleChangeNewQty,
     handleSaveProductInStock,
+    handleChangeQtyInRegisteredStock,
+    handleUpdateRegisteredStock,
+    deleteRegisteredStock,
     isStocksVisible,
     selectedStock
 }) =>
@@ -46,7 +49,7 @@ const SetInStocks = ({
                         <p>Indica la cantidad a guardar</p>
                         <Input
                             className='qty-stock'
-                            placeholder={'Cantidad'}
+                            placeholder='Cantidad'
                             value={newQty}
                             onChange={e => handleChangeNewQty(e)}
                             disabled={selectedStock ? false : true}
@@ -60,12 +63,59 @@ const SetInStocks = ({
                         />
                     </Col>
                 </Row>
-                <div className="product-stocks-existing-container">
-
-                </div>
+                <Row className="product-stocks-existing-container">
+                    <p className="label-stocks-registered">Almacenes registrados</p>
+                    {productStocks ?
+                        productStocks.map((stock, index) =>
+                            <Col
+                                span={5}
+                                offset={1}
+                                key={stock.stock.id}
+                            >
+                                <StockRegistered
+                                    stock={stock}
+                                    index={index}
+                                    handleChangeQtyInRegisteredStock={handleChangeQtyInRegisteredStock}
+                                    handleUpdateRegisteredStock={handleUpdateRegisteredStock}
+                                    deleteRegisteredStock={deleteRegisteredStock}
+                                />
+                            </Col>
+                        )
+                        : <p>El producto no existe en ningún stock</p>
+                    }
+                </Row>
             </div>
             : null
         }
     </Fragment>
+
+const StockRegistered = ({
+    stock,
+    index,
+    handleChangeQtyInRegisteredStock,
+    handleUpdateRegisteredStock,
+    deleteRegisteredStock
+}) =>
+    <div className="stock-registered-container">
+        <p>{stock.stock.name}</p>
+        <div className="qty-container">
+            <p>Cantidad</p>
+            <Input
+                placeholder='Cantidad'
+                value={stock.qty}
+                onChange={e => handleChangeQtyInRegisteredStock(e.target.value, index)}
+            />
+        </div>
+        <MainButton
+            className="btn-update-stocks"
+            text="Actualizar"
+            onClick={() => handleUpdateRegisteredStock(index) }
+        />
+        <Icon
+            className="icon-delete-stock"
+            type="close"
+            onClick={() => deleteRegisteredStock(index)}
+        />
+    </div>
 
 export default SetInStocks

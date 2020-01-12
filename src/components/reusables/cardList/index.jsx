@@ -21,7 +21,7 @@ const CardList = props =>
         <Row className="card-list-container">
             {
                 props.data && props.data.length > 0 ?
-                    props.data.map(item => 
+                    props.data.map(item =>
                         <Col span={6} key={item.id}>
                             <CardItem
                                 item={item}
@@ -44,6 +44,7 @@ const CardItem = ({item, history, URL, handleDelete}) =>
             <img
                 alt={item.name}
                 src={validateImageOnItem(item) ? validateImageOnItem(item) : defaultProduct}
+                // style={{height: '200px'}}
             />
         }
         actions={[

@@ -271,7 +271,7 @@ class ProductForm extends Component {
     }
 
     finishCreateProduct = () => {
-        this.props.history.push(`/productos/${this.state.newProductId}`)
+        this.props.history.push(`/productos/${this.state.newProductId}/`)
     }
 
     render() {

@@ -10,7 +10,7 @@ const StockProducts = ({
     isRightArrowProductShow
 }) =>
     <Fragment>
-        {data && data.length > 0 ?
+        {data ?
             <div className="stocks-container">
                 <p className="stocks-title">Productos existentes en este almacén</p>
                 <div className="product-stocks-container">
@@ -20,13 +20,15 @@ const StockProducts = ({
                             : null
                     }
                     {
-                        data.slice(firstProduct, lastProduct + 1).map(product =>
-                            <div className="card-container" key = {product.product.name}>
-                                <img src={product.product.images.length > 0 ? product.product.images[0].image : defaultProduct} alt={product.product.name}/>
-                                <p className="name">{product.product.name}</p>
-                                <p>{`Cantidad: ${product.qty} pzas.`}</p>
-                            </div>
-                        )
+                        data.length > 0 ?
+                            data.slice(firstProduct, lastProduct + 1).map(product =>
+                                <div className="card-container" key = {product.product.name}>
+                                    <img src={product.product.images.length > 0 ? product.product.images[0].image : defaultProduct} alt={product.product.name}/>
+                                    <p className="name">{product.product.name}</p>
+                                    <p>{`Cantidad: ${product.qty} pzas.`}</p>
+                                </div>
+                            )
+                            : <p className="not-products-in-stock">No existen productos dentro de este almacén ☹️</p>
                     }
                     {
                         isRightArrowProductShow() ?
@@ -34,7 +36,7 @@ const StockProducts = ({
                             : null
                     }
                 </div>
-                <p className="total-products-in-stock">Total de productos: {data.length}</p>
+                { data.length > 0 ? <p className="total-products-in-stock">Total de productos: {data.length}</p> : null }
             </div>
             : null
         }

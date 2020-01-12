@@ -73,9 +73,9 @@ class StockForm extends Component {
             if (response.data) {
                 toast.success('Almacén creado con éxito')
                 this.setState({
-                    isProductsVisible: true,
+                    // isProductsVisible: true,
                     newStockId: response.data.id
-                })
+                }, () => this.finishCreateStock())
             } else {
                 toast.error('WTF')
             }

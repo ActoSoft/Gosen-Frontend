@@ -63,6 +63,7 @@
         .total-products-in-stock {
             color: $white;
             font-size: 1.5em;
+            margin: 1vh 0;
         }
     }
 
@@ -102,7 +103,11 @@
                 height: 20vh;
                 padding: 5%;
             }
-
+        }
+        .not-products-in-stock {
+            color: $primary;
+            font-size: 2em;
+            margin-bottom: 0;
         }
     }
 }

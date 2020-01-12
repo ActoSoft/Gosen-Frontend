@@ -88,10 +88,12 @@
             width: 25%;
             // background-color: $primary;
             min-height: 15vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
+            div {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+            }
             color: $primary;
             .name {
                 font-weight: 600;

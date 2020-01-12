@@ -189,7 +189,13 @@ class ProductForm extends Component {
     }
 
     handleSaveProductInStock = async () => {
-        const { selectedStock, newQty, allStocks, newProductId } = this.state
+        const {
+            selectedStock,
+            newQty,
+            allStocks,
+            newProductId
+        } = this.state
+
         const body = {
             stock: selectedStock.id,
             qty: parseInt(newQty),
@@ -209,10 +215,10 @@ class ProductForm extends Component {
                     newQty: 0
                 })
             } else {
-                toast.error('Algo falló al registrar producto dentro del almacén')
+                toast.error('Algo falló al registrar el producto dentro del almacén')
             }
         } catch (error) {
-            toast.error('Algo falló al registrar producto en almacén')
+            toast.error('Algo falló al registrar el producto dentro del almacén')
         }
     }
 

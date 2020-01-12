@@ -106,11 +106,13 @@
             font-size: 1.5em;
             width: 25%;
             background-color: $primary;
-            min-height: 15vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
+            div {
+                min-height: 15vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+            }
             color: $black;
             .name {
                 font-weight: 600;

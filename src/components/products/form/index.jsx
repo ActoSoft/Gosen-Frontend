@@ -13,9 +13,9 @@ class ProductForm extends Component {
         super(props)
         this.state = {
             isCreate: false,
-            isFormVisible: false,
+            isFormVisible: true,
             isImagesVisible: false,
-            isStocksVisible: true,
+            isStocksVisible: false,
             model: 'Producto',
             images: [],
             productStocks: [],

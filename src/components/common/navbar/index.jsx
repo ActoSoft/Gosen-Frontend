@@ -4,7 +4,7 @@ import { Menu, Icon } from 'antd'
 import Logo from '../../../assets/logo_transparencia_1x.png'
 import { withAuth } from '../../../Authentication'
 import { NavLink } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 const { SubMenu } = Menu
 
 class Navbar extends Component {
@@ -115,7 +115,9 @@ class Navbar extends Component {
                         </Menu.Item>
                         <Menu.Item className="root-item" key="7">
                             <Icon type="tool" />
-                            <span>Trabajos</span>
+                            <NavLink to="/trabajos">
+                                <span>Trabajos</span>
+                            </NavLink>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="8">
                             <Icon type="container" />

@@ -26,6 +26,7 @@ import ProductForm from '../components/products/form'
 import StocksList from '../components/stocks/list'
 import StockDetail from '../components/stocks/detail'
 import StockForm from '../components/stocks/form'
+import WorksList from '../components/works/list'
 
 const Routes = ({auth}) => {
     return (
@@ -166,6 +167,25 @@ const Routes = ({auth}) => {
                     component = {StockForm}
                 />
                 {/* ===== END STOCKS ROUTES ====== */}
+
+                {/* ===== WORKS ROUTES ====== */}
+                <PrivateRoute
+                    exact path = '/trabajos'
+                    component = {WorksList}
+                />
+                {/* <PrivateRoute
+                    exact path = '/almacenes/crear'
+                    component = {StockForm}
+                />
+                <PrivateRoute
+                    exact path = '/almacenes/:id'
+                    component = {StockDetail}
+                />
+                <PrivateRoute
+                    exact path = '/almacenes/:id/editar'
+                    component = {StockForm}
+                /> */}
+                {/* ===== END WORKS ROUTES ====== */}
 
 
                 <Redirect to={ auth.isAuthenticated() ? '/dashboard' : '/login' } />

@@ -1,21 +1,53 @@
 const deconstructInfo = (data) => {
-    return data.map(item=> {
-        //console.log(dataWithOutObjects)
-        let objectArray = []
-        let keyNamesRemove = []
+    let returnObject = {}
+    let objectArray = []
+    let keyNamesRemove = []
+    if (Array.isArray(data)) {
+        data.map(item=> {
+            Object.entries(item).forEach(pair => {
+                if (pair[1] && typeof pair[1] === 'object') {
+                    keyNamesRemove.push(pair[0])
+                    objectArray.push(pair)
+                }
+            })
 
-        Object.entries(item).forEach(pair => {
+            if (keyNamesRemove.length > 0) {
+                keyNamesRemove.forEach(name => delete item[name])
+            }
+
+            returnObject = { ...item }
+
+            if (objectArray.length > 0) {
+                objectArray.forEach(data => {
+                    const nameData = data[0]
+                    const objectData = data[1]
+                    Object.entries(objectData).forEach(attribute => {
+                        const key = attribute[0]
+                        const value = attribute[1]
+                        const camelCase = key.charAt(0).toUpperCase() + key.slice(1) 
+                        returnObject[`${nameData}${camelCase}`] = value
+                    })
+                })
+            }
+        })
+    } else {
+        Object.entries(data).forEach(pair => {
             if (pair[1] && typeof pair[1] === 'object') {
                 keyNamesRemove.push(pair[0])
                 objectArray.push(pair)
             }
         })
 
-        if (keyNamesRemove.length > 0) {
-            keyNamesRemove.forEach(name => delete item[name])
-        } 
+        console.log('oA', objectArray)
+        console.log('kNR', keyNamesRemove)
 
-        const returnObject = { ...item }
+        if (keyNamesRemove.length > 0) {
+            keyNamesRemove.forEach(name => delete data[name])
+        }
+
+        returnObject = { ...data }
+
+        console.log(returnObject)
 
         if (objectArray.length > 0) {
             objectArray.forEach(data => {
@@ -24,13 +56,14 @@ const deconstructInfo = (data) => {
                 Object.entries(objectData).forEach(attribute => {
                     const key = attribute[0]
                     const value = attribute[1]
-                    const camelCase = key.charAt(0).toUpperCase() + key.slice(1) 
+                    const camelCase = key.charAt(0).toUpperCase() + key.slice(1)
                     returnObject[`${nameData}${camelCase}`] = value
                 })
             })
         }
-        return returnObject
-    })
+    }
+    return returnObject
 }
+
 
 export default deconstructInfo

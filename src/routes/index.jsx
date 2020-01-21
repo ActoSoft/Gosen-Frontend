@@ -27,6 +27,7 @@ import StocksList from '../components/stocks/list'
 import StockDetail from '../components/stocks/detail'
 import StockForm from '../components/stocks/form'
 import WorksList from '../components/works/list'
+import WorkDetail from '../components/works/detail'
 
 const Routes = ({auth}) => {
     return (
@@ -176,12 +177,12 @@ const Routes = ({auth}) => {
                 {/* <PrivateRoute
                     exact path = '/almacenes/crear'
                     component = {StockForm}
-                />
+                /> */}
                 <PrivateRoute
-                    exact path = '/almacenes/:id'
-                    component = {StockDetail}
+                    exact path = '/trabajos/:id'
+                    component = {WorkDetail}
                 />
-                <PrivateRoute
+                {/* <PrivateRoute
                     exact path = '/almacenes/:id/editar'
                     component = {StockForm}
                 /> */}

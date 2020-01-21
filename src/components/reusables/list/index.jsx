@@ -148,7 +148,7 @@ export default class ReusableList extends Component {
                                 columns={
                                     this.setupColumns(columns)
                                 }
-                                pagination={{ pageSize: 15 }}
+                                pagination={{ pageSize: 10 }}
                                 onRow={(record) => {
                                     return {
                                         onClick: event => {

@@ -1,0 +1,23 @@
+@import "../../../variables.scss";
+.work-rows {
+    width: 100%;
+    .work-label {
+        color: $primary;
+        font-size: 1em;
+    }
+
+    .work-value {
+        color: $white;
+        font-size: 1.5em;
+    }
+
+    .many-work-values {
+        margin-bottom: 0;
+        font-size: 1.2em !important;
+    }
+
+    .work-link {
+        font-weight: 600;
+        text-decoration: underline;
+    }
+}

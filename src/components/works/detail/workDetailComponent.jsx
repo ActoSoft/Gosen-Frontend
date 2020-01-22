@@ -94,7 +94,6 @@ const WorkDetailComponent = ({ data, editURL, handleDelete }) =>
     </div>
 
 const WorkProperty = ({label, value, link}) => {
-    console.log(link)
     return (
         <Fragment>
             <p className="work-label">{label}</p>

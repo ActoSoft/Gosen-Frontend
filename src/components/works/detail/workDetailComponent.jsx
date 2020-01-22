@@ -4,11 +4,10 @@ import { Skeleton, Row, Col } from 'antd'
 import { Link } from 'react-router-dom'
 import {
     validateExist,
-    formatCosts,
     formatDate,
     joinUserName,
 } from '../../../utils'
-import { getWorkStatus } from '../../../consts'
+import { getWorkStatus } from '../../../consts'
 
 const WorkDetailComponent = ({ data, editURL, handleDelete }) =>
     <div className="profile-container">
@@ -124,3 +123,4 @@ const WorkProperty = ({label, value, link}) => {
 }
 
 export default WorkDetailComponent
+export { WorkProperty }

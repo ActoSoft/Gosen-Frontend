@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { worksEndpoint } from '../../../utils/backendEndpoints'
 import CRUD from '../../../services'
 import WorkDetailReusable from './workDetailComponent'
-import { Skeleton } from 'antd'
+import WorkPayment from './workPaymentComponent'
+import { Skeleton, Row, Col } from 'antd'
 import { toast } from 'react-toastify'
 import './index.scss'
 
@@ -49,13 +50,20 @@ export default class WorkDetail extends Component {
                     {
                         isReady ?
                             <div className="products-detail-container">
-                                <div className="main-row">
-                                    <WorkDetailReusable
-                                        data={data}
-                                        editURL={pathname}
-                                        handleDelete={this.handleDelete}
-                                    />
-                                </div>
+                                <Row className="work-rows">
+                                    <Col span={15}>
+                                        <WorkDetailReusable
+                                            data={data}
+                                            editURL={pathname}
+                                            handleDelete={this.handleDelete}
+                                        />
+                                    </Col>
+                                    <Col span={7} offset={1}>
+                                        <WorkPayment
+                                            data={data}
+                                        />
+                                    </Col>
+                                </Row>
                             </div>
                             :
                             <Skeleton active></Skeleton>

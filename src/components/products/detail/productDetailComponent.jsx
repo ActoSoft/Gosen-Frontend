@@ -2,7 +2,7 @@ import React from 'react'
 import MainButtonOutlined from '../../common/mainButtonOutlined'
 import { Skeleton } from 'antd'
 import { Link } from 'react-router-dom'
-import { validateExist } from '../../../utils';
+import { validateExist } from '../../../utils'
 
 const DetailReusable = ({ data, editURL, handleDelete, attributes }) =>
     <div className='profile-container'>

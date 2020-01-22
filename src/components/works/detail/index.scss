@@ -19,5 +19,29 @@
     .work-link {
         font-weight: 600;
         text-decoration: underline;
+        &:hover {
+            text-decoration-color: $primary !important;
+        }
     }
 }
+
+.work-label-title {
+    font-size: 3em;
+    color: $white;
+}
+
+.add-payment-work-button {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.historial-payment-works-button {
+    background-color: $black;
+    color: $primary;
+    margin-top: 30px;
+    width: 100%;
+}
+
+// .work-payment-container {
+//     margin-left: 5vw;
+// }

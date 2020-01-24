@@ -8,6 +8,7 @@ import SelectComponent from '../../common/select'
 import DatePicker from '../../common/datePicker'
 import TextArea from '../../common/textArea'
 import { validateExist, joinUserName } from '../../../utils'
+import moment from 'moment'
 
 const Form = ({
     data,
@@ -50,6 +51,7 @@ const Form = ({
                                 <Col span={12} className="work-form-col">
                                     <InputGroup
                                         label='Cliente'
+                                        value='Selecciona a un cliente'
                                         name='client'
                                         options={clients.map(client => joinUserName(client.user))}
                                         searchable={true}
@@ -58,6 +60,7 @@ const Form = ({
                                 </Col>
                                 <Col span={12} className="work-form-col">
                                     <InputGroup
+                                        value='Selecciona el servicio a realizar'
                                         label='Servicio'
                                         name='service'
                                         options={services.map(service => service.name)}
@@ -70,7 +73,7 @@ const Form = ({
                                 <Col span={12} className="work-form-col">
                                     <InputGroup
                                         label='Fecha de inicio'
-                                        value=''
+                                        value={moment().format('YYYY-MM-DD')}
                                         type='datePicker'
                                         name='dateStart'
                                     />
@@ -78,7 +81,7 @@ const Form = ({
                                 <Col span={12} className="work-form-col">
                                     <InputGroup
                                         label='Fecha de fin'
-                                        value=''
+                                        value={moment().add(1, 'days').format('YYYY-MM-DD')}
                                         type='datePicker'
                                         name='dateEnd'
                                     />
@@ -124,6 +127,8 @@ const Form = ({
                                     <InputGroup
                                         label='Empleados'
                                         name='employees'
+                                        value={[]}
+                                        placeholder='Selecciona los empleados a realizar el trabajo'
                                         options={employees.map(employee => joinUserName(employee.user))}
                                         searchable={true}
                                         mode='multiple'
@@ -159,6 +164,7 @@ const InputGroup = (props) =>
                         searchable={props.searchable}
                         mode={props.mode}
                         options={props.options}
+                        placeholder={props.placeholder}
                         disabled={props.disabled}
                     />
                     : props.type === 'datePicker' ?
@@ -169,6 +175,7 @@ const InputGroup = (props) =>
                         />
                         : props.type === 'textarea' ?
                             <TextArea
+                                placeholder={props.placeholder}
                                 value={props.value}
                                 onChange={props.onChange}
                                 className={props.className}

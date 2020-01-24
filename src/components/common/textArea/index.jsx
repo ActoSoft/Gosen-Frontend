@@ -8,6 +8,7 @@ const TextAreaComponent = ( props ) =>{
         <TextArea
             className={`text-area-component ${props.className ? props.className : null}`}
             onChange={props.onChange}
+            placeholder={props.placeholder ? props.placeholder : null}
             value={props.value}
         />
     )

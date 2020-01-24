@@ -16,6 +16,7 @@ const SelectComponent = (props) => {
             defaultValue={props.value ? props.value : null}
             showSearch={props.searchable ? true : false}
             disabled={props.disabled ? true : false}
+            placeholder={props.placeholder ? props.placeholder : null}
         >
             { props.options ?
                 props.options.map((option, index) =>

@@ -11,6 +11,7 @@ const SelectComponent = (props) => {
                 ${props.className ? props.className : ''}`
             }
             name={props.name}
+            mode={props.mode ? props.mode : null}
             onChange={props.onChange}
             defaultValue={props.value ? props.value : null}
             showSearch={props.searchable ? true : false}

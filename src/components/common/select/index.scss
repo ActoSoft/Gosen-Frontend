@@ -39,3 +39,11 @@
         }
     }
 }
+
+.ant-select-selection--multiple .ant-select-selection__choice {
+    color: $white;
+    background-color: $black;
+    .anticon-close {
+        color: $white !important;
+    }
+}

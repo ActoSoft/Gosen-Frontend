@@ -6,8 +6,9 @@ const TextAreaComponent = ( props ) =>{
     const { TextArea } = Input
     return(
         <TextArea
-            className="text-area-component"
+            className={`text-area-component ${props.className ? props.className : null}`}
             onChange={props.onChange}
+            value={props.value}
         />
     )
 }

@@ -5,8 +5,6 @@ import Form from './form'
 import CRUD, { post } from '../../../services'
 import UploadProducts from './uploadProducts'
 
-
-
 class StockForm extends Component {
     constructor(props) {
         super(props)

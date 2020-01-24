@@ -27,7 +27,7 @@ const Form = (
                                 ? `Editar ${data.name}`
                                 : `Agregar nuevo ${model}`
                         }</p>
-                        <div className="buttons-service-form">
+                        <div className="buttons-service-form button-work-form">
                             <MainButton
                                 text='Continuar'
                                 className="edit-buttons"

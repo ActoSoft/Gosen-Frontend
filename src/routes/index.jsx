@@ -28,6 +28,7 @@ import StockDetail from '../components/stocks/detail'
 import StockForm from '../components/stocks/form'
 import WorksList from '../components/works/list'
 import WorkDetail from '../components/works/detail'
+import WorkForm from '../components/works/form'
 
 const Routes = ({auth}) => {
     return (
@@ -174,18 +175,18 @@ const Routes = ({auth}) => {
                     exact path = '/trabajos'
                     component = {WorksList}
                 />
-                {/* <PrivateRoute
-                    exact path = '/almacenes/crear'
-                    component = {StockForm}
-                /> */}
+                <PrivateRoute
+                    exact path = '/trabajos/crear'
+                    component = {WorkForm}
+                />
                 <PrivateRoute
                     exact path = '/trabajos/:id'
                     component = {WorkDetail}
                 />
-                {/* <PrivateRoute
-                    exact path = '/almacenes/:id/editar'
-                    component = {StockForm}
-                /> */}
+                <PrivateRoute
+                    exact path = '/trabajos/:id/editar'
+                    component = {WorkForm}
+                />
                 {/* ===== END WORKS ROUTES ====== */}
 
 

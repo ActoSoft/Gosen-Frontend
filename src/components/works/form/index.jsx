@@ -11,6 +11,7 @@ import Form from './form'
 import './index.scss'
 import moment from 'moment'
 import { Skeleton } from 'antd'
+import { statuses, getWorkStatusByValue } from '../../../consts'
 
 class WorkForm extends Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class WorkForm extends Component {
             clients: [],
             services: [],
             employees: [],
+            statusItems: [],
             newWorkId: 0,
             data: null,
             work: null
@@ -44,7 +46,7 @@ class WorkForm extends Component {
                 qty: 0,
                 total: 0,
                 payed: 0,
-                toay: 0
+                toPay: 0
             }
             this.setState({
                 clients: clients.data,
@@ -59,6 +61,7 @@ class WorkForm extends Component {
         else {
             const id = this.props.match.params.id || null
             if (!id) toast.error('No se especificó el almacén a modificar')
+            const statusItems = Object.values(statuses)
             CRUD.findOne(worksEndpoint, id)
                 .then(({ data }) => {
                     const work = {
@@ -72,13 +75,17 @@ class WorkForm extends Component {
                         dateEnd: data.datetime_end,
                         qty: data.qty,
                         total: data.total,
+                        description: data.description,
                         payed: data.payed,
-                        toPay: data.to_pay
+                        toPay: data.to_pay,
+                        status: data.status,
                     }
+                    console.log(work)
                     this.setState({
                         clients: clients.data,
                         services: services.data,
                         employees: employees.data,
+                        statusItems,
                         data,
                         work,
                         isReady: true
@@ -89,7 +96,7 @@ class WorkForm extends Component {
                     toast.error('Algo falló al traer la información')
                 })
         }
-        this.makeCalculations()
+        // this.makeCalculations()
     }
 
     makeCalculations = () => {
@@ -149,6 +156,14 @@ class WorkForm extends Component {
         this.makeCalculations()
     }
 
+    handleChangeStatus = (status) => {
+        const { work } = this.state
+        console.log(work.status)
+        work.status = getWorkStatusByValue(status)
+        console.log(work.status)
+        this.setState({ work })
+    }
+
     handleChangeDatePicker = ({ name, moment }) => {
         const dateFormatted = moment.format('YYYY-MM-DD')
         const { work } = this.state
@@ -163,7 +178,7 @@ class WorkForm extends Component {
     }
 
     handleSubmit = async () => {
-        const { work } = this.state
+        const { work, isCreate } = this.state
         const {
             clientId,
             serviceId,
@@ -174,7 +189,8 @@ class WorkForm extends Component {
             qty,
             total,
             payed,
-            toPay
+            toPay,
+            status
         } = work
 
         const body = {
@@ -187,18 +203,22 @@ class WorkForm extends Component {
             qty: parseInt(qty),
             total,
             payed,
-            toPay
+            toPay,
+            status: isCreate ? 'authorized' : status
         }
         try {
             const response = await post(`${worksEndpoint}create_work/`, body)
 
             if (response.data) {
                 console.log(response.data)
+                toast.success(`Trabajo ${isCreate ? 'creado' : 'actualizado'} con éxito`)
             } else {
                 console.log(response)
+                toast.error(`Algo falló al ${isCreate ? 'crear' : 'actualizar'}. Intenta más tarde`)
             }
         } catch (error) {
             console.log(error)
+            toast.error(`Algo falló al ${isCreate ? 'crear' : 'actualizar'}. Intenta más tarde`)
         }
     }
 
@@ -208,6 +228,7 @@ class WorkForm extends Component {
             handleChangeService: this.handleChangeService,
             handleChangeEmployees: this.handleChangeEmployees,
             handleChangeInputText: this.handleChangeInputText,
+            handleChangeStatus: this.handleChangeStatus,
             handleChangeDatePicker: this.handleChangeDatePicker,
             handleChangeTextarea: this.handleChangeTextarea,
             handleSubmit: this.handleSubmit
@@ -218,7 +239,16 @@ class WorkForm extends Component {
     }
 
     render() {
-        const { data, clients, services, employees, isCreate, work, isReady } = this.state
+        const {
+            data,
+            clients,
+            services,
+            employees,
+            statusItems,
+            isCreate,
+            work,
+            isReady
+        } = this.state
         return (
             <Fragment>
                 {
@@ -230,6 +260,7 @@ class WorkForm extends Component {
                             goBack='/trabajos/'
                             clients={clients}
                             services={services}
+                            statusItems={statusItems}
                             employees={employees}
                             work={work}
                             events={this.handleEvent}

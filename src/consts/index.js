@@ -1,4 +1,7 @@
-import getWorkStatus from './workStatus'
+import { statuses, getWorkStatus, getWorkStatusByValue } from './workStatus'
 
-export { getWorkStatus,
+export {
+    getWorkStatus,
+    getWorkStatusByValue,
+    statuses
 }

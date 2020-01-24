@@ -7,11 +7,10 @@ import InputText from '../../common/inputText'
 import SelectComponent from '../../common/select'
 import DatePicker from '../../common/datePicker'
 import TextArea from '../../common/textArea'
-import { validateExist, joinUserName } from '../../../utils'
-import moment from 'moment'
+import { joinUserName } from '../../../utils'
+import { getWorkStatus } from '../../../consts'
 
 const Form = ({
-    data,
     events,
     isCreate,
     model = '',
@@ -19,6 +18,7 @@ const Form = ({
     clients,
     services,
     employees,
+    statusItems,
     work
 }) => {
     // const { RangePicker } = DatePicker
@@ -37,7 +37,7 @@ const Form = ({
                                     }</p>
                                     <div className="buttons-service-form">
                                         <MainButton
-                                            text='Continuar'
+                                            text={isCreate ? 'Guardar' : 'Actualizar'}
                                             className='edit-buttons work-buttons'
                                             onClick={() => events('handleSubmit', {})}
                                         />
@@ -103,7 +103,7 @@ const Form = ({
                                     </Col>
                                     <Col span={12} className="work-form-col">
                                         <InputGroup
-                                            label='Fecha de fin'
+                                            label='Fecha de finalización'
                                             value={work.dateEnd ? work.dateEnd : '1990-01-02'}
                                             type='datePicker'
                                             name='dateEnd'
@@ -112,7 +112,7 @@ const Form = ({
                                     </Col>
                                 </Row>
                                 <Row className="work-rows work-rows-margin-vertical">
-                                    <Col span={12} className="work-form-col">
+                                    <Col span={isCreate ? 12 : 8} className="work-form-col">
                                         <InputGroup
                                             label='Descripción'
                                             value={work.description ? work.description : ''}
@@ -122,7 +122,7 @@ const Form = ({
                                             onChange={e => events('handleChangeTextarea', { name: 'description', e })}
                                         />
                                     </Col>
-                                    <Col span={12} className="work-form-col">
+                                    <Col span={isCreate ? 12 : 8} className="work-form-col">
                                         <InputGroup
                                             label='Cantidad'
                                             value={work.qty ? work.qty : ''}
@@ -131,6 +131,20 @@ const Form = ({
                                             onChange={e => events('handleChangeInputText', e)}
                                         />
                                     </Col>
+                                    {!isCreate ?
+                                        <Col span={8} className="work-form-col">
+                                            <InputGroup
+                                                type='select'
+                                                label='Status'
+                                                value={work.status ? getWorkStatus(work.status) : ''}
+                                                placeholder='Status'
+                                                options={statusItems}
+                                                name='status'
+                                                onChange={value => events('handleChangeStatus', value)}
+                                            />
+                                        </Col>
+                                        : null
+                                    }
                                 </Row>
                                 <Row className="work-rows work-rows-margin-vertical">
                                     <Col span={8} className="work-form-col">
@@ -143,7 +157,7 @@ const Form = ({
                                     </Col>
                                     <Col span={8} className="work-form-col">
                                         <InputGroup
-                                            label='Anticipo'
+                                            label={isCreate ? 'Anticipo' : 'Pagado'}
                                             value={work.payed ? work.payed : ''}
                                             name='payed'
                                             onChange={e => events('handleChangeInputText', e)}
@@ -164,8 +178,11 @@ const Form = ({
                                             label='Empleados'
                                             name='employees'
                                             value={work.employees && work.employees.length > 0 ?
-                                                work.employees.map(employee =>
-                                                    joinUserName(employee.user))
+                                                isCreate ?
+                                                    work.employees.map(employee =>
+                                                        joinUserName(employee.user))
+                                                    : work.employees.map(({employee})=>
+                                                        joinUserName(employee.user))
                                                 : []}
                                             placeholder='Selecciona los empleados a realizar el trabajo'
                                             options={employees.map(employee => {

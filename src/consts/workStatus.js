@@ -11,4 +11,8 @@ const getWorkStatus = status =>
         statuses[status]
         : status
 
-export default getWorkStatus
+const getWorkStatusByValue = status => {
+    const getStatus = Object.entries(statuses).filter(statusPair => statusPair[1] === status)[0]
+    return getStatus[0]
+}
+export { statuses, getWorkStatus, getWorkStatusByValue }

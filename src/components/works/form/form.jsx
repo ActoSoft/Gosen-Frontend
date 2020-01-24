@@ -18,131 +18,177 @@ const Form = ({
     goBack,
     clients,
     services,
-    employees
-}) =>
-    <div className="body-container">
-        <div className="profile-container">
-            {
-                !isCreate && data || isCreate ?
-                    <div>
-                        <div className="header-container services">
-                            <div className="header-text-container-update">
-                                <p>{
-                                    !isCreate
-                                        ? `Editar ${model}`
-                                        : `Agregar nuevo ${model}`
-                                }</p>
-                                <div className="buttons-service-form">
-                                    <MainButton
-                                        text='Continuar'
-                                        className='edit-buttons work-buttons'
-                                    />
-                                    <Link to={goBack}>
-                                        <SecondaryButton
-                                            text='Cancelar'
-                                            className='edit-buttons work-buttons cancel-buttons'
+    employees,
+    work
+}) => {
+    // const { RangePicker } = DatePicker
+    return (
+        <div className="body-container">
+            <div className="profile-container">
+                {
+                    work ?
+                        <div>
+                            <div className="header-container services">
+                                <div className="header-text-container-update">
+                                    <p>{
+                                        !isCreate
+                                            ? `Editar ${model}`
+                                            : `Agregar nuevo ${model}`
+                                    }</p>
+                                    <div className="buttons-service-form">
+                                        <MainButton
+                                            text='Continuar'
+                                            className='edit-buttons work-buttons'
+                                            onClick={() => events('handleSubmit', {})}
                                         />
-                                    </Link>
+                                        <Link to={goBack}>
+                                            <SecondaryButton
+                                                text='Cancelar'
+                                                className='edit-buttons work-buttons cancel-buttons'
+                                            />
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
+                            <div className="form flex-direction-column">
+                                <Row className="work-rows">
+                                    <Col span={12} className="work-form-col">
+                                        <InputGroup
+                                            label='Cliente'
+                                            value={work.client ? joinUserName(work.client.user) : 'Selecciona un cliente'}
+                                            name='client'
+                                            options={clients.map(client => {
+                                                return {
+                                                    label: joinUserName(client.user),
+                                                    value: client.id
+                                                }
+                                            })}
+                                            searchable={true}
+                                            type='select'
+                                            onChange={id => events('handleChangeClient', { id })}
+                                        />
+                                    </Col>
+                                    <Col span={12} className="work-form-col">
+                                        <InputGroup
+                                            value={work.service ? work.service.name : 'Selecciona el servicio a realizar'}
+                                            label='Servicio'
+                                            name='service'
+                                            options={services.map(service => {
+                                                return {
+                                                    label: service.name,
+                                                    value: service.id
+                                                }
+                                            })}
+                                            searchable={true}
+                                            type='select'
+                                            onChange={id => events('handleChangeService', { id })}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row className="work-rows work-rows-margin-vertical">
+                                    <Col span={12} className="work-form-col">
+                                        <InputGroup
+                                            label='Fecha de inicio'
+                                            value={work.dateStart ? work.dateStart : '1990-01-01'}
+                                            type='datePicker'
+                                            name='dateStart'
+                                            onChange={moment => events('handleChangeDatePicker', { name: 'dateStart', moment })}
+                                        />
+                                        {/* <RangePicker
+                                            showTime={{ format: 'HH:mm' }}
+                                            format='HH:mm'
+                                            placeholder={'Hora'}
+                                            onChange={e => console.log(e)}
+                                        /> */}
+                                    </Col>
+                                    <Col span={12} className="work-form-col">
+                                        <InputGroup
+                                            label='Fecha de fin'
+                                            value={work.dateEnd ? work.dateEnd : '1990-01-02'}
+                                            type='datePicker'
+                                            name='dateEnd'
+                                            onChange={moment => events('handleChangeDatePicker', { name: 'dateEnd', moment })}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row className="work-rows work-rows-margin-vertical">
+                                    <Col span={12} className="work-form-col">
+                                        <InputGroup
+                                            label='Descripción'
+                                            value={work.description ? work.description : ''}
+                                            placeholder='Descripción'
+                                            name='description'
+                                            type="textarea"
+                                            onChange={e => events('handleChangeTextarea', { name: 'description', e })}
+                                        />
+                                    </Col>
+                                    <Col span={12} className="work-form-col">
+                                        <InputGroup
+                                            label='Cantidad'
+                                            value={work.qty ? work.qty : ''}
+                                            placeholder='Cantidad'
+                                            name='qty'
+                                            onChange={e => events('handleChangeInputText', e)}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row className="work-rows work-rows-margin-vertical">
+                                    <Col span={8} className="work-form-col">
+                                        <InputGroup
+                                            label='Total a pagar'
+                                            value={work.total ? work.total : ''}
+                                            name='total'
+                                            onChange={e => events('handleChangeInputText', e)}
+                                        />
+                                    </Col>
+                                    <Col span={8} className="work-form-col">
+                                        <InputGroup
+                                            label='Anticipo'
+                                            value={work.payed ? work.payed : ''}
+                                            name='payed'
+                                            onChange={e => events('handleChangeInputText', e)}
+                                        />
+                                    </Col>
+                                    <Col span={8} className="work-form-col">
+                                        <InputGroup
+                                            label='Restante'
+                                            value={work.toPay ? work.toPay : ''}
+                                            name='toPay'
+                                            onChange={e => events('handleChangeInputText', e)}
+                                        />
+                                    </Col>
+                                </Row>
+                                <Row className="work-rows work-rows-margin-vertical">
+                                    <Col span={18} offset={3} className="work-form-col">
+                                        <InputGroup
+                                            label='Empleados'
+                                            name='employees'
+                                            value={work.employees && work.employees.length > 0 ?
+                                                work.employees.map(employee =>
+                                                    joinUserName(employee.user))
+                                                : []}
+                                            placeholder='Selecciona los empleados a realizar el trabajo'
+                                            options={employees.map(employee => {
+                                                return {
+                                                    label: joinUserName(employee.user),
+                                                    value: employee.id
+                                                }
+                                            })}
+                                            searchable={true}
+                                            mode='multiple'
+                                            type='select'
+                                            onChange={ids => events('handleChangeEmployees', { ids })}
+                                        />
+                                    </Col>
+                                </Row>
+                            </div>
                         </div>
-                        <div className="form flex-direction-column">
-                            <Row className="work-rows">
-                                <Col span={12} className="work-form-col">
-                                    <InputGroup
-                                        label='Cliente'
-                                        value='Selecciona a un cliente'
-                                        name='client'
-                                        options={clients.map(client => joinUserName(client.user))}
-                                        searchable={true}
-                                        type='select'
-                                    />
-                                </Col>
-                                <Col span={12} className="work-form-col">
-                                    <InputGroup
-                                        value='Selecciona el servicio a realizar'
-                                        label='Servicio'
-                                        name='service'
-                                        options={services.map(service => service.name)}
-                                        searchable={true}
-                                        type='select'
-                                    />
-                                </Col>
-                            </Row>
-                            <Row className="work-rows work-rows-margin-vertical">
-                                <Col span={12} className="work-form-col">
-                                    <InputGroup
-                                        label='Fecha de inicio'
-                                        value={moment().format('YYYY-MM-DD')}
-                                        type='datePicker'
-                                        name='dateStart'
-                                    />
-                                </Col>
-                                <Col span={12} className="work-form-col">
-                                    <InputGroup
-                                        label='Fecha de fin'
-                                        value={moment().add(1, 'days').format('YYYY-MM-DD')}
-                                        type='datePicker'
-                                        name='dateEnd'
-                                    />
-                                </Col>
-                            </Row>
-                            <Row className="work-rows work-rows-margin-vertical">
-                                <Col span={12} className="work-form-col">
-                                    <InputGroup
-                                        label='Descripción'
-                                        value=''
-                                        placeholder='Descripción'
-                                        name='description'
-                                        type="textarea"
-                                    />
-                                </Col>
-                                <Col span={12} className="work-form-col">
-                                    <InputGroup
-                                        label='Cantidad'
-                                        value=''
-                                        placeholder='Cantidad'
-                                        name='qty'
-                                    />
-                                </Col>
-                            </Row>
-                            <Row className="work-rows work-rows-margin-vertical">
-                                <Col span={12} className="work-form-col">
-                                    <InputGroup
-                                        label='Total a pagar'
-                                        value='0'
-                                        name='total'
-                                    />
-                                </Col>
-                                <Col span={12} className="work-form-col">
-                                    <InputGroup
-                                        label='Anticipo'
-                                        value='0'
-                                        name='payed'
-                                    />
-                                </Col>
-                            </Row>
-                            <Row className="work-rows work-rows-margin-vertical">
-                                <Col span={18} offset={3} className="work-form-col">
-                                    <InputGroup
-                                        label='Empleados'
-                                        name='employees'
-                                        value={[]}
-                                        placeholder='Selecciona los empleados a realizar el trabajo'
-                                        options={employees.map(employee => joinUserName(employee.user))}
-                                        searchable={true}
-                                        mode='multiple'
-                                        type='select'
-                                    />
-                                </Col>
-                            </Row>
-                        </div>
-                    </div>
-                    :
-                    <Skeleton active />
-            }
+                        :
+                        <Skeleton active />
+                }
+            </div>
         </div>
-    </div>
+    )}
 
 const InputGroup = (props) =>
     <div className="form-group form-work">

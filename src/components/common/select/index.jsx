@@ -22,9 +22,9 @@ const SelectComponent = (props) => {
                 props.options.map((option, index) =>
                     <Option
                         key={index}
-                        value = {`${option}`}
+                        value={option.value ? option.value : option}
                     >
-                        {option}
+                        {option.label ? option.label : option}
                     </Option>
                 )
                 :

@@ -5,6 +5,7 @@ import './index.scss'
 
 const SelectComponent = (props) => {
     const { Option } = Select
+    console.log(props.options)
     return(
         <Select
             className={`select-component

@@ -9,6 +9,7 @@ import validateExist from './validateExist'
 import joinUserName from './joinUserName'
 import validateImageOnItem from './validateImageOnItem'
 import getBase64File from './getBase64File'
+import getDifferenceBetweenTwoArrays from './getDifferenceBetweenTwoArrays'
 export {
     formatURL,
     cities,
@@ -20,5 +21,6 @@ export {
     validateExist,
     joinUserName,
     validateImageOnItem,
-    getBase64File
+    getBase64File,
+    getDifferenceBetweenTwoArrays
 }

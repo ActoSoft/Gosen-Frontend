@@ -6,6 +6,7 @@ import {
     employeesEndpoint
 } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
+import { getDifferenceBetweenTwoArrays } from '../../../utils'
 import CRUD, { post } from '../../../services'
 import Form from './form'
 import './index.scss'
@@ -46,7 +47,8 @@ class WorkForm extends Component {
                 qty: 0,
                 total: 0,
                 payed: 0,
-                toPay: 0
+                toPay: 0,
+                employeesId: []
             }
             this.setState({
                 clients: clients.data,
@@ -70,8 +72,8 @@ class WorkForm extends Component {
                         clientId: data.client.id,
                         service: data.service,
                         serviceId: data.service.id,
-                        employees: data.employees,
-                        employeesId: data.employees.map(employee => employee.id),
+                        employees: data.employees.map(({employee}) => employee),
+                        employeesId: data.employees.map(({employee}) => employee.id),
                         dateStart: data.datetime_start,
                         dateEnd: data.datetime_end,
                         qty: data.qty,
@@ -80,6 +82,8 @@ class WorkForm extends Component {
                         payed: data.payed,
                         toPay: data.to_pay,
                         status: data.status,
+                        newEmployees: [],
+                        removedEmployees: [],
                     }
                     console.log(work)
                     this.setState({
@@ -136,13 +140,34 @@ class WorkForm extends Component {
     }
 
     handleChangeEmployees = ({ ids }) => {
-        const { work, employees } = this.state
-        const selectedEmployees = ids.map(id =>
-            employees.filter(employee => employee.id === id)[0]
-        )
-        console.log(selectedEmployees)
-        work.employees = selectedEmployees
-        work.employeesId = ids
+        const { work } = this.state
+        const { employeesId } = work
+        if (ids.length > employeesId.length) {
+            const addedId = getDifferenceBetweenTwoArrays(ids, employeesId)[0]
+            this.addEmployee(addedId)
+        } else if (ids.length < employeesId.length) {
+            const removedId = getDifferenceBetweenTwoArrays(employeesId, ids)[0]
+            this.removeEmployee(removedId)
+        }
+    }
+
+    addEmployee = id => {
+        const { employees, work } = this.state
+        const selectedEmployee = employees.filter(employee => employee.id === id)[0]
+        work.employees.push(selectedEmployee)
+        work.employeesId.push(id)
+        work.newEmployees.push(id)
+        this.setState({
+            work,
+        })
+    }
+
+    removeEmployee = id => {
+        const { work } = this.state
+        const removedEmployeeId = work.employees.map(employee => employee.id).indexOf(id)
+        work.employees.splice(removedEmployeeId, 1)
+        work.employeesId = work.employees.map(employee => employee.id)
+        work.removedEmployees.push(id)
         this.setState({
             work
         })
@@ -192,7 +217,9 @@ class WorkForm extends Component {
             total,
             payed,
             toPay,
-            status
+            status,
+            newEmployees,
+            removedEmployees
         } = work
 
         const body = {
@@ -208,6 +235,10 @@ class WorkForm extends Component {
             toPay,
             status: isCreate ? 'authorized' : status,
             id: !isCreate ? id : null
+        }
+        if (!isCreate) {
+            body.newEmployees = getDifferenceBetweenTwoArrays(newEmployees, removedEmployees)
+            body.removedEmployees = getDifferenceBetweenTwoArrays(removedEmployees, newEmployees)
         }
         try {
             let response

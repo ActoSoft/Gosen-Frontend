@@ -65,6 +65,7 @@ class WorkForm extends Component {
             CRUD.findOne(worksEndpoint, id)
                 .then(({ data }) => {
                     const work = {
+                        id: data.id,
                         client: data.client,
                         clientId: data.client.id,
                         service: data.service,
@@ -157,7 +158,7 @@ class WorkForm extends Component {
     }
 
     handleChangeStatus = (status) => {
-        const { work } = this.state
+        const { work } = this.state
         console.log(work.status)
         work.status = getWorkStatusByValue(status)
         console.log(work.status)
@@ -180,6 +181,7 @@ class WorkForm extends Component {
     handleSubmit = async () => {
         const { work, isCreate } = this.state
         const {
+            id,
             clientId,
             serviceId,
             employeesId,
@@ -204,10 +206,16 @@ class WorkForm extends Component {
             total,
             payed,
             toPay,
-            status: isCreate ? 'authorized' : status
+            status: isCreate ? 'authorized' : status,
+            id: !isCreate ? id : null
         }
         try {
-            const response = await post(`${worksEndpoint}create_work/`, body)
+            let response
+            if (isCreate) {
+                response = await post(`${worksEndpoint}create_work/`, body)
+            } else {
+                response = await post(`${worksEndpoint}update_work/`, body)
+            }
 
             if (response.data) {
                 console.log(response.data)

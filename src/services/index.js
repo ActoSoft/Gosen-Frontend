@@ -42,20 +42,20 @@ axios.interceptors.response.use(response => {
     if(status === 401) {
         toast.error('No tienes permiso para realizar esta acción')
         if(localStorage.getItem('token')) localStorage.clear()
-        // setTimeout(()=>window.location.assign('/login'), 3000)
+        setTimeout(()=>window.location.assign('/login'), 3000)
     }
     else if(status === 500) {
         toast.error('Error del servidor')
-        // setTimeout(() => window.location.assign('/'), 3000)
+        setTimeout(() => window.location.assign('/'), 3000)
     }
     else if(status === 404) {
         toast.error('Entidad no encontrada')
-        // setTimeout(() => window.location.assign('/'), 3000)
+        setTimeout(() => window.location.assign('/'), 3000)
     }
     else {
         console.log(error.response)
         toast.error('Algo falló')
-        // setTimeout(() => window.location.assign('/'), 3000)
+        setTimeout(() => window.location.assign('/'), 3000)
     }
     return Promise.reject(error)
 })

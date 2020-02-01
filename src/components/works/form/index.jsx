@@ -48,6 +48,7 @@ class WorkForm extends Component {
                 total: 0,
                 payed: 0,
                 toPay: 0,
+                employees: [],
                 employeesId: []
             }
             this.setState({
@@ -152,22 +153,22 @@ class WorkForm extends Component {
     }
 
     addEmployee = id => {
-        const { employees, work } = this.state
+        const { employees, work, isCreate } = this.state
         const selectedEmployee = employees.filter(employee => employee.id === id)[0]
         work.employees.push(selectedEmployee)
         work.employeesId.push(id)
-        work.newEmployees.push(id)
+        if (!isCreate) work.newEmployees.push(id)
         this.setState({
             work,
         })
     }
 
     removeEmployee = id => {
-        const { work } = this.state
+        const { work, isCreate } = this.state
         const removedEmployeeId = work.employees.map(employee => employee.id).indexOf(id)
         work.employees.splice(removedEmployeeId, 1)
         work.employeesId = work.employees.map(employee => employee.id)
-        work.removedEmployees.push(id)
+        if (!isCreate) work.removedEmployees.push(id)
         this.setState({
             work
         })

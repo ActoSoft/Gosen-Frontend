@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { Icon, Row, Col } from 'antd'
 import MainButton from '../../common/mainButton'
 import './index.scss'
-import { formatURL } from '../../../utils'
+import { formatURL } from '../../../utils'
 
 const UploadImages = ({
     images,

@@ -2,7 +2,7 @@ import React from 'react'
 import MainButtonOutlined from '../common/mainButtonOutlined'
 import { Skeleton } from 'antd'
 import { Link } from 'react-router-dom'
-import { formatDate, joinUserName } from '../../utils'
+import { formatDate, joinUserName } from '../../utils'
 
 const ProfileCard = ({ data }) =>
     <div className="profile-container">

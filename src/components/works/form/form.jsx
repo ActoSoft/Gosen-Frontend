@@ -9,7 +9,6 @@ import DatePicker from '../../common/datePicker'
 import TextArea from '../../common/textArea'
 import { joinUserName } from '../../../utils'
 import { getWorkStatus } from '../../../consts'
-import { employeesEndpoint } from '../../../utils/backendEndpoints'
 
 const Form = ({
     events,
@@ -180,12 +179,10 @@ const Form = ({
                                             name='employees'
                                             value={work.employees && work.employees.length > 0 ?
                                                 work.employees.map(employee =>
-                                                    // joinUserName(employee.user))
                                                     employee.id)
                                                 : []}
                                             placeholder='Selecciona los empleados a realizar el trabajo'
                                             options={employees.map(employee => {
-                                                console.log("El employee", employee)
                                                 return {
                                                     label: joinUserName(employee.user),
                                                     value: employee.id

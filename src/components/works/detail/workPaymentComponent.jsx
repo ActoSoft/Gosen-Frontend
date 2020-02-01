@@ -1,6 +1,5 @@
-import React, { Fragment } from 'react'
+import React, { Fragment } from 'react'
 import MainButton from '../../common/mainButton'
-import MainButtonOutlined from '../../common/mainButtonOutlined'
 import { Skeleton, Row, Col } from 'antd'
 import { WorkProperty } from './workDetailComponent'
 import InputText from '../../common/inputText'

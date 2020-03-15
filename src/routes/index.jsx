@@ -29,6 +29,7 @@ import StockForm from '../components/stocks/form'
 import WorksList from '../components/works/list'
 import WorkDetail from '../components/works/detail'
 import WorkForm from '../components/works/form'
+import PotentialEmployeeList from '../components/potentialEmployee/list'
 
 const Routes = ({auth}) => {
     return (
@@ -188,6 +189,13 @@ const Routes = ({auth}) => {
                     component = {WorkForm}
                 />
                 {/* ===== END WORKS ROUTES ====== */}
+
+                {/* ======= POTENTIAL EMPLOYEES ============= */}
+                <PrivateRoute
+                    exact path = '/empleados-postulantes'
+                    component = {PotentialEmployeeList}
+                />
+                {/* ======= END POTENTIAL EMPLOYEES ============= */}
 
 
                 <Redirect to={ auth.isAuthenticated() ? '/dashboard' : '/login' } />

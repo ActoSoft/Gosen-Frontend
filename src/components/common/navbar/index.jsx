@@ -84,46 +84,52 @@ class Navbar extends Component {
                             </NavLink>
                         </Menu.Item>
                         <Menu.Item className="root-item" key="2">
+                            <Icon type="audit" />
+                            <NavLink to='/empleados-postulantes/'>
+                                <span>Postulantes</span>
+                            </NavLink>
+                        </Menu.Item>
+                        <Menu.Item className="root-item" key="3">
                             <NavLink to="/empleados/">
                                 <Icon type="reconciliation" />
                                 <span>Empleados</span>
                             </NavLink>
                         </Menu.Item>
-                        <Menu.Item className="root-item" key="3">
+                        <Menu.Item className="root-item" key="4">
                             <NavLink to="/clientes/">
                                 <Icon type="user" />
                                 <span>Clientes</span>
                             </NavLink>
                         </Menu.Item>
-                        <Menu.Item className="root-item" key="4">
+                        <Menu.Item className="root-item" key="5">
                             <NavLink to="/servicios/">
                                 <Icon type="customer-service" />
                                 <span>Servicios</span>
                             </NavLink>
                         </Menu.Item>
-                        <Menu.Item className="root-item" key="5">
+                        <Menu.Item className="root-item" key="6">
                             <Icon type="inbox" />
                             <NavLink to="/productos/">
                                 <span>Productos</span>
                             </NavLink>
                         </Menu.Item>
-                        <Menu.Item className="root-item" key="6">
+                        <Menu.Item className="root-item" key="7">
                             <Icon type="inbox" />
                             <NavLink to="/almacenes/">
                                 <span>Almacenes</span>
                             </NavLink>
                         </Menu.Item>
-                        <Menu.Item className="root-item" key="7">
+                        <Menu.Item className="root-item" key="8">
                             <Icon type="tool" />
                             <NavLink to="/trabajos">
                                 <span>Trabajos</span>
                             </NavLink>
                         </Menu.Item>
-                        <Menu.Item className="root-item" key="8">
+                        <Menu.Item className="root-item" key="9">
                             <Icon type="container" />
                             <span>Contabilidad</span>
                         </Menu.Item>
-                        <SubMenu key="9" title={this.state.name}>
+                        <SubMenu key="10" title={this.state.name}>
                             <Menu.Item className="sub-item" key="sub1">
                                 <NavLink to="/perfil/">Perfil</NavLink>
                             </Menu.Item>

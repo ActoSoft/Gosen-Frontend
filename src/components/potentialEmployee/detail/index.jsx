@@ -18,11 +18,13 @@ class PotentialEmployeeDetail extends Component {
 
     componentDidMount() {
         CRUD.findOne(potentialEmployeesEndpoint, this.potentialEmployeeId)
-            .then(response =>
+            .then(response => {
+                console.log(response.data)
                 this.setState({
                     data: response.data,
                     isReady: true
                 })
+            }
             )
             .catch(error =>
                 console.log(error)
@@ -30,16 +32,15 @@ class PotentialEmployeeDetail extends Component {
     }
 
     handleDelete = () => {
-        if(window.confirm('¿Deseas realmente eliminar a este empleado postulante?')) {
+        if(window.confirm('¿Deseas realmente descartar a este empleado postulante?')) {
             CRUD.softDelete(potentialEmployeesEndpoint, this.potentialEmployeeId)
-                .then(response => {
-                    console.log(response.data)
-                    toast.success('El empleado postulante ha sido eliminado')
+                .then(() => {
+                    toast.success('El empleado postulante ha sido descartado')
                     setTimeout(() => this.props.history.push('/empleados-postulantes/'), 3000)
                 })
                 .catch(error => {
                     console.log(error.response)
-                    toast.error('Algo fallo al eliminar')
+                    toast.error('Algo fallo al descartar')
                 })
         }
     }

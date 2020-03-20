@@ -58,7 +58,7 @@ export default class PotentialEmployeeList extends Component {
                         columns={columns}
                         data={data}
                         title='Empleados Postulantes'
-                        URL='/empleados-postulantes/'
+                        URL='/empleados-postulantes'
                         history={this.props.history}
                     />
                     :

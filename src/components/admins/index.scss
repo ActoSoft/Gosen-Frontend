@@ -18,7 +18,7 @@
 .header-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     span {
         color:white;
     }
@@ -34,6 +34,25 @@
                 text-decoration: underline;
             }
         }
+    }
+}
+
+.potential-employee-role-container {
+    width: 30%;
+    span {
+        font-size: 2em;
+        text-align: center;
+    }
+}
+
+.potential-employee-observations-container {
+    p {
+        font-size: 1.5em;
+        color: #F4E38B;
+    }
+    span {
+        font-size: 1.2em;
+        color: #fff;
     }
 }
 .user-fullname {

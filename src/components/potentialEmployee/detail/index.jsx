@@ -1,23 +1,23 @@
 import React, { Component, Fragment } from 'react'
-import { clientsEndpoint } from '../../../utils/backendEndpoints'
+import { potentialEmployeesEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
-import DetailReusable from '../../reusables/detail'
+import DetailComponent from './DetailComponent'
 import CRUD from '../../../services'
 import { withAuth } from '../../../Authentication'
 
-class ClientDetail extends Component {
+class PotentialEmployeeDetail extends Component {
     constructor(props) {
         super(props)
         this.state = {
             data: null,
             isReady: false
         }
-        this.adminId = this.props.match.params.id
+        this.potentialEmployeeId = this.props.match.params.id
         this.isStaff = this.props.auth.isStaff
     }
 
     componentDidMount() {
-        CRUD.findOne(clientsEndpoint, this.adminId)
+        CRUD.findOne(potentialEmployeesEndpoint, this.potentialEmployeeId)
             .then(response =>
                 this.setState({
                     data: response.data,
@@ -30,12 +30,12 @@ class ClientDetail extends Component {
     }
 
     handleDelete = () => {
-        if(window.confirm('¿Deseas realmente eliminar a este cliente?')) {
-            CRUD.softDelete(clientsEndpoint, this.adminId)
+        if(window.confirm('¿Deseas realmente eliminar a este empleado postulante?')) {
+            CRUD.softDelete(potentialEmployeesEndpoint, this.potentialEmployeeId)
                 .then(response => {
                     console.log(response.data)
-                    toast.success('El cliente ha sido eliminado')
-                    setTimeout(() => this.props.history.push('/clientes/'), 3000)
+                    toast.success('El empleado postulante ha sido eliminado')
+                    setTimeout(() => this.props.history.push('/empleados-postulantes/'), 3000)
                 })
                 .catch(error => {
                     console.log(error.response)
@@ -51,7 +51,7 @@ class ClientDetail extends Component {
             <Fragment>
                 <div className="body-container">
                     {isReady ?
-                        <DetailReusable
+                        <DetailComponent
                             data={data}
                             editURL={pathname}
                             handleDelete={this.handleDelete}
@@ -65,4 +65,4 @@ class ClientDetail extends Component {
     }
 }
 
-export default withAuth(ClientDetail)
+export default withAuth(PotentialEmployeeDetail)

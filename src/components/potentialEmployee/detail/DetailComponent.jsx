@@ -74,7 +74,7 @@ const DetailComponent = ({ data, editURL, handleDelete, notProfileContainer, isS
                 </div>
                 <div className="data-container">
                     <div className="potential-employee-observations-container">
-                        <p>Observaciones</p>
+                        <p>¿Por qué quiere trabajar con nosotros?</p>
                         <span>{data.observations}</span>
                     </div>
                 </div>

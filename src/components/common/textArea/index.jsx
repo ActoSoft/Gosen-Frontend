@@ -6,6 +6,7 @@ const TextAreaComponent = ( props ) =>{
     const { TextArea } = Input
     return(
         <TextArea
+            name={props.name}
             className={`text-area-component ${props.className ? props.className : null}`}
             onChange={props.onChange}
             placeholder={props.placeholder ? props.placeholder : null}

@@ -31,6 +31,7 @@ import WorkDetail from '../components/works/detail'
 import WorkForm from '../components/works/form'
 import PotentialEmployeeList from '../components/potentialEmployee/list'
 import PotentialEmployeeDetail from '../components/potentialEmployee/detail'
+import PotentialEmployeeForm from '../components/potentialEmployee/form'
 
 const Routes = ({auth}) => {
     return (
@@ -199,6 +200,11 @@ const Routes = ({auth}) => {
                 <PrivateRoute
                     exact path = '/empleados-postulantes/:id'
                     component = {PotentialEmployeeDetail}
+                />
+
+                <PublicRoute
+                    exact path = '/postulate'
+                    component = {PotentialEmployeeForm}
                 />
                 {/* ======= END POTENTIAL EMPLOYEES ============= */}
 

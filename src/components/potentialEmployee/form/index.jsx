@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { clientsEndpoint } from '../../../utils/backendEndpoints'
+import { potentialEmployeesEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
-import FormReusable from '../../reusables/form'
+import FormReusable from './FormComponent'
 // import './index.scss'
 import CRUD, { post } from '../../../services'
 
@@ -9,32 +9,24 @@ class ClientForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isCreate: false,
-            model: 'Cliente'
+            isCreate: true,
+            model: 'Postulantes',
+            isReady: false
         }
     }
 
     async componentDidMount() {
-        if (this.props.match.path.split('/').pop() === 'crear') {
-            const data = {
-                user: {}
-            }
-            this.setState({
-                isCreate: true,
-                data
-            })
-        } else {
-            const id = this.props.match.params.id || null
-            if (!id) toast.error('No se especificó el usuario a modificar')
-            CRUD.findOne(clientsEndpoint, id)
-                .then(({ data }) => {
-                    this.setState({ data })
-                })
-                .catch(error => {
-                    console.log(error)
-                    toast.error('Algo falló al traer la información.')
-                })
+        const data = {
+            user: {}
         }
+        this.setState({
+            isReady: true,
+            data
+        })
+    }
+
+    generateUsername = (firstName, lastName) => {
+        return `${firstName.replace(' ', '_').toLowerCase()}_${lastName.replace(' ', '_').toLowerCase()}`
     }
 
     handleChangeForm = ({ e, intoUser = false }) => {
@@ -42,6 +34,9 @@ class ClientForm extends Component {
         const { data } = this.state
         if (intoUser) {
             data.user[name] = value
+            if (data.user.first_name && data.user.last_name) {
+                data.user.username = this.generateUsername(data.user.first_name, data.user.last_name)
+            }
             this.setState({ data })
         } else {
             data[name] = value
@@ -68,6 +63,9 @@ class ClientForm extends Component {
     }
 
     handleChangeSelect = ({ name, value }) => {
+        console.log("llego?")
+        console.log(name)
+        console.log(value)
         const { data } = this.state
         data[name] = value
         this.setState({ data })
@@ -79,7 +77,7 @@ class ClientForm extends Component {
         formData.append('id', this.state.data.id)
         try {
             const response = await post(
-                `${clientsEndpoint}update_image/`,
+                `${potentialEmployeesEndpoint}update_image/`,
                 formData
             )
             if(response.data) {
@@ -102,24 +100,15 @@ class ClientForm extends Component {
 
     handleSubmit = async () => {
         // TODO: Validations
-        const { data, isCreate } = this.state
+        const { data } = this.state
         delete data.photo
         try {
-            let response
-            if(!data.country) data.country = 'México'
-            if(isCreate) {
-                data.role = 'cliente'
-                response = await CRUD.create(clientsEndpoint, data)
-            } else {
-                response = await CRUD.update(clientsEndpoint, data.id, data)
-            }
+            if (!data.country) data.country = 'México'
+            const response = await CRUD.create(potentialEmployeesEndpoint, data)
             if (response.data) {
-                toast.success('Datos actualizados con éxito')
-                isCreate ?
-                    this.props.history.push('/clientes/')
-                    : this.props.history.push(`/clientes/${data.id}/`)
+                toast.success('Se ha registrado tu postulación')
             } else {
-                toast.error('WTF')
+                toast.error('Algo falló al enviar la información, intenta más  tarde')
             }
         } catch (error) {
             const { data } = error.response
@@ -140,15 +129,16 @@ class ClientForm extends Component {
     }
 
     render() {
-        const { isCreate, data, model } = this.state
+        const { isCreate, data, model, isReady } = this.state
         return (
             <div className="body-container">
                 <FormReusable
                     events={this.handleEvent}
                     isCreate={isCreate}
+                    isReady={isReady}
                     data={data}
                     model={model}
-                    goBack='/clientes/'
+                    goBack='/'
                 />
             </div>
         )

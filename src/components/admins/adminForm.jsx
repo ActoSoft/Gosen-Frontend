@@ -148,6 +148,7 @@ class AdminForm extends Component {
     }
 
     render() {
+        console.log(this.isStaff)
         const { isCreate, data, model } = this.state
         return (
             <div className="body-container">
@@ -158,7 +159,7 @@ class AdminForm extends Component {
                     model={model}
                     goBack='/administradores/'
                     isAdmin={true}
-                    isStaff={true}
+                    isStaff={this.isStaff}
                 />
             </div>
         )

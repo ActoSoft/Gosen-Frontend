@@ -4,7 +4,6 @@ const roles = {
 }
 
 const getPotentialEmployeeRole = role => {
-    console.log(role)
     return roles.hasOwnProperty(role) ?
         roles[role]
         : role

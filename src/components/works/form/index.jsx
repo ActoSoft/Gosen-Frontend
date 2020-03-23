@@ -86,7 +86,6 @@ class WorkForm extends Component {
                         newEmployees: [],
                         removedEmployees: [],
                     }
-                    console.log(work)
                     this.setState({
                         clients: clients.data,
                         services: services.data,
@@ -185,9 +184,7 @@ class WorkForm extends Component {
 
     handleChangeStatus = (status) => {
         const { work } = this.state
-        console.log(work.status)
         work.status = getWorkStatusByValue(status)
-        console.log(work.status)
         this.setState({ work })
     }
 
@@ -250,10 +247,8 @@ class WorkForm extends Component {
             }
 
             if (response.data) {
-                console.log(response.data)
                 toast.success(`Trabajo ${isCreate ? 'creado' : 'actualizado'} con éxito`)
             } else {
-                console.log(response)
                 toast.error(`Algo falló al ${isCreate ? 'crear' : 'actualizar'}. Intenta más tarde`)
             }
         } catch (error) {

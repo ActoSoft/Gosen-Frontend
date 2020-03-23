@@ -43,7 +43,6 @@ class Authentication {
             let response = await axios.post(loginEndpoint, data)
             if (response.data) {
                 const { token, profile } = response.data
-                console.log(profile)
                 const { username, email, first_name, last_name, id, is_staff } = profile.user
                 localStorage.setItem('token', token)
                 localStorage.setItem('username', username)
@@ -72,7 +71,6 @@ class Authentication {
             const response = await axios.post(resetPasswordEndpoint, data)
             if (response.data) {
                 toast.success('Se ha enviado un correo electrónico con las instrucciones')
-                console.log(data)
             }
         } catch (error) {
             console.log(error)
@@ -84,7 +82,7 @@ class Authentication {
         try {
             const response = await axios.post(recoverPasswordEndpoint, data)
             if(response.data){
-                console.log(data)
+                toast.success('La contraseña se ha restablecido correctamente')
             }
         } catch (error) {
             console.log(error)

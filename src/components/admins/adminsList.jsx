@@ -43,9 +43,6 @@ export default class AdminList extends Component {
 
     destructInfo = data => {
         return data.map(m => {
-            // TODO: Remove nested objects
-            //const dataWithOutObjects = Object.keys(m).filter(key => typeof m[key] !== 'object')
-            //console.log(dataWithOutObjects)
             m.user.userId = m.user.id
             delete m.user.id
             return {

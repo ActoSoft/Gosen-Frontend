@@ -209,7 +209,7 @@ const Routes = ({auth}) => {
                 {/* ======= END POTENTIAL EMPLOYEES ============= */}
 
 
-                {/* <Redirect to={ auth.isAuthenticated() ? '/dashboard' : '/login' } /> */}
+                <Redirect to={ auth.isAuthenticated() ? '/dashboard' : '/login' } />
             </Switch>
         </Fragment>
     )

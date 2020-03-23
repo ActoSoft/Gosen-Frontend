@@ -94,12 +94,6 @@ const Form = ({
                                             name='dateStart'
                                             onChange={moment => events('handleChangeDatePicker', { name: 'dateStart', moment })}
                                         />
-                                        {/* <RangePicker
-                                            showTime={{ format: 'HH:mm' }}
-                                            format='HH:mm'
-                                            placeholder={'Hora'}
-                                            onChange={e => console.log(e)}
-                                        /> */}
                                     </Col>
                                     <Col span={12} className="work-form-col">
                                         <InputGroup

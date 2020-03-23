@@ -11,7 +11,7 @@ import { validateExist } from '../../../utils'
 const ContractForm = ({ data, events, isCreate }) =>
     <Fragment>
         {/* eslint-disable-next-line */}
-        {!isCreate && data || isCreate ?
+        {data ?
             <div>
                 <div className="form not-margin-top">
                     <div className="column">
@@ -24,7 +24,7 @@ const ContractForm = ({ data, events, isCreate }) =>
                         />
                         <InputGroup
                             label='Inicio de contrato'
-                            value={data.contract_date_start ? data.contract_date_start : moment.format('YYYY-MM-DD') }
+                            value={data.contract_date_start ? data.contract_date_start : moment().format('YYYY-MM-DD') }
                             onChange={moment => events('handleChangeDate', { name: 'contract_date_start', moment })}
                             type='datePicker'
                         />

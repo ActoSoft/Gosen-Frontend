@@ -41,7 +41,6 @@ class AdminForm extends Component {
     }
 
     handleChangeForm = ({ e, intoUser = false }) => {
-        console.log(e)
         const { name, value } = e.target
         const { data } = this.state
         if (intoUser) {
@@ -65,7 +64,6 @@ class AdminForm extends Component {
     }
 
     handleChangeDatePicker = ({ moment }) => {
-        console.log(moment)
         const dateFormatted = moment.format('YYYY-MM-DD')
         const { data } = this.state
         data.birth_date = dateFormatted

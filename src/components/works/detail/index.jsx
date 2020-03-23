@@ -42,8 +42,7 @@ export default class WorkDetail extends Component {
     handleDelete = () => {
         if(window.confirm('¿Deseas realmente eliminar este trabajo?')) {
             CRUD.softDelete(worksEndpoint, this.workId)
-                .then(response => {
-                    console.log(response.data)
+                .then(() => {
                     toast.success('El trabajo ha sido eliminado')
                     setTimeout(() => this.props.history.push('/trabajos/'), 3000)
                 })

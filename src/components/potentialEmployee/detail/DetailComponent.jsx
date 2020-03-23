@@ -1,23 +1,31 @@
 import React from 'react'
 import MainButtonOutlined from '../../common/mainButtonOutlined'
+import MainButton from '../../common/mainButton'
+import ContractEmployee from '../../employees/form/contractForm'
 import { Skeleton } from 'antd'
-import { Link } from 'react-router-dom'
 import { formatDate, joinUserName } from '../../../utils'
 import { getPotentialEmployeeRole } from '../../../consts'
 
-const DetailComponent = ({ data, editURL, handleDelete, notProfileContainer, isStaff }) =>
-    <div className={!notProfileContainer ? 'profile-container' : ''}>
+const DetailComponent = ({
+    data,
+    handleDelete,
+    handleSubmit,
+    handleContractEmployee,
+    isStaff,
+    events,
+    isContracted
+}) =>
+    <div className='profile-container'>
         {data ?
             <div>
                 <div className="header-container">
                     <div className="header-text-container">
                         <div>
                             <span className="user-fullname">{joinUserName(data.user)}</span>
-                            <Link to = {`${editURL}editar/`}>
-                                <MainButtonOutlined
-                                    text='Contratar'
-                                />
-                            </Link>
+                            <MainButtonOutlined
+                                text='Contratar'
+                                onClick={handleContractEmployee}
+                            />
                             {
                                 isStaff === 'true' ?
                                     <MainButtonOutlined
@@ -83,6 +91,24 @@ const DetailComponent = ({ data, editURL, handleDelete, notProfileContainer, isS
             <div className="skeleton">
                 <Skeleton active />
             </div>
+        }
+        {
+            isContracted &&
+                <>
+                    <div className="contract-potential-employee-container">
+                        <p>Datos de contratación</p>
+                        <ContractEmployee
+                            data={data}
+                            isReady={true}
+                            events={events}
+                        />
+
+                    </div>
+                    <MainButton
+                        text='CONTRATAR EMPLEADO'
+                        onClick={handleSubmit}
+                    />
+                </>
         }
     </div>
 

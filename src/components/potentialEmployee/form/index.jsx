@@ -5,11 +5,12 @@ import FormReusable from './FormComponent'
 // import './index.scss'
 import CRUD, { post } from '../../../services'
 
-class ClientForm extends Component {
+class PotentialEmployeeForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
             isCreate: true,
+            isContracted: false,
             model: 'Postulantes',
             isReady: false
         }
@@ -104,6 +105,7 @@ class ClientForm extends Component {
         delete data.photo
         try {
             if (!data.country) data.country = 'México'
+            data.user.username += '_potential'
             const response = await CRUD.create(potentialEmployeesEndpoint, data)
             if (response.data) {
                 toast.success('Se ha registrado tu postulación')
@@ -145,4 +147,4 @@ class ClientForm extends Component {
     }
 }
 
-export default ClientForm
+export default PotentialEmployeeForm

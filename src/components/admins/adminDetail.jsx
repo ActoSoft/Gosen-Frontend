@@ -26,8 +26,7 @@ class AdminDetail extends Component {
     handleDelete = () => {
         if(window.confirm('¿Deseas realmente eliminar a este administrador?')) {
             CRUD.softDelete(adminsEndpoint, this.adminId)
-                .then(response => {
-                    console.log(response.data)
+                .then(() => {
                     toast.success('El administrador ha sido eliminado')
                     setTimeout(() => this.props.history.push('/administradores/'), 3000)
                 })

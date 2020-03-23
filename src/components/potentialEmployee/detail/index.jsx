@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import { potentialEmployeesEndpoint } from '../../../utils/backendEndpoints'
+import { potentialEmployeesEndpoint, employeesEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
 import DetailComponent from './DetailComponent'
 import CRUD from '../../../services'
+import moment from 'moment'
 import { withAuth } from '../../../Authentication'
 
 class PotentialEmployeeDetail extends Component {
@@ -10,16 +11,19 @@ class PotentialEmployeeDetail extends Component {
         super(props)
         this.state = {
             data: null,
-            isReady: false
+            isReady: false,
+            isContracted: false
         }
         this.potentialEmployeeId = this.props.match.params.id
         this.isStaff = this.props.auth.isStaff
+        this.adminId = this.props.auth.adminId
     }
 
     componentDidMount() {
         CRUD.findOne(potentialEmployeesEndpoint, this.potentialEmployeeId)
             .then(response => {
-                console.log(response.data)
+                const uname = response.data.user.username
+                response.data.user.username = uname.replace('_potential', '')
                 this.setState({
                     data: response.data,
                     isReady: true
@@ -29,6 +33,32 @@ class PotentialEmployeeDetail extends Component {
             .catch(error =>
                 console.log(error)
             )
+    }
+
+    handleSubmit = async () => {
+        // TODO: Validations
+        const { data } = this.state
+        delete data.photo
+        try {
+            if (!data.country) data.country = 'México'
+            data.contracted_by = this.adminId
+            const response = await CRUD.create(employeesEndpoint, data)
+
+            if (response.data) {
+                toast.success('Datos actualizados con éxito')
+                this.props.history.push(`/empleados/${response.data.id}/`)
+            } else {
+                toast.error('WTF')
+            }
+        } catch (error) {
+            const { data } = error.response
+            console.log(data)
+            // showErrors(data)
+        }
+    }
+
+    handleContractEmployee = () => {
+        this.setState({ isContracted: true })
     }
 
     handleDelete = () => {
@@ -45,8 +75,37 @@ class PotentialEmployeeDetail extends Component {
         }
     }
 
+    handleChange = ({ e }) => {
+        const { data } = this.state
+        data[e.target.name] = e.target.value
+        this.setState({ data })
+    }
+
+    handleChangeDate = ({name, value}) => {
+        const dateFormatted = moment(value).format('YYYY-MM-DD')
+        const { data } = this.state
+        data[name] = dateFormatted
+        this.setState({ data })
+    }
+
+    handleChangeSelect = ({name, value}) => {
+        const { data } = this.state
+        data[name] = value
+        this.setState({ data })
+    }
+
+    handleEvent = (event, params) => {
+        const events = {
+            handleChange: this.handleChange,
+            handleChangeDate: this.handleChangeDate,
+            handleChangeSelect: this.handleChangeSelect,
+            handleSubmit: this.handleSubmit
+        }
+        return events[event](params)
+    }
+
     render() {
-        const { data, isReady } = this.state
+        const { data, isReady, isContracted } = this.state
         const { pathname } = this.props.location
         return (
             <Fragment>
@@ -56,7 +115,11 @@ class PotentialEmployeeDetail extends Component {
                             data={data}
                             editURL={pathname}
                             handleDelete={this.handleDelete}
+                            handleContractEmployee={this.handleContractEmployee}
                             isStaff={this.isStaff}
+                            handleSubmit={this.handleSubmit}
+                            isContracted={isContracted}
+                            events={this.handleEvent}
                         />
                         : null
                     }

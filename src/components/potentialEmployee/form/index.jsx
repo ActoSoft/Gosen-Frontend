@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import FormReusable from './FormComponent'
 // import './index.scss'
 import CRUD, { post } from '../../../services'
+import moment from 'moment'
 
 class PotentialEmployeeForm extends Component {
     constructor(props) {
@@ -56,17 +57,14 @@ class PotentialEmployeeForm extends Component {
         }
     }
 
-    handleChangeDatePicker = ({ moment }) => {
-        const dateFormatted = moment.format('YYYY-MM-DD')
+    handleChangeDatePicker = ({ moment: momentDate }) => {
+        const dateFormatted = momentDate.format('YYYY-MM-DD')
         const { data } = this.state
         data.birth_date = dateFormatted
         this.setState({ data })
     }
 
     handleChangeSelect = ({ name, value }) => {
-        console.log("llego?")
-        console.log(name)
-        console.log(value)
         const { data } = this.state
         data[name] = value
         this.setState({ data })
@@ -103,19 +101,27 @@ class PotentialEmployeeForm extends Component {
         // TODO: Validations
         const { data } = this.state
         delete data.photo
-        try {
-            if (!data.country) data.country = 'México'
-            data.user.username += '_potential'
-            const response = await CRUD.create(potentialEmployeesEndpoint, data)
-            if (response.data) {
-                toast.success('Se ha registrado tu postulación')
-            } else {
-                toast.error('Algo falló al enviar la información, intenta más  tarde')
+
+        const now  = moment()
+        const momentBirth = moment(data.birth_date)
+        const yearsOld = now.diff(momentBirth, 'years')
+        if (yearsOld < 21 || yearsOld > 50) {
+            toast.warn('Sólo pueden aplicar personas entre los 21 y 50 años. Lo sentimos.')
+        } else {
+            try {
+                if (!data.country) data.country = 'México'
+                data.user.username += '_potential'
+                const response = await CRUD.create(potentialEmployeesEndpoint, data)
+                if (response.data) {
+                    toast.success('Se ha registrado tu postulación')
+                } else {
+                    toast.error('Algo falló al enviar la información, intenta más  tarde')
+                }
+            } catch (error) {
+                const { data } = error.response
+                console.log(data)
+                // showErrors(data)
             }
-        } catch (error) {
-            const { data } = error.response
-            console.log(data)
-            // showErrors(data)
         }
     }
 

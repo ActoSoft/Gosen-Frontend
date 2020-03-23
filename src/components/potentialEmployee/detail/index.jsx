@@ -45,8 +45,15 @@ class PotentialEmployeeDetail extends Component {
             const response = await CRUD.create(employeesEndpoint, data)
 
             if (response.data) {
-                toast.success('Datos actualizados con éxito')
-                this.props.history.push(`/empleados/${response.data.id}/`)
+                CRUD.softDelete(potentialEmployeesEndpoint, this.potentialEmployeeId)
+                    .then(() => {
+                        toast.success('Datos actualizados con éxito')
+                        setTimeout(() => this.props.history.push(`/empleados/${response.data.id}/`), 3000)
+                    })
+                    .catch(error => {
+                        console.log(error.response)
+                        toast.error('Algo fallo al convertir postulante a empleado')
+                    })
             } else {
                 toast.error('WTF')
             }

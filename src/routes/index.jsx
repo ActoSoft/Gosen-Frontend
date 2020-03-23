@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Switch, Redirect } from 'react-router-dom'
+import { Switch, Redirect, Route } from 'react-router-dom'
 import Login from '../components/authentication/login'
 import { withAuth } from '../Authentication'
 import ForgotPassword from '../components/authentication/forgotPassword'
@@ -32,7 +32,7 @@ import WorkForm from '../components/works/form'
 import PotentialEmployeeList from '../components/potentialEmployee/list'
 import PotentialEmployeeDetail from '../components/potentialEmployee/detail'
 import PotentialEmployeeForm from '../components/potentialEmployee/form'
-
+import HomePage from '../components/homepage'
 const Routes = ({auth}) => {
     return (
         <Fragment>
@@ -208,6 +208,10 @@ const Routes = ({auth}) => {
                 />
                 {/* ======= END POTENTIAL EMPLOYEES ============= */}
 
+                <Route
+                    exact path = '/'
+                    component = {HomePage}
+                />
 
                 <Redirect to={ auth.isAuthenticated() ? '/dashboard' : '/login' } />
             </Switch>

@@ -12,3 +12,4 @@ export const stocksEndpoint = `${API_URL}/stocks/`
 export const worksEndpoint = `${API_URL}/works/`
 export const transactionsEndpoint = `${API_URL}/financials/transactions/`
 export const financialsEndpoint = `${API_URL}/financials/`
+export const potentialEmployeesEndpoint = `${API_URL}/potential_employees/`

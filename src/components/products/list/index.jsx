@@ -34,8 +34,7 @@ export default class ProductList extends Component {
     handleDelete = id => {
         if(window.confirm('¿Deseas realmente eliminar este producto?')) {
             CRUD.softDelete(productsEndpoint, id)
-                .then(response => {
-                    console.log(response.data)
+                .then(() => {
                     toast.success('El producto ha sido eliminado')
                     setTimeout(() => this.props.history.push('/productos/'), 3000)
                 })

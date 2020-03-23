@@ -35,7 +35,6 @@ export default class WorksList extends Component {
         const response = await CRUD.findAll(worksEndpoint)
         if(response.data) {
             const data = response.data.map(work => {
-                console.log(work)
                 const userWithOutDeconstruct = work.client.user
                 const user = deconstructInfo(work.client)
                 delete work.client
@@ -49,7 +48,6 @@ export default class WorksList extends Component {
                 mainData.total = formatCosts(mainData.total)
                 return mainData
             })
-            console.log(data)
             this.setState({ data, isReady: true })
         }
     }

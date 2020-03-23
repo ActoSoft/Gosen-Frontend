@@ -39,16 +39,11 @@ const deconstructInfo = (data) => {
             }
         })
 
-        console.log('oA', objectArray)
-        console.log('kNR', keyNamesRemove)
-
         if (keyNamesRemove.length > 0) {
             keyNamesRemove.forEach(name => delete data[name])
         }
 
         returnObject = { ...data }
-
-        console.log(returnObject)
 
         if (objectArray.length > 0) {
             objectArray.forEach(data => {
@@ -63,7 +58,6 @@ const deconstructInfo = (data) => {
             })
         }
     }
-    console.log(returnObject)
     return returnObject
 }
 

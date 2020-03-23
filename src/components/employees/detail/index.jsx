@@ -33,8 +33,7 @@ class EmployeeDetail extends Component {
     handleDelete = () => {
         if(window.confirm('¿Deseas realmente eliminar a este empleado?')) {
             CRUD.softDelete(employeesEndpoint, this.adminId)
-                .then(response => {
-                    console.log(response.data)
+                .then(() => {
                     toast.success('El empleado ha sido eliminado')
                     setTimeout(() => this.props.history.push('/empleados/'), 3000)
                 })

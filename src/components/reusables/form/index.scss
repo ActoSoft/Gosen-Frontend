@@ -1,3 +1,20 @@
+.logo-public-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5vh;
+}
+
+.potential-employee-extra-form {
+    width: 60%;
+    margin: 0 20%;
+    p {
+        font-size: 1.3em;
+        color: #F4E38B;
+    }
+}
+
 .profile-component-container {
     height: 100vh;
     display: flex;

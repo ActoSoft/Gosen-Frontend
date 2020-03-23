@@ -11,10 +11,6 @@ export default class ReusableList extends Component {
         }
     }
 
-    componentDidMount() {
-        console.log(this.props)
-    }
-
     getColumnSearchProps = (dataIndex, title) => ({
         filterDropdown: ({
             setSelectedKeys,

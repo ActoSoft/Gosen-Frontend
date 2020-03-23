@@ -33,7 +33,6 @@ class ClientDetail extends Component {
         if(window.confirm('¿Deseas realmente eliminar a este cliente?')) {
             CRUD.softDelete(clientsEndpoint, this.adminId)
                 .then(response => {
-                    console.log(response.data)
                     toast.success('El cliente ha sido eliminado')
                     setTimeout(() => this.props.history.push('/clientes/'), 3000)
                 })

@@ -46,18 +46,21 @@ class PotentialEmployeeForm extends Component {
         }
     }
 
-    handleChangeImage = async ({ file }) => {
-        const result = await this.handleSubmitImage(file)
-        if (!result.hasError) {
-            const { data } = this.state
-            data.photo = result
-            this.setState({
-                data
-            })
-        }
-    }
+    // handleChangeImage = async ({ file }) => {
+    //     const result = await this.handleSubmitImage(file)
+    //     if (!result.hasError) {
+    //         const { data } = this.state
+    //         data.photo = result
+    //         this.setState({
+    //             data
+    //         })
+    //     }
+    // }
 
     handleChangeDatePicker = ({ moment: momentDate }) => {
+
+        if(!momentDate) return false
+
         const dateFormatted = momentDate.format('YYYY-MM-DD')
         const { data } = this.state
         data.birth_date = dateFormatted
@@ -70,41 +73,44 @@ class PotentialEmployeeForm extends Component {
         this.setState({ data })
     }
 
-    handleSubmitImage = async (image) => {
-        let formData = new FormData()
-        formData.append('photo', image)
-        formData.append('id', this.state.data.id)
-        try {
-            const response = await post(
-                `${potentialEmployeesEndpoint}update_image/`,
-                formData
-            )
-            if(response.data) {
-                toast.success('Imagen actualizada con éxito')
-                return response.data.photo
-            } else {
-                toast.warn('WTF')
-                return {
-                    hasError: true
-                }
-            }
-        } catch (error) {
-            // showErrors(error.response.data)
-            console.log(error.response.data)
-            return {
-                hasError: true
-            }
-        }
-    }
+    // handleSubmitImage = async (image) => {
+    //     let formData = new FormData()
+    //     formData.append('photo', image)
+    //     formData.append('id', this.state.data.id)
+    //     try {
+    //         const response = await post(
+    //             `${potentialEmployeesEndpoint}update_image/`,
+    //             formData
+    //         )
+    //         if(response.data) {
+    //             toast.success('Imagen actualizada con éxito')
+    //             return response.data.photo
+    //         } else {
+    //             toast.warn('WTF')
+    //             return {
+    //                 hasError: true
+    //             }
+    //         }
+    //     } catch (error) {
+    //         // showErrors(error.response.data)
+    //         console.log(error.response.data)
+    //         return {
+    //             hasError: true
+    //         }
+    //     }
+    // }
 
     handleSubmit = async () => {
         // TODO: Validations
         const { data } = this.state
         delete data.photo
 
+        console.log(data)
+
         const now  = moment()
         const momentBirth = moment(data.birth_date)
         const yearsOld = now.diff(momentBirth, 'years')
+        console.log(yearsOld)
         if (yearsOld < 21 || yearsOld > 50) {
             toast.warn('Sólo pueden aplicar personas entre los 21 y 50 años. Lo sentimos.')
         } else {
@@ -130,7 +136,7 @@ class PotentialEmployeeForm extends Component {
             handleChange: this.handleChangeForm,
             handleChangeDate: this.handleChangeDatePicker,
             handleChangeSelect: this.handleChangeSelect,
-            handleChangeImage: this.handleChangeImage,
+            // handleChangeImage: this.handleChangeImage,
             handleSubmit: this.handleSubmit
         }
         return events[event](params)

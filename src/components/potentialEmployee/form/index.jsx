@@ -19,7 +19,20 @@ class PotentialEmployeeForm extends Component {
 
     async componentDidMount() {
         const data = {
-            user: {}
+            user: {
+                first_name: null,
+                last_name: null,
+                username: null,
+                email: null
+            },
+            birth_date: '1990-01-01',
+            phone_number: null,
+            street: null,
+            city: null,
+            zip_code: null,
+            gender: null,
+            state: null,
+            role: null
         }
         this.setState({
             isReady: true,
@@ -100,33 +113,110 @@ class PotentialEmployeeForm extends Component {
     //     }
     // }
 
+    handleValidation = async (data) => {
+
+        const { user } = data
+        let hasError = false
+
+        await Object.keys(user).map(attr => {
+
+            let name
+
+            switch (attr) {
+                case 'first_name':
+                    name = 'Nombre'
+                    break;
+                case 'last_name':
+                    name = 'Apellido'
+                    break;
+                case 'username':
+                    name = 'Usuario'
+                    break;
+                case 'email':
+                    name = 'Correo electrónico'
+                    break;
+                default:
+                    break;
+            }
+
+            if(!user[attr] || user[attr].length < 2) {
+                toast.error(`Por favor llena el siguiente campo: ${name}`)
+                hasError = true
+            }
+        })
+
+        await Object.keys(data).map(attr => {
+
+            let name
+            if(attr === 'user') return false
+
+            switch (attr) {
+                case 'birth_date':
+                    name = 'Fecha de Nacimiento'
+                    break;
+                case 'phone_number':
+                    name = 'Teléfono'
+                    break;
+                case 'street':
+                    name = 'Calle'
+                    break;
+                case 'city':
+                    name = 'Ciudad'
+                    break;
+                case 'zip_code':
+                    name = 'Código postal'
+                    break;
+                case 'gender':
+                    name = 'Género'
+                    break;
+                case 'state':
+                    name = 'Estado'
+                    break;
+                case 'role':
+                    name = 'Tipo de Empleado'
+                    break;
+                default:
+                    break;
+            }
+
+            if(!data[attr] || data[attr].length < 2) {
+                toast.error(`Por favor llena el siguiente campo: ${name}`)
+                hasError = true
+            }
+        })
+
+        return hasError
+    }
+
     handleSubmit = async () => {
         // TODO: Validations
         const { data } = this.state
         delete data.photo
 
-        console.log(data)
+        const validation = await this.handleValidation(data)
 
-        const now  = moment()
-        const momentBirth = moment(data.birth_date)
-        const yearsOld = now.diff(momentBirth, 'years')
-        console.log(yearsOld)
-        if (yearsOld < 21 || yearsOld > 50) {
-            toast.warn('Sólo pueden aplicar personas entre los 21 y 50 años. Lo sentimos.')
-        } else {
-            try {
-                if (!data.country) data.country = 'México'
-                data.user.username += '_potential'
-                const response = await CRUD.create(potentialEmployeesEndpoint, data)
-                if (response.data) {
-                    toast.success('Se ha registrado tu postulación')
-                } else {
-                    toast.error('Algo falló al enviar la información, intenta más  tarde')
+        if(!validation) {
+            const now  = moment()
+            const momentBirth = moment(data.birth_date)
+            const yearsOld = now.diff(momentBirth, 'years')
+            if (yearsOld < 21 || yearsOld > 50) {
+                toast.warn('Sólo pueden aplicar personas entre los 21 y 50 años. Lo sentimos.')
+            } else {
+                try {
+                    if (!data.country) data.country = 'México'
+                    data.user.username += '_potential'
+                    const response = await CRUD.create(potentialEmployeesEndpoint, data)
+                    if (response.data) {
+                        toast.success('Se ha registrado tu postulación')
+                        window.location.reload()
+                    } else {
+                        toast.error('Algo falló al enviar la información, intenta más  tarde')
+                    }
+                } catch (error) {
+                    const { data } = error.response
+                    console.log(data)
+                    // showErrors(data)
                 }
-            } catch (error) {
-                const { data } = error.response
-                console.log(data)
-                // showErrors(data)
             }
         }
     }

@@ -197,8 +197,6 @@ class PotentialEmployeeForm extends Component {
         const { data } = this.state
         delete data.photo
 
-        console.log(data)
-
         const validation = await this.handleValidation(data)
 
         if(!validation) {

@@ -222,6 +222,7 @@ class PotentialEmployeeForm extends Component {
                 } catch (error) {
                     const { data } = error.response
                     console.log(data)
+                    if(data.includes('duplicate key value violates unique constraint "auth_user_username_key"')) toast.error('El nombre de usuario ya esta en uso.')
                     // showErrors(data)
                 }
             }

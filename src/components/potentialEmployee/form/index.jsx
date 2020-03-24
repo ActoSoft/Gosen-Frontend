@@ -72,7 +72,12 @@ class PotentialEmployeeForm extends Component {
 
     handleChangeDatePicker = ({ moment: momentDate }) => {
 
-        if(!momentDate) return false
+        if(!momentDate) {
+            const { data } = this.state
+            data.birth_date = momentDate
+            this.setState({ data })
+            return false
+        }
 
         const dateFormatted = momentDate.format('YYYY-MM-DD')
         const { data } = this.state
@@ -192,6 +197,8 @@ class PotentialEmployeeForm extends Component {
         // TODO: Validations
         const { data } = this.state
         delete data.photo
+
+        console.log(data)
 
         const validation = await this.handleValidation(data)
 

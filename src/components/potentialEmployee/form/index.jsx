@@ -194,7 +194,6 @@ class PotentialEmployeeForm extends Component {
     }
 
     handleSubmit = async () => {
-        // TODO: Validations
         const { data } = this.state
         delete data.photo
 

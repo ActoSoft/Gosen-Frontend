@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import MainButton from '../../common/mainButton'
-import { Skeleton, Row, Col } from 'antd'
+import { Skeleton, Row, Col, Empty } from 'antd'
 import { WorkProperty } from './workDetailComponent'
 import InputText from '../../common/inputText'
 import {
@@ -129,7 +129,15 @@ const PaymentHistoryComponent = ({ data }) =>
                                     </Col>
                                 </Row>
                             )
-                            : <p>No hay historial de pagos</p>
+                            : 
+                            <Empty
+                                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                                description={
+                                    <span style={{color: '#FFFFFF'}}>
+                                        No historial de pagos
+                                    </span>
+                                }
+                            />
                         }
                     </div>
                 </div>

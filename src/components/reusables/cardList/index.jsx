@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Card, Icon, Col, Row } from 'antd'
+import { Card, Icon, Col, Row, Empty } from 'antd'
 import { validateImageOnItem, validateExist } from '../../../utils'
 import './index.scss'
 import defaultProduct from '../../../assets/default-product.png'
@@ -31,7 +31,15 @@ const CardList = props =>
                             />
                         </Col>
                     )
-                    : null
+                    :
+                    <Empty
+                        image={Empty.PRESENTED_IMAGE_SIMPLE}
+                        description={
+                            <span style={{color: '#FFFFFF'}}>
+                                No hay productos para mostrar
+                            </span>
+                        }
+                    />
             }
         </Row>
     </Fragment>

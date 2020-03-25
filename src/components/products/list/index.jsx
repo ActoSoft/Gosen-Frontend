@@ -50,23 +50,13 @@ export default class ProductList extends Component {
         return (
             <Fragment>
                 {isReady ?
-                    !!data && data.length > 0 ?
-                        <CardList
-                            data={data}
-                            title='Productos'
-                            URL='/productos'
-                            history={this.props.history}
-                            handleDelete={this.handleDelete}
-                        />
-                        :
-                        <Empty
-                            image={Empty.PRESENTED_IMAGE_SIMPLE}
-                            description={
-                                <span style={{color: '#FFFFFF'}}>
-                                    No hay productos para mostrar
-                                </span>
-                            }
-                        />
+                    <CardList
+                        data={data}
+                        title='Productos'
+                        URL='/productos'
+                        history={this.props.history}
+                        handleDelete={this.handleDelete}
+                    />
                     :
                     <Skeleton active={true} />
                 }

@@ -37,24 +37,24 @@ export const deleted = (url, headers = {}) => {
 axios.interceptors.response.use(response => {
     return response
 }, error => {
-    const { response: { status } } = error
+    const { response: { status, data } } = error
     if(status === 401) {
-        toast.error('No tienes permiso para realizar esta acción')
+        toast.error('No tienes permiso para realizar esta acción, se te redigirá a iniciar sesión')
         if(localStorage.getItem('token')) localStorage.clear()
-        // setTimeout(()=>window.location.assign('/login'), 3000)
+        setTimeout(()=>window.location.assign('/login'), 5000)
     }
     else if(status === 500) {
-        toast.error('Error del servidor')
-        // setTimeout(() => window.location.assign('/'), 3000)
+        toast.error('Error del servidor, contacta al desarrollador')
     }
     else if(status === 404) {
-        toast.error('Entidad no encontrada')
-        // setTimeout(() => window.location.assign('/'), 3000)
+        toast.error('Entidad no encontrada, probablemente fue eliminada')
     }
     else {
-        console.log(error.response)
-        toast.error('Algo falló')
-        // setTimeout(() => window.location.assign('/'), 3000)
+        if (data && data.message) {
+            toast.error(data.message)
+        } else {
+            toast.error('Algo falló')
+        }
     }
     return Promise.reject(error)
 })

@@ -19,7 +19,20 @@ class PotentialEmployeeForm extends Component {
 
     async componentDidMount() {
         const data = {
-            user: {}
+            user: {
+                first_name: null,
+                last_name: null,
+                username: null,
+                email: null
+            },
+            birth_date: '1990-01-01',
+            phone_number: null,
+            street: null,
+            city: null,
+            zip_code: null,
+            gender: null,
+            state: null,
+            role: null
         }
         this.setState({
             isReady: true,
@@ -46,18 +59,26 @@ class PotentialEmployeeForm extends Component {
         }
     }
 
-    handleChangeImage = async ({ file }) => {
-        const result = await this.handleSubmitImage(file)
-        if (!result.hasError) {
-            const { data } = this.state
-            data.photo = result
-            this.setState({
-                data
-            })
-        }
-    }
+    // handleChangeImage = async ({ file }) => {
+    //     const result = await this.handleSubmitImage(file)
+    //     if (!result.hasError) {
+    //         const { data } = this.state
+    //         data.photo = result
+    //         this.setState({
+    //             data
+    //         })
+    //     }
+    // }
 
     handleChangeDatePicker = ({ moment: momentDate }) => {
+
+        if(!momentDate) {
+            const { data } = this.state
+            data.birth_date = momentDate
+            this.setState({ data })
+            return false
+        }
+
         const dateFormatted = momentDate.format('YYYY-MM-DD')
         const { data } = this.state
         data.birth_date = dateFormatted
@@ -70,57 +91,137 @@ class PotentialEmployeeForm extends Component {
         this.setState({ data })
     }
 
-    handleSubmitImage = async (image) => {
-        let formData = new FormData()
-        formData.append('photo', image)
-        formData.append('id', this.state.data.id)
-        try {
-            const response = await post(
-                `${potentialEmployeesEndpoint}update_image/`,
-                formData
-            )
-            if(response.data) {
-                toast.success('Imagen actualizada con éxito')
-                return response.data.photo
-            } else {
-                toast.warn('WTF')
-                return {
-                    hasError: true
-                }
+    // handleSubmitImage = async (image) => {
+    //     let formData = new FormData()
+    //     formData.append('photo', image)
+    //     formData.append('id', this.state.data.id)
+    //     try {
+    //         const response = await post(
+    //             `${potentialEmployeesEndpoint}update_image/`,
+    //             formData
+    //         )
+    //         if(response.data) {
+    //             toast.success('Imagen actualizada con éxito')
+    //             return response.data.photo
+    //         } else {
+    //             toast.warn('WTF')
+    //             return {
+    //                 hasError: true
+    //             }
+    //         }
+    //     } catch (error) {
+    //         // showErrors(error.response.data)
+    //         console.log(error.response.data)
+    //         return {
+    //             hasError: true
+    //         }
+    //     }
+    // }
+
+    handleValidation = async (data) => {
+
+        const { user } = data
+        let hasError = false
+
+        await Object.keys(user).map(attr => {
+
+            let name
+
+            switch (attr) {
+                case 'first_name':
+                    name = 'Nombre'
+                    break;
+                case 'last_name':
+                    name = 'Apellido'
+                    break;
+                case 'username':
+                    name = 'Usuario'
+                    break;
+                case 'email':
+                    name = 'Correo electrónico'
+                    break;
+                default:
+                    break;
             }
-        } catch (error) {
-            // showErrors(error.response.data)
-            console.log(error.response.data)
-            return {
-                hasError: true
+
+            if(!user[attr] || user[attr].length < 2) {
+                toast.error(`Por favor llena el siguiente campo: ${name}`)
+                hasError = true
             }
-        }
+        })
+
+        await Object.keys(data).map(attr => {
+
+            let name
+            if(attr === 'user') return false
+
+            switch (attr) {
+                case 'birth_date':
+                    name = 'Fecha de Nacimiento'
+                    break;
+                case 'phone_number':
+                    name = 'Teléfono'
+                    break;
+                case 'street':
+                    name = 'Calle'
+                    break;
+                case 'city':
+                    name = 'Ciudad'
+                    break;
+                case 'zip_code':
+                    name = 'Código postal'
+                    break;
+                case 'gender':
+                    name = 'Género'
+                    break;
+                case 'state':
+                    name = 'Estado'
+                    break;
+                case 'role':
+                    name = 'Tipo de Empleado'
+                    break;
+                default:
+                    break;
+            }
+
+            if(!data[attr] || data[attr].length < 2) {
+                toast.error(`Por favor llena el siguiente campo: ${name}`)
+                hasError = true
+            }
+        })
+
+        return hasError
     }
 
     handleSubmit = async () => {
-        // TODO: Validations
         const { data } = this.state
         delete data.photo
 
-        const now  = moment()
-        const momentBirth = moment(data.birth_date)
-        const yearsOld = now.diff(momentBirth, 'years')
-        if (yearsOld < 21 || yearsOld > 50) {
-            toast.warn('Sólo pueden aplicar personas entre los 21 y 50 años. Lo sentimos.')
-        } else {
-            try {
-                if (!data.country) data.country = 'México'
-                data.user.username += '_potential'
-                const response = await CRUD.create(potentialEmployeesEndpoint, data)
-                if (response.data) {
-                    toast.success('Se ha registrado tu postulación')
-                } else {
-                    toast.error('Algo falló al enviar la información, intenta más  tarde')
+        const validation = await this.handleValidation(data)
+
+        if(!validation) {
+            const now  = moment()
+            const momentBirth = moment(data.birth_date)
+            const yearsOld = now.diff(momentBirth, 'years')
+            if (yearsOld < 21 || yearsOld > 50) {
+                toast.warn('Sólo pueden aplicar personas entre los 21 y 50 años. Lo sentimos.')
+            } else {
+                try {
+                    if (!data.country) data.country = 'México'
+                    data.user.username += '_potential'
+                    const response = await CRUD.create(potentialEmployeesEndpoint, data)
+                    if (response.data) {
+                        toast.success('Se ha registrado tu postulación')
+                        window.location.reload()
+                    } else {
+                        toast.error('Algo falló al enviar la información, intenta más  tarde')
+                    }
+                } catch (error) {
+                    const { data } = error.response
+                    console.log(data)
+                    if(data.includes('duplicate key value violates unique constraint "auth_user_username_key"')) toast.error('El nombre de usuario ya esta en uso.')
+                    // showErrors(data)
                 }
-            } catch (error) {
-                const { data } = error.response
-                console.log(data)
-                // showErrors(data)
             }
         }
     }
@@ -130,7 +231,7 @@ class PotentialEmployeeForm extends Component {
             handleChange: this.handleChangeForm,
             handleChangeDate: this.handleChangeDatePicker,
             handleChangeSelect: this.handleChangeSelect,
-            handleChangeImage: this.handleChangeImage,
+            // handleChangeImage: this.handleChangeImage,
             handleSubmit: this.handleSubmit
         }
         return events[event](params)

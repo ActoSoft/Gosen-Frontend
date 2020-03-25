@@ -234,6 +234,9 @@ class WorkForm extends Component {
             status: isCreate ? 'authorized' : status,
             id: !isCreate ? id : null
         }
+
+        const workId = this.props.match.params.id
+
         if (!isCreate) {
             body.newEmployees = getDifferenceBetweenTwoArrays(newEmployees, removedEmployees)
             body.removedEmployees = getDifferenceBetweenTwoArrays(removedEmployees, newEmployees)
@@ -248,6 +251,11 @@ class WorkForm extends Component {
 
             if (response.data) {
                 toast.success(`Trabajo ${isCreate ? 'creado' : 'actualizado'} con éxito`)
+                if(isCreate) {
+                    window.location.assign(`/trabajos/`)
+                } else {
+                    window.location.assign(`/trabajos/${workId}/`)
+                }
             } else {
                 toast.error(`Algo falló al ${isCreate ? 'crear' : 'actualizar'}. Intenta más tarde`)
             }

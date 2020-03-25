@@ -252,9 +252,9 @@ class WorkForm extends Component {
             if (response.data) {
                 toast.success(`Trabajo ${isCreate ? 'creado' : 'actualizado'} con éxito`)
                 if(isCreate) {
-                    window.location.assign(`/trabajos/`)
+                    setTimeout(() => window.location.assign('/trabajos/'), 3000)
                 } else {
-                    window.location.assign(`/trabajos/${workId}/`)
+                    setTimeout(() => window.location.assign(`/trabajos/${workId}/`), 3000)
                 }
             } else {
                 toast.error(`Algo falló al ${isCreate ? 'crear' : 'actualizar'}. Intenta más tarde`)

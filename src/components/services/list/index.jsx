@@ -19,7 +19,7 @@ export default class ServicesList extends Component {
                     name: 'cost'
                 },
                 {
-                    title: 'Description',
+                    title: 'Descripción',
                     name: 'description'
                 }
             ]

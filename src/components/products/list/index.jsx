@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Skeleton } from 'antd'
+import { Skeleton, Empty } from 'antd'
 import CRUD from '../../../services'
 import { productsEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
@@ -50,13 +50,23 @@ export default class ProductList extends Component {
         return (
             <Fragment>
                 {isReady ?
-                    <CardList
-                        data={data}
-                        title='Productos'
-                        URL='/productos'
-                        history={this.props.history}
-                        handleDelete={this.handleDelete}
-                    />
+                    !!data && data.length > 0 ?
+                        <CardList
+                            data={data}
+                            title='Productos'
+                            URL='/productos'
+                            history={this.props.history}
+                            handleDelete={this.handleDelete}
+                        />
+                        :
+                        <Empty
+                            image={Empty.PRESENTED_IMAGE_SIMPLE}
+                            description={
+                                <span style={{color: '#FFFFFF'}}>
+                                    No hay productos para mostrar
+                                </span>
+                            }
+                        />
                     :
                     <Skeleton active={true} />
                 }

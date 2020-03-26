@@ -122,7 +122,7 @@ const Form = ({
                                             value={work.qty ? work.qty : ''}
                                             placeholder='Cantidad'
                                             name='qty'
-                                            onChange={e => events('handleChangeInputText', e)}
+                                            onChange={e => events('handleChangeInputText', { e, onlyNumbers: true })}
                                         />
                                     </Col>
                                     {!isCreate ?
@@ -146,7 +146,7 @@ const Form = ({
                                             label='Total a pagar'
                                             value={work.total ? work.total : ''}
                                             name='total'
-                                            onChange={e => events('handleChangeInputText', e)}
+                                            onChange={e => events('handleChangeInputText', { e, onlyNumbers: true })}
                                         />
                                     </Col>
                                     <Col span={8} className="work-form-col">
@@ -154,7 +154,7 @@ const Form = ({
                                             label={isCreate ? 'Anticipo' : 'Pagado'}
                                             value={work.payed ? work.payed : ''}
                                             name='payed'
-                                            onChange={e => events('handleChangeInputText', e)}
+                                            onChange={e => events('handleChangeInputText', { e, onlyNumbers: true })}
                                         />
                                     </Col>
                                     <Col span={8} className="work-form-col">
@@ -162,7 +162,7 @@ const Form = ({
                                             label='Restante'
                                             value={work.toPay ? work.toPay : ''}
                                             name='toPay'
-                                            onChange={e => events('handleChangeInputText', e)}
+                                            onChange={e => events('handleChangeInputText', )}
                                         />
                                     </Col>
                                 </Row>

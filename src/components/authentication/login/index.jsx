@@ -9,6 +9,8 @@ import SubtitleOne from '../../common/subtitleOne'
 import SubtitleTwo from '../../common/subtitleTwo'
 import { NavLink } from 'react-router-dom'
 import { withAuth } from '../../../Authentication'
+import { loginSchemaValidator } from '../../../validators'
+import { toast } from 'react-toastify'
 
 class Login extends Component {
 
@@ -31,9 +33,19 @@ class Login extends Component {
     }
 
     onLogin = async () => {
-        if (await this.login(this.state)) {
-            this.props.history.push('/dashboard/')
+
+        const validatorResult = loginSchemaValidator(this.state)
+
+        if (!validatorResult.error) {
+            if (await this.login(this.state)) {
+                this.props.history.push('/dashboard/')
+            }
+        } else {
+            validatorResult.errors.forEach(errorMessage =>
+                toast.error(errorMessage)
+            )
         }
+
     }
 
     render() {

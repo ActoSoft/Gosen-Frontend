@@ -46,12 +46,12 @@ const CardList = props =>
 
 const CardItem = ({item, history, URL, handleDelete}) =>
     <Card
-        onClick={()=>history.push(`${URL}/${item.id}/`)}
         className="card-item"
         cover={
             <img
                 alt={item.name}
                 src={validateImageOnItem(item) ? validateImageOnItem(item) : defaultProduct}
+                onClick={()=>history.push(`${URL}/${item.id}/`)}
                 // style={{height: '200px'}}
             />
         }

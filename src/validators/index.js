@@ -111,8 +111,6 @@ const schemas = {
 }
 
 const validateRequest = async (schema, data) => {
-    console.log(schema)
-    console.log(data)
     if (schemas[schema]) {
         const result = schemas[schema].validate(data, { abortEarly: false })
         if (result.error) {

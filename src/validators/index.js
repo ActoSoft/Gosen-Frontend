@@ -52,7 +52,13 @@ const employeeSchema = profileSchema.append({
     contract_date_start: Joi.string().required(),
     payment_type: Joi.string().required(),
     vigency: Joi.string().required(),
-    user: userSchema
+    user: userSchema,
+    contracted_by: Joi.optional(),
+    fired_date: Joi.optional(),
+    fired_by: Joi.optional(),
+    fired: Joi.optional(),
+    active: Joi.optional(),
+    available: Joi.optional()
 })
 
 const clientSchema = profileSchema.append({

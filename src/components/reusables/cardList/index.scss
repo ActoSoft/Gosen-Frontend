@@ -11,6 +11,17 @@
         align-items: center;
         .card-item {
             width: 80%;
+            .ant-card-cover {
+                background-color: $main-background;
+                min-height: 240px;
+                max-height: 240px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    border-radius: 10px 10px 0 0;
+                }
+            }
             .ant-card-body {
                 background-color: $main-background;
                 padding: 24px 0;
@@ -29,6 +40,7 @@
             
             .ant-card-actions {
                 background-color: $main-background;
+                border-radius: 0 0 10px 10px;
                 li {
                     span {
                         .anticon {

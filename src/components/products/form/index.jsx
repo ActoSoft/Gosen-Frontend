@@ -106,7 +106,7 @@ class ProductForm extends Component {
                     toast.error(errorMessage)
                 )
             }
-            
+
         } catch (error) {
             const { data } = error.response
             console.log(data)
@@ -212,19 +212,26 @@ class ProductForm extends Component {
         }
 
         try {
-            const response = await post(`${productsEndpoint}save_stock/`, body)
+            const validatorResult = await validateRequest('productInStock', body)
 
-            if (response.data) {
-                toast.success('Producto registrado en almacén con éxito')
-                const productStocks = response.data.stocks.filter(stock => !stock.stock.deleted)
-                this.setState({
-                    stocks: this.excludeStocksOnProduct(allStocks, productStocks),
-                    productStocks,
-                    selectedStock: null,
-                    newQty: 0
-                })
+            if (!validatorResult.error) {
+                const response = await post(`${productsEndpoint}save_stock/`, body)
+                if (response.data) {
+                    toast.success('Producto registrado en almacén con éxito')
+                    const productStocks = response.data.stocks.filter(stock => !stock.stock.deleted)
+                    this.setState({
+                        stocks: this.excludeStocksOnProduct(allStocks, productStocks),
+                        productStocks,
+                        selectedStock: null,
+                        newQty: 0
+                    })
+                } else {
+                    toast.error('Algo falló al registrar el producto dentro del almacén')
+                }
             } else {
-                toast.error('Algo falló al registrar el producto dentro del almacén')
+                validatorResult.errors.forEach(errorMessage =>
+                    toast.error(errorMessage)
+                )
             }
         } catch (error) {
             toast.error('Algo falló al registrar el producto dentro del almacén')

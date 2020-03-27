@@ -80,13 +80,19 @@ const serviceSchema = Joi.object({
 const productSchema = Joi.object({
     id: Joi.optional(),
     name: Joi.string().required(),
-    description: Joi.string().allow(''),
+    description: Joi.string().required(),
     barcode: Joi.string().allow('').allow(null),
     images: Joi.optional(),
     stocks: Joi.optional(),
     created: Joi.optional(),
     updated: Joi.optional(),
     deleted: Joi.optional()
+})
+
+const productInStockSchema = Joi.object({
+    stock: Joi.number().min(1).required(),
+    product: Joi.number().min(1).required(),
+    qty: Joi.number().min(1).required(),
 })
 
 const schemas = {
@@ -100,7 +106,8 @@ const schemas = {
     employee: employeeSchema,
     client: clientSchema,
     service: serviceSchema,
-    product: productSchema
+    product: productSchema,
+    productInStock: productInStockSchema
 }
 
 const validateRequest = async (schema, data) => {

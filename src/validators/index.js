@@ -19,16 +19,8 @@ const profileSchema = Joi.object().keys({
     gender: Joi.string().required(),
     state: Joi.string().required(),
     country: Joi.string().required(),
-    role: Joi.string(),
+    role: Joi.string().allow(''),
     zip_code: Joi.string().required().min(5).max(6)
-})
-
-const employeeSchema = profileSchema.append({
-    salary: Joi.string().regex(/^[0-9]+$/, 'numbers').required(),
-    contract_date_start: Joi.string().required(),
-    payment_type: Joi.string().required(),
-    vigency: Joi.string().required(),
-    user: userSchema
 })
 
 const loginSchema = Joi.object({
@@ -49,6 +41,18 @@ const adminSchema = profileSchema.append({
     user: userAdminSchema
 })
 
+const employeeSchema = profileSchema.append({
+    salary: Joi.string().regex(/^[0-9]+$/, 'numbers').required(),
+    contract_date_start: Joi.string().required(),
+    payment_type: Joi.string().required(),
+    vigency: Joi.string().required(),
+    user: userSchema
+})
+
+const clientSchema = profileSchema.append({
+    user: userSchema
+})
+
 const schemas = {
     user: userSchema,
     userAdmin: userAdminSchema,
@@ -57,7 +61,8 @@ const schemas = {
     forgotPassword: forgotPasswordSchema,
     resetPassword: resetPasswordSchema,
     admin: adminSchema,
-    employee: employeeSchema
+    employee: employeeSchema,
+    client: clientSchema
 }
 
 const validateRequest = async (schema, data) => {

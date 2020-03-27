@@ -77,6 +77,18 @@ const serviceSchema = Joi.object({
     deleted: Joi.optional(),
 })
 
+const productSchema = Joi.object({
+    id: Joi.optional(),
+    name: Joi.string().required(),
+    description: Joi.string().allow(''),
+    barcode: Joi.string().allow('').allow(null),
+    images: Joi.optional(),
+    stocks: Joi.optional(),
+    created: Joi.optional(),
+    updated: Joi.optional(),
+    deleted: Joi.optional()
+})
+
 const schemas = {
     user: userSchema,
     userAdmin: userAdminSchema,
@@ -87,7 +99,8 @@ const schemas = {
     admin: adminSchema,
     employee: employeeSchema,
     client: clientSchema,
-    service: serviceSchema
+    service: serviceSchema,
+    product: productSchema
 }
 
 const validateRequest = async (schema, data) => {

@@ -5,6 +5,7 @@ import Form from './form'
 import CRUD, { post } from '../../../services'
 import UploadImages from './uploadImages'
 import SetStocks from './setStocks'
+import { validateRequest } from '../../../validators'
 
 // import './index.scss'
 
@@ -81,23 +82,31 @@ class ProductForm extends Component {
         // TODO: Validations
         const { data, isCreate } = this.state
         try {
-            let response
-            if(isCreate) {
-                response = await CRUD.create(productsEndpoint, data)
+            const validatorResult = await validateRequest('product', data)
+            if (!validatorResult.error) {
+                let response
+                if(isCreate) {
+                    response = await CRUD.create(productsEndpoint, data)
+                } else {
+                    delete data.works
+                    response = await CRUD.update(productsEndpoint, data.id, data)
+                }
+                if (response.data) {
+                    toast.success(`Producto ${isCreate ? 'creado' : 'editado'} con éxito`)
+                    this.setState({
+                        isFormVisible: false,
+                        isImagesVisible: true,
+                        newProductId: response.data.id
+                    })
+                } else {
+                    toast.error('WTF')
+                }
             } else {
-                delete data.works
-                response = await CRUD.update(productsEndpoint, data.id, data)
+                validatorResult.errors.forEach(errorMessage =>
+                    toast.error(errorMessage)
+                )
             }
-            if (response.data) {
-                toast.success(`Producto ${isCreate ? 'creado' : 'editado'} con éxito`)
-                this.setState({
-                    isFormVisible: false,
-                    isImagesVisible: true,
-                    newProductId: response.data.id
-                })
-            } else {
-                toast.error('WTF')
-            }
+            
         } catch (error) {
             const { data } = error.response
             console.log(data)

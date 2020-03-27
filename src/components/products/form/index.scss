@@ -11,14 +11,14 @@
     margin-top: 5vh;
 }
 
-.image-item-src{
-    padding: 10%;
-}
-
 .image-item-src {
     position: relative;
+    padding: 10%;
+    max-height: 400px;
+    min-height: 400px;
     img {
         width: 100% !important;
+        max-height: 90%;
     }
 }
 .icon-delete-image {

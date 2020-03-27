@@ -1,10 +1,12 @@
 import * as Joi from 'joi-browser'
 
 const userSchema = Joi.object().keys({
+    id: Joi.number().optional(),
     first_name: Joi.string().required(),
     last_name: Joi.string().required(),
     username: Joi.string().required(),
-    email: Joi.string().email().required()
+    email: Joi.string().email().required(),
+    is_staff: Joi.optional()
 })
 
 const userAdminSchema = userSchema.append({
@@ -12,6 +14,7 @@ const userAdminSchema = userSchema.append({
 })
 
 const profileSchema = Joi.object().keys({
+    id: Joi.optional(),
     phone_number: Joi.string().regex(/^[0-9]+$/, 'numbers').min(10).max(15),
     birth_date: Joi.string().required(),
     street: Joi.string().required(),
@@ -20,7 +23,10 @@ const profileSchema = Joi.object().keys({
     state: Joi.string().required(),
     country: Joi.string().required(),
     role: Joi.string().allow(''),
-    zip_code: Joi.string().required().min(5).max(6)
+    zip_code: Joi.string().required().min(5).max(6),
+    created: Joi.optional(),
+    updated: Joi.optional(),
+    deleted: Joi.optional(),
 })
 
 const loginSchema = Joi.object({
@@ -53,6 +59,18 @@ const clientSchema = profileSchema.append({
     user: userSchema
 })
 
+const serviceSchema = Joi.object({
+    id: Joi.optional(),
+    name: Joi.string().required(),
+    description: Joi.string().allow(''),
+    cost: Joi.string().required(),
+    payment_type: Joi.string().required(),
+    works: Joi.optional(),
+    created: Joi.optional(),
+    updated: Joi.optional(),
+    deleted: Joi.optional(),
+})
+
 const schemas = {
     user: userSchema,
     userAdmin: userAdminSchema,
@@ -62,10 +80,13 @@ const schemas = {
     resetPassword: resetPasswordSchema,
     admin: adminSchema,
     employee: employeeSchema,
-    client: clientSchema
+    client: clientSchema,
+    service: serviceSchema
 }
 
 const validateRequest = async (schema, data) => {
+    console.log(schema)
+    console.log(data)
     if (schemas[schema]) {
         const result = schemas[schema].validate(data, { abortEarly: false })
         if (result.error) {

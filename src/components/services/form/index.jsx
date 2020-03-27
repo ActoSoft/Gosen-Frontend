@@ -3,6 +3,7 @@ import { servicesEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
 import Form from './form'
 import CRUD from '../../../services'
+import { validateRequest } from '../../../validators'
 import './index.scss'
 
 class ServiceForm extends Component {
@@ -17,7 +18,10 @@ class ServiceForm extends Component {
     async componentDidMount() {
         if (this.props.match.path.split('/').pop() === 'crear') {
             const data = {
-                user: {}
+                name: '',
+                description: '',
+                cost: null,
+                payment_type: null
             }
             this.setState({
                 isCreate: true,
@@ -55,20 +59,27 @@ class ServiceForm extends Component {
         // TODO: Validations
         const { data, isCreate } = this.state
         try {
-            let response
-            if(isCreate) {
-                response = await CRUD.create(servicesEndpoint, data)
+            const validatorResult = await validateRequest('service', data)
+            if (!validatorResult.error) {
+                let response
+                if (isCreate) {
+                    response = await CRUD.create(servicesEndpoint, data)
+                } else {
+                    delete data.works
+                    response = await CRUD.update(servicesEndpoint, data.id, data)
+                }
+                if (response.data) {
+                    toast.success('Datos actualizados con éxito')
+                    isCreate ?
+                        this.props.history.push('/servicios/')
+                        : this.props.history.push(`/servicios/${data.id}/`)
+                } else {
+                    toast.error('WTF')
+                }
             } else {
-                delete data.works
-                response = await CRUD.update(servicesEndpoint, data.id, data)
-            }
-            if (response.data) {
-                toast.success('Datos actualizados con éxito')
-                isCreate ?
-                    this.props.history.push('/servicios/')
-                    : this.props.history.push(`/servicios/${data.id}/`)
-            } else {
-                toast.error('WTF')
+                validatorResult.errors.forEach(errorMessage =>
+                    toast.error(errorMessage)
+                )
             }
         } catch (error) {
             const { data } = error.response

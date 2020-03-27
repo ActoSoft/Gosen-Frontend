@@ -38,9 +38,6 @@ class Navbar extends Component {
     }
 
     render() {
-
-        console.log(this.props.location.pathname)
-
         let path = this.props.location.pathname
         let defaultMenuIndex = '1'
 
@@ -159,7 +156,7 @@ class Navbar extends Component {
                         </Menu.Item>
                         <Menu.Item className="root-item" key="8">
                             <Icon type="tool" />
-                            <NavLink to="/trabajos">
+                            <NavLink to="/trabajos/">
                                 <span>Trabajos</span>
                             </NavLink>
                         </Menu.Item>

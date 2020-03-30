@@ -1,6 +1,5 @@
 import React from 'react'
 import MainButtonOutlined from '../../common/mainButtonOutlined'
-import DeletePopConfirm from '../deletePopConfirm'
 import { Skeleton, Popconfirm } from 'antd'
 import { Link } from 'react-router-dom'
 import { formatDate, joinUserName } from '../../../utils'

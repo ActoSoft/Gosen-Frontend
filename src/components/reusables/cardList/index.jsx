@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Card, Icon, Col, Row } from 'antd'
+import { Card, Icon, Col, Row, Popconfirm } from 'antd'
 import { validateImageOnItem, validateExist } from '../../../utils'
 import './index.scss'
 import defaultProduct from '../../../assets/default-product.png'
@@ -55,11 +55,19 @@ const CardItem = ({item, history, URL, handleDelete}) =>
                     () => history.push(`${URL}/${item.id}/editar`)
                 }
             />,
-            <Icon
-                type="delete"
-                key="delete"
-                onClick={() => handleDelete(item.id)}
-            />,
+            <Popconfirm
+                title='¿Estás seguro que deseas realizar esta acción?'
+                onConfirm={handleDelete(item.id)}
+                onCancel={() => console.log('Canceling')}
+                okText="Aceptar"
+                cancelText="Cancelar"
+            >
+                <Icon
+                    type="delete"
+                    key="delete"
+                />
+            </Popconfirm>
+            ,
         ]}
     >
         <Meta

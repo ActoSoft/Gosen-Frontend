@@ -31,17 +31,15 @@ class EmployeeDetail extends Component {
     }
 
     handleDelete = () => {
-        if(window.confirm('¿Deseas realmente eliminar a este empleado?')) {
-            CRUD.softDelete(employeesEndpoint, this.adminId)
-                .then(() => {
-                    toast.success('El empleado ha sido eliminado')
-                    setTimeout(() => this.props.history.push('/empleados/'), 3000)
-                })
-                .catch(error => {
-                    console.log(error.response)
-                    toast.error('Algo fallo al eliminar')
-                })
-        }
+        CRUD.softDelete(employeesEndpoint, this.adminId)
+            .then(() => {
+                toast.success('El empleado ha sido eliminado')
+                setTimeout(() => this.props.history.push('/empleados/'), 3000)
+            })
+            .catch(error => {
+                console.log(error.response)
+                toast.error('Algo fallo al eliminar')
+            })
     }
 
     render() {

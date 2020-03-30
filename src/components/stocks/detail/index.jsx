@@ -31,18 +31,16 @@ export default class StockDetail extends Component {
     }
 
     handleDelete = () => {
-        if(window.confirm('¿Deseas realmente eliminar este almacén?')) {
-            CRUD.softDelete(stocksEndpoint, this.stockId)
-                .then(response => {
-                    console.log(response.data)
-                    toast.success('El almacén ha sido eliminado')
-                    setTimeout(() => this.props.history.push('/almacenes/'), 3000)
-                })
-                .catch(error => {
-                    console.log(error.response)
-                    toast.error('Algo fallo al eliminar')
-                })
-        }
+        CRUD.softDelete(stocksEndpoint, this.stockId)
+            .then(response => {
+                console.log(response.data)
+                toast.success('El almacén ha sido eliminado')
+                setTimeout(() => this.props.history.push('/almacenes/'), 3000)
+            })
+            .catch(error => {
+                console.log(error.response)
+                toast.error('Algo fallo al eliminar')
+            })
     }
 
     isLeftArrowProductShow = () => {

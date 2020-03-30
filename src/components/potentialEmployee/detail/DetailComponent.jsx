@@ -2,7 +2,7 @@ import React from 'react'
 import MainButtonOutlined from '../../common/mainButtonOutlined'
 import MainButton from '../../common/mainButton'
 import ContractEmployee from '../../employees/form/contractForm'
-import { Skeleton } from 'antd'
+import { Skeleton, Popconfirm } from 'antd'
 import { formatDate, joinUserName } from '../../../utils'
 import { getPotentialEmployeeRole } from '../../../consts'
 
@@ -28,11 +28,18 @@ const DetailComponent = ({
                             />
                             {
                                 isStaff === 'true' ?
-                                    <MainButtonOutlined
-                                        className='delete-button'
-                                        text='Descartar'
-                                        onClick={handleDelete}
-                                    />
+                                    <Popconfirm
+                                            title='¿Estás seguro que deseas realizar esta acción?'
+                                            onConfirm={handleDelete}
+                                            onCancel={() => console.log('Canceling')}
+                                            okText="Aceptar"
+                                            cancelText="Cancelar"
+                                        >
+                                        <MainButtonOutlined
+                                            className='delete-button'
+                                            text='Descartar'
+                                        />
+                                    </Popconfirm>
                                     : null
                             }
                         </div>

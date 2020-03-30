@@ -69,17 +69,15 @@ class PotentialEmployeeDetail extends Component {
     }
 
     handleDelete = () => {
-        if(window.confirm('¿Deseas realmente descartar a este empleado postulante?')) {
-            CRUD.softDelete(potentialEmployeesEndpoint, this.potentialEmployeeId)
-                .then(() => {
-                    toast.success('El empleado postulante ha sido descartado')
-                    setTimeout(() => this.props.history.push('/empleados-postulantes/'), 3000)
-                })
-                .catch(error => {
-                    console.log(error.response)
-                    toast.error('Algo fallo al descartar')
-                })
-        }
+        CRUD.softDelete(potentialEmployeesEndpoint, this.potentialEmployeeId)
+            .then(() => {
+                toast.success('El empleado postulante ha sido descartado')
+                setTimeout(() => this.props.history.push('/empleados-postulantes/'), 3000)
+            })
+            .catch(error => {
+                console.log(error.response)
+                toast.error('Algo fallo al descartar')
+            })
     }
 
     handleChange = ({ e }) => {

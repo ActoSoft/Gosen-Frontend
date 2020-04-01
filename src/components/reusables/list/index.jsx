@@ -91,7 +91,7 @@ export default class ReusableList extends Component {
                 }}
                 searchWords={[this.state.inputText]}
                 autoEscape
-                textToHighlight={text.toString()}
+                textToHighlight={text ? text.toString() : null}
             />
     })
 

@@ -31,7 +31,15 @@ const CardList = props =>
                             />
                         </Col>
                     )
-                    : null
+                    :
+                    <Empty
+                        image={Empty.PRESENTED_IMAGE_SIMPLE}
+                        description={
+                            <span style={{color: '#FFFFFF'}}>
+                                No hay productos para mostrar
+                            </span>
+                        }
+                    />
             }
         </Row>
     </Fragment>

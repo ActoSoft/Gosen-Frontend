@@ -11,7 +11,7 @@ const DetailReusable = ({ data, editURL, handleDelete, attributes }) =>
                     <div className="header-text-container">
                         <div>
                             <span className="user-fullname">{`${data.name}`}</span>
-                            <Link to = {`${editURL}editar/`}>
+                            <Link to = {`${editURL}/editar/`}>
                                 <MainButtonOutlined
                                     text='Editar'
                                 />

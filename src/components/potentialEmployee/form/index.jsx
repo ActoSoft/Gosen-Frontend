@@ -3,7 +3,7 @@ import { potentialEmployeesEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
 import FormReusable from './FormComponent'
 // import './index.scss'
-import CRUD, { post } from '../../../services'
+import CRUD from '../../../services'
 import moment from 'moment'
 
 class PotentialEmployeeForm extends Component {
@@ -59,17 +59,6 @@ class PotentialEmployeeForm extends Component {
         }
     }
 
-    // handleChangeImage = async ({ file }) => {
-    //     const result = await this.handleSubmitImage(file)
-    //     if (!result.hasError) {
-    //         const { data } = this.state
-    //         data.photo = result
-    //         this.setState({
-    //             data
-    //         })
-    //     }
-    // }
-
     handleChangeDatePicker = ({ moment: momentDate }) => {
 
         if(!momentDate) {
@@ -91,33 +80,6 @@ class PotentialEmployeeForm extends Component {
         this.setState({ data })
     }
 
-    // handleSubmitImage = async (image) => {
-    //     let formData = new FormData()
-    //     formData.append('photo', image)
-    //     formData.append('id', this.state.data.id)
-    //     try {
-    //         const response = await post(
-    //             `${potentialEmployeesEndpoint}update_image/`,
-    //             formData
-    //         )
-    //         if(response.data) {
-    //             toast.success('Imagen actualizada con éxito')
-    //             return response.data.photo
-    //         } else {
-    //             toast.warn('WTF')
-    //             return {
-    //                 hasError: true
-    //             }
-    //         }
-    //     } catch (error) {
-    //         // showErrors(error.response.data)
-    //         console.log(error.response.data)
-    //         return {
-    //             hasError: true
-    //         }
-    //     }
-    // }
-
     handleValidation = async (data) => {
 
         const { user } = data
@@ -128,20 +90,20 @@ class PotentialEmployeeForm extends Component {
             let name
 
             switch (attr) {
-                case 'first_name':
-                    name = 'Nombre'
-                    break;
-                case 'last_name':
-                    name = 'Apellido'
-                    break;
-                case 'username':
-                    name = 'Usuario'
-                    break;
-                case 'email':
-                    name = 'Correo electrónico'
-                    break;
-                default:
-                    break;
+            case 'first_name':
+                name = 'Nombre'
+                break
+            case 'last_name':
+                name = 'Apellido'
+                break
+            case 'username':
+                name = 'Usuario'
+                break
+            case 'email':
+                name = 'Correo electrónico'
+                break
+            default:
+                break
             }
 
             if(!user[attr] || user[attr].length < 2) {
@@ -156,32 +118,32 @@ class PotentialEmployeeForm extends Component {
             if(attr === 'user') return false
 
             switch (attr) {
-                case 'birth_date':
-                    name = 'Fecha de Nacimiento'
-                    break;
-                case 'phone_number':
-                    name = 'Teléfono'
-                    break;
-                case 'street':
-                    name = 'Calle'
-                    break;
-                case 'city':
-                    name = 'Ciudad'
-                    break;
-                case 'zip_code':
-                    name = 'Código postal'
-                    break;
-                case 'gender':
-                    name = 'Género'
-                    break;
-                case 'state':
-                    name = 'Estado'
-                    break;
-                case 'role':
-                    name = 'Tipo de Empleado'
-                    break;
-                default:
-                    break;
+            case 'birth_date':
+                name = 'Fecha de Nacimiento'
+                break
+            case 'phone_number':
+                name = 'Teléfono'
+                break
+            case 'street':
+                name = 'Calle'
+                break
+            case 'city':
+                name = 'Ciudad'
+                break
+            case 'zip_code':
+                name = 'Código postal'
+                break
+            case 'gender':
+                name = 'Género'
+                break
+            case 'state':
+                name = 'Estado'
+                break
+            case 'role':
+                name = 'Tipo de Empleado'
+                break
+            default:
+                break
             }
 
             if(!data[attr] || data[attr].length < 2) {
@@ -213,6 +175,7 @@ class PotentialEmployeeForm extends Component {
                     if (response.data) {
                         toast.success('Se ha registrado tu postulación')
                         window.location.reload()
+                        setTimeout(() => window.location.reload(), 3000)
                     } else {
                         toast.error('Algo falló al enviar la información, intenta más  tarde')
                     }
@@ -231,7 +194,6 @@ class PotentialEmployeeForm extends Component {
             handleChange: this.handleChangeForm,
             handleChangeDate: this.handleChangeDatePicker,
             handleChangeSelect: this.handleChangeSelect,
-            // handleChangeImage: this.handleChangeImage,
             handleSubmit: this.handleSubmit
         }
         return events[event](params)

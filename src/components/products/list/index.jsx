@@ -35,7 +35,7 @@ export default class ProductList extends Component {
         CRUD.softDelete(productsEndpoint, id)
             .then(() => {
                 toast.success('El producto ha sido eliminado')
-                setTimeout(() => this.props.history.push('/productos/'), 3000)
+                setTimeout(() => window.location.reload(), 3000)
             })
             .catch(error => {
                 console.log(error.response)

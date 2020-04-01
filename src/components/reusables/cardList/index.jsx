@@ -64,8 +64,9 @@ const CardItem = ({item, history, URL, handleDelete}) =>
                 }
             />,
             <Popconfirm
+                key="delete"
                 title='¿Estás seguro que deseas realizar esta acción?'
-                onConfirm={handleDelete(item.id)}
+                onConfirm={()=>handleDelete(item.id)}
                 onCancel={() => console.log('Canceling')}
                 okText="Aceptar"
                 cancelText="Cancelar"

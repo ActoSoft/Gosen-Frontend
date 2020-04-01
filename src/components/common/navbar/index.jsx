@@ -38,6 +38,44 @@ class Navbar extends Component {
     }
 
     render() {
+        let path = this.props.location.pathname
+        let defaultMenuIndex = '1'
+
+        switch (true) {
+        case path.includes('dashboard/'):
+            defaultMenuIndex = '1'
+            break
+        case path.includes('empleados-postulantes/'):
+            defaultMenuIndex = '2'
+            break
+        case path.includes('empleados/'):
+            defaultMenuIndex = '3'
+            break
+        case path.includes('clientes/'):
+            defaultMenuIndex = '4'
+            break
+        case path.includes('servicios/'):
+            defaultMenuIndex = '5'
+            break
+        case path.includes('productos/'):
+            defaultMenuIndex = '6'
+            break
+        case path.includes('almacenes/'):
+            defaultMenuIndex = '7'
+            break
+        case path.includes('trabajos/'):
+            defaultMenuIndex = '8'
+            break
+        case path.includes('perfil/'):
+            defaultMenuIndex = 'sub1'
+            break
+        case path.includes('administradores/'):
+            defaultMenuIndex = 'sub2'
+            break
+        default:
+            break
+        }
+
         return (
             <div>
                 <div className="navbar">
@@ -70,7 +108,7 @@ class Navbar extends Component {
                     left: this.state.left
                 }}>
                     <Menu
-                        defaultSelectedKeys={['1']}
+                        defaultSelectedKeys={[defaultMenuIndex]}
                         mode="vertical"
                         theme="dark"
                     >
@@ -121,7 +159,7 @@ class Navbar extends Component {
                         </Menu.Item>
                         <Menu.Item className="root-item" key="8">
                             <Icon type="tool" />
-                            <NavLink to="/trabajos">
+                            <NavLink to="/trabajos/">
                                 <span>Trabajos</span>
                             </NavLink>
                         </Menu.Item>

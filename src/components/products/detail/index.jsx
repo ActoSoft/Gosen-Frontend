@@ -33,17 +33,15 @@ export default class ProductDetail extends Component {
     }
 
     handleDelete = () => {
-        if(window.confirm('¿Deseas realmente eliminar este producto?')) {
-            CRUD.softDelete(productsEndpoint, this.productId)
-                .then(() => {
-                    toast.success('El producto ha sido eliminado')
-                    setTimeout(() => this.props.history.push('/productos/'), 3000)
-                })
-                .catch(error => {
-                    console.log(error.response)
-                    toast.error('Algo fallo al eliminar')
-                })
-        }
+        CRUD.softDelete(productsEndpoint, this.productId)
+            .then(() => {
+                toast.success('El producto ha sido eliminado')
+                setTimeout(() => this.props.history.push('/productos/'), 3000)
+            })
+            .catch(error => {
+                console.log(error.response)
+                toast.error('Algo fallo al eliminar')
+            })
     }
 
     isLeftArrowStockShow = () => {

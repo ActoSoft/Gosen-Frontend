@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { clientsEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
 import FormReusable from '../../reusables/form'
-// import './index.scss'
+import { validateRequest } from '../../../validators'
 import CRUD, { post } from '../../../services'
 
 class ClientForm extends Component {
@@ -17,7 +17,20 @@ class ClientForm extends Component {
     async componentDidMount() {
         if (this.props.match.path.split('/').pop() === 'crear') {
             const data = {
-                user: {}
+                user: {
+                    first_name: null,
+                    last_name: null,
+                    username: null,
+                    email: null
+                },
+                birth_date: '1990-01-01',
+                phone_number: null,
+                street: null,
+                city: null,
+                zip_code: null,
+                gender: null,
+                state: null,
+                role: '',
             }
             this.setState({
                 isCreate: true,
@@ -106,20 +119,27 @@ class ClientForm extends Component {
         delete data.photo
         try {
             let response
-            if(!data.country) data.country = 'México'
-            if(isCreate) {
-                data.role = 'cliente'
-                response = await CRUD.create(clientsEndpoint, data)
+            if (!data.country) data.country = 'México'
+            const validatorResult = await validateRequest('client', data)
+            if (!validatorResult.error) {
+                if (isCreate) {
+                    data.role = 'cliente'
+                    response = await CRUD.create(clientsEndpoint, data)
+                } else {
+                    response = await CRUD.update(clientsEndpoint, data.id, data)
+                }
+                if (response.data) {
+                    toast.success('Datos actualizados con éxito')
+                    isCreate ?
+                        this.props.history.push('/clientes/')
+                        : this.props.history.push(`/clientes/${data.id}/`)
+                } else {
+                    toast.error('WTF')
+                }
             } else {
-                response = await CRUD.update(clientsEndpoint, data.id, data)
-            }
-            if (response.data) {
-                toast.success('Datos actualizados con éxito')
-                isCreate ?
-                    this.props.history.push('/clientes/')
-                    : this.props.history.push(`/clientes/${data.id}/`)
-            } else {
-                toast.error('WTF')
+                validatorResult.errors.forEach(errorMessage =>
+                    toast.error(errorMessage)
+                )
             }
         } catch (error) {
             const { data } = error.response

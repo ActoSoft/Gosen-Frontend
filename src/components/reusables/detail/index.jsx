@@ -1,6 +1,6 @@
 import React from 'react'
 import MainButtonOutlined from '../../common/mainButtonOutlined'
-import { Skeleton } from 'antd'
+import { Skeleton, Popconfirm } from 'antd'
 import { Link } from 'react-router-dom'
 import { formatDate, joinUserName } from '../../../utils'
 
@@ -19,11 +19,19 @@ const DetailReusable = ({ data, editURL, handleDelete, notProfileContainer, isSt
                             </Link>
                             {
                                 isStaff === 'true' ?
-                                    <MainButtonOutlined
-                                        className='delete-button'
-                                        text='Eliminar'
-                                        onClick={handleDelete}
-                                    />
+                                    <Popconfirm
+                                        title='¿Estás seguro que deseas realizar esta acción?'
+                                        onConfirm={handleDelete}
+                                        onCancel={() => console.log('Canceling')}
+                                        okText="Aceptar"
+                                        cancelText="Cancelar"
+                                    >
+                                        <MainButtonOutlined
+                                            className='delete-button'
+                                            text='Eliminar'
+                                        />
+                                    </Popconfirm>
+                                        
                                     : null
                             }
                         </div>

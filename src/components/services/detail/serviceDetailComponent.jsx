@@ -1,6 +1,6 @@
 import React from 'react'
 import MainButtonOutlined from '../../common/mainButtonOutlined'
-import { Skeleton } from 'antd'
+import { Skeleton, Popconfirm } from 'antd'
 import { Link } from 'react-router-dom'
 
 const DetailReusable = ({ data, editURL, handleDelete, attributes }) =>
@@ -16,13 +16,20 @@ const DetailReusable = ({ data, editURL, handleDelete, attributes }) =>
                                     text='Editar'
                                 />
                             </Link>
-                            <MainButtonOutlined
-                                className='delete-button'
-                                text='Eliminar'
-                                onClick={handleDelete}
-                            />
+                            <Popconfirm
+                                title='¿Estás seguro que deseas realizar esta acción?'
+                                onConfirm={handleDelete}
+                                onCancel={() => console.log('Canceling')}
+                                okText="Aceptar"
+                                cancelText="Cancelar"
+                            >
+                                <MainButtonOutlined
+                                    className='delete-button'
+                                    text='Eliminar'
+                                />
+                            </Popconfirm>
                         </div>
-                    </div>                   
+                    </div>
                 </div>
                 <div className="data-container">
                     {  attributes && attributes.length > 0 ?

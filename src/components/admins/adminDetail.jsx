@@ -24,17 +24,15 @@ class AdminDetail extends Component {
     }
 
     handleDelete = () => {
-        if(window.confirm('¿Deseas realmente eliminar a este administrador?')) {
-            CRUD.softDelete(adminsEndpoint, this.adminId)
-                .then(() => {
-                    toast.success('El administrador ha sido eliminado')
-                    setTimeout(() => this.props.history.push('/administradores/'), 3000)
-                })
-                .catch(error => {
-                    console.log(error.response)
-                    toast.error('Algo fallo al eliminar')
-                })
-        }
+        CRUD.softDelete(adminsEndpoint, this.adminId)
+            .then(() => {
+                toast.success('El administrador ha sido eliminado')
+                setTimeout(() => this.props.history.push('/administradores/'), 3000)
+            })
+            .catch(error => {
+                console.log(error.response)
+                toast.error('Algo fallo al eliminar')
+            })
     }
 
     render() {

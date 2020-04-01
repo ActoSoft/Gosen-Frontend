@@ -173,9 +173,22 @@ class WorkForm extends Component {
         })
     }
 
-    handleChangeInputText = ({target}) => {
+    handleChangeInputText = ({e, onlyNumbers = false}) => {
+        console.log(e)
         const { work } = this.state
-        work[target.name] = target.value
+        const { target } = e
+        if (onlyNumbers) {
+            const isNumber = /^\d+$/.test(e.target.value)
+            if (!isNumber) {
+                toast.error('Sólo puedes introducir números en este campo')
+                work[target.name] = ''
+
+            } else {
+                work[target.name] = target.value
+            }
+        } else {
+            work[target.name] = target.value
+        }
         this.setState({
             work
         })

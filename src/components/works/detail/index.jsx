@@ -40,17 +40,15 @@ export default class WorkDetail extends Component {
     }
 
     handleDelete = () => {
-        if(window.confirm('¿Deseas realmente eliminar este trabajo?')) {
-            CRUD.softDelete(worksEndpoint, this.workId)
-                .then(() => {
-                    toast.success('El trabajo ha sido eliminado')
-                    setTimeout(() => this.props.history.push('/trabajos/'), 3000)
-                })
-                .catch(error => {
-                    console.log(error.response)
-                    toast.error('Algo falló al eliminar')
-                })
-        }
+        CRUD.softDelete(worksEndpoint, this.workId)
+            .then(() => {
+                toast.success('El trabajo ha sido eliminado')
+                setTimeout(() => this.props.history.push('/trabajos/'), 3000)
+            })
+            .catch(error => {
+                console.log(error.response)
+                toast.error('Algo falló al eliminar')
+            })
     }
 
     handleChangeNewPaymentValues = e => {

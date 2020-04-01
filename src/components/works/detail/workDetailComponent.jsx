@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import MainButtonOutlined from '../../common/mainButtonOutlined'
-import { Skeleton, Row, Col } from 'antd'
+import { Skeleton, Row, Col, Popconfirm } from 'antd'
 import { Link } from 'react-router-dom'
 import {
     validateExist,
@@ -22,11 +22,18 @@ const WorkDetailComponent = ({ data, editURL, handleDelete }) =>
                                     text='Editar'
                                 />
                             </Link>
-                            <MainButtonOutlined
-                                className='delete-button'
-                                text='Eliminar'
-                                onClick={handleDelete}
-                            />
+                            <Popconfirm
+                                title='¿Estás seguro que deseas realizar esta acción?'
+                                onConfirm={handleDelete}
+                                onCancel={() => console.log('Canceling')}
+                                okText="Aceptar"
+                                cancelText="Cancelar"
+                            >
+                                <MainButtonOutlined
+                                    className='delete-button'
+                                    text='Eliminar'
+                                />
+                            </Popconfirm>
                         </div>
                     </div>
                 </div>

@@ -7,6 +7,7 @@ import InputPassword from '../../common/inputPassword'
 import MainButton from '../../common/mainButton'
 import { withAuth } from '../../../Authentication/'
 import { toast } from 'react-toastify'
+import { validateRequest } from '../../../validators'
 
 class ChangePassword extends Component{
 
@@ -33,9 +34,16 @@ class ChangePassword extends Component{
 
         const { password, confirmPassword, token } = this.state
         if(password === confirmPassword) {
-            await this.changePassword({ password, token })
-            toast.success('Las contraseña se ha actualizado correctamente')
-            setTimeout(()=>this.props.history.push('/login/'), 3000)
+            const data = { password, token }
+            const validatorResult = await validateRequest('resetPassword', data)
+            if (!validatorResult.error) {
+                await this.changePassword(data)
+                setTimeout(()=>this.props.history.push('/login/'), 3000)
+            } else {
+                validatorResult.errors.forEach(errorMessage =>
+                    toast.error(errorMessage)
+                )
+            }
         } else {
             toast.error('Revisa las contraseñas, no son iguales')
         }

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Skeleton, Empty } from 'antd'
+import { Skeleton } from 'antd'
 import CRUD from '../../../services'
 import { productsEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'
@@ -32,17 +32,15 @@ export default class ProductList extends Component {
     }
 
     handleDelete = id => {
-        if(window.confirm('¿Deseas realmente eliminar este producto?')) {
-            CRUD.softDelete(productsEndpoint, id)
-                .then(() => {
-                    toast.success('El producto ha sido eliminado')
-                    setTimeout(() => this.props.history.push('/productos/'), 3000)
-                })
-                .catch(error => {
-                    console.log(error.response)
-                    toast.error('Algo fallo al eliminar')
-                })
-        }
+        CRUD.softDelete(productsEndpoint, id)
+            .then(() => {
+                toast.success('El producto ha sido eliminado')
+                setTimeout(() => window.location.reload(), 3000)
+            })
+            .catch(error => {
+                console.log(error.response)
+                toast.error('Algo fallo al eliminar')
+            })
     }
 
     render() {

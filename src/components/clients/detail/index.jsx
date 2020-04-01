@@ -30,17 +30,15 @@ class ClientDetail extends Component {
     }
 
     handleDelete = () => {
-        if(window.confirm('¿Deseas realmente eliminar a este cliente?')) {
-            CRUD.softDelete(clientsEndpoint, this.adminId)
-                .then(response => {
-                    toast.success('El cliente ha sido eliminado')
-                    setTimeout(() => this.props.history.push('/clientes/'), 3000)
-                })
-                .catch(error => {
-                    console.log(error.response)
-                    toast.error('Algo fallo al eliminar')
-                })
-        }
+        CRUD.softDelete(clientsEndpoint, this.adminId)
+            .then(response => {
+                toast.success('El cliente ha sido eliminado')
+                setTimeout(() => this.props.history.push('/clientes/'), 3000)
+            })
+            .catch(error => {
+                console.log(error.response)
+                toast.error('Algo fallo al eliminar')
+            })
     }
 
     render() {

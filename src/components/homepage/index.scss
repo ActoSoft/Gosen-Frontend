@@ -8,6 +8,18 @@
     justify-content: center;
     align-items: center;
 
+    .homepage-navbar {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-right: 200px;
+        a {
+            font-weight: 400;
+            font-size: 1.5em;
+            margin: 0 15px;
+        }
+    }
 
     .name {
         font-size: 5em;

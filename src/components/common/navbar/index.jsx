@@ -42,35 +42,38 @@ class Navbar extends Component {
         let defaultMenuIndex = '1'
 
         switch (true) {
-            case path.includes('dashboard/'):
-                defaultMenuIndex = '1'
-                break;
-            case path.includes('empleados-postulantes/'):
-                defaultMenuIndex = '2'
-                break;
-            case path.includes('empleados/'):
-                defaultMenuIndex = '3'
-                break;
-            case path.includes('clientes/'):
-                defaultMenuIndex = '4'
-                break;
-            case path.includes('servicios/'):
-                defaultMenuIndex = '5'
-                break;
-            case path.includes('productos/'):
-                defaultMenuIndex = '6'
-                break;
-            case path.includes('almacenes/'):
-                defaultMenuIndex = '7'
-                break;
-            case path.includes('trabajos/'):
-                defaultMenuIndex = '8'
-                break;
-            // case path.includes('dashboard/'):
-            //     defaultMenuIndex = '1'
-            //     break;
-            default:
-                break;
+        case path.includes('dashboard/'):
+            defaultMenuIndex = '1'
+            break
+        case path.includes('empleados-postulantes/'):
+            defaultMenuIndex = '2'
+            break
+        case path.includes('empleados/'):
+            defaultMenuIndex = '3'
+            break
+        case path.includes('clientes/'):
+            defaultMenuIndex = '4'
+            break
+        case path.includes('servicios/'):
+            defaultMenuIndex = '5'
+            break
+        case path.includes('productos/'):
+            defaultMenuIndex = '6'
+            break
+        case path.includes('almacenes/'):
+            defaultMenuIndex = '7'
+            break
+        case path.includes('trabajos/'):
+            defaultMenuIndex = '8'
+            break
+        case path.includes('perfil/'):
+            defaultMenuIndex = 'sub1'
+            break
+        case path.includes('administradores/'):
+            defaultMenuIndex = 'sub2'
+            break
+        default:
+            break
         }
 
         return (

@@ -18,6 +18,10 @@
             background-color: $main-background;
             color: $primary;
             border-color: $primary;
-        } 
+        }
     }
+}
+
+.main-container {
+    min-height: 80vh;
 }

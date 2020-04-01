@@ -34,7 +34,7 @@ const ContractDetail = ({ data }) =>
                     </div>
                     <div className="data-column info data-column-info-2">
                         <div>
-                            <p>{validateExist(data.salary) === '' ? `${data.salary}.00 MXN` : 'N/A'}</p>
+                            <p>{validateExist(data.salary) !== '' ? `$${data.salary}.00 MXN` : 'N/A'}</p>
                             <p>{validateExist(data.vigency)}</p>
                             <p>{data.active ? 'SI' : 'NO'}</p>
                         </div>

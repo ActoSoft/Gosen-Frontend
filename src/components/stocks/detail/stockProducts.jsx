@@ -31,7 +31,7 @@ const StockProducts = ({
                                     </div>
                                 </Link>
                             )
-                            : <p className="not-products-in-stock">No existen productos dentro de este almacén ☹️</p>
+                            : <p className="not-products-in-stock">No existen productos dentro de este almacén</p>
                     }
                     {
                         isRightArrowProductShow() ?

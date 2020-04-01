@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Skeleton, Empty } from 'antd'
+import { Skeleton } from 'antd'
 import CRUD from '../../../services'
 import { productsEndpoint } from '../../../utils/backendEndpoints'
 import { toast } from 'react-toastify'

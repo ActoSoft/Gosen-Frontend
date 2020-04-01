@@ -5,6 +5,7 @@ import FormReusable from '../../reusables/form'
 import CRUD, { post } from '../../../services'
 import ContractForm from './contractForm'
 import moment from 'moment'
+import { validateRequest } from '../../../validators'
 import { withAuth } from '../../../Authentication'
 
 class EmployeeForm extends Component {
@@ -20,7 +21,20 @@ class EmployeeForm extends Component {
     async componentDidMount() {
         if (this.props.match.path.split('/').pop() === 'crear') {
             const data = {
-                user: {}
+                user: {
+                    first_name: null,
+                    last_name: null,
+                    username: null,
+                    email: null
+                },
+                birth_date: '1990-01-01',
+                phone_number: null,
+                street: null,
+                city: null,
+                zip_code: null,
+                gender: null,
+                state: null,
+                role: null
             }
             data.contract_date_start = moment().format('YYYY-MM-DD')
             this.setState({
@@ -111,24 +125,33 @@ class EmployeeForm extends Component {
         delete data.photo
         try {
             let response
-            if(!data.country) data.country = 'México'
-            if(isCreate) {
-                data.role = 'empleado'
-                data.contracted_by = this.adminId
-                response = await CRUD.create(employeesEndpoint, data)
+            if (!data.country) data.country = 'México'
+
+            const validatorResult = await validateRequest('employee', data)
+            if (!validatorResult.error) {
+                if (isCreate) {
+                    data.role = 'empleado'
+                    data.contracted_by = this.adminId
+                    response = await CRUD.create(employeesEndpoint, data)
+                } else {
+                    //Remove contracted_by in put request
+                    delete data.contracted_by
+                    response = await CRUD.update(employeesEndpoint, data.id, data)
+                }
+                if (response.data) {
+                    toast.success('Datos actualizados con éxito')
+                    isCreate ?
+                        this.props.history.push('/empleados/')
+                        : this.props.history.push(`/empleados/${data.id}/`)
+                } else {
+                    toast.error('WTF')
+                }
             } else {
-                //Remove contracted_by in put request
-                delete data.contracted_by
-                response = await CRUD.update(employeesEndpoint, data.id, data)
+                validatorResult.errors.forEach(errorMessage =>
+                    toast.error(errorMessage)
+                )
             }
-            if (response.data) {
-                toast.success('Datos actualizados con éxito')
-                isCreate ?
-                    this.props.history.push('/empleados/')
-                    : this.props.history.push(`/empleados/${data.id}/`)
-            } else {
-                toast.error('WTF')
-            }
+
         } catch (error) {
             const { data } = error.response
             console.log(data)

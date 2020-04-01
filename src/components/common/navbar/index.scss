@@ -62,12 +62,15 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-bottom: 2vh;
 }
 .anticon-close {
-    padding-right: 1vw;
+    margin-right: 10px;
+    border-radius: 50%;
+    padding: 10px;
     font-size: 1.5em;
-    color: $main-background !important;
+    font-weight: 800;
+    background-color: $main-background;
+    color: $primary !important;
     svg:hover {
         cursor: pointer;
     }
@@ -114,6 +117,7 @@
     display: flex;
     align-items: center;
     padding-left: 3vw !important;
+    margin: 3px 0 !important;
 }
 .ant-menu-item-selected {
     border-right: none;
@@ -123,6 +127,7 @@
         color: $primary-light !important;
     }
 }
+
 .ant-menu-submenu-arrow {
     &::before {
         background: $main-background !important;
@@ -138,4 +143,8 @@
     z-index: 9999;
     transition: 0.4s;
     top: 0;
+    ul {
+        overflow-y: scroll;
+        box-shadow: 5px 5px 10px rgba($black, 1);
+    }
 }

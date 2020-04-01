@@ -5,6 +5,7 @@ import FormReusable from '../reusables/form'
 import { showErrors } from '../../utils'
 import './index.scss'
 import CRUD, { post } from '../../services'
+import { validateRequest } from '../../validators'
 import { withAuth } from '../../Authentication'
 
 class AdminForm extends Component {
@@ -112,21 +113,30 @@ class AdminForm extends Component {
         delete data.photo
         try {
             let response
-            if(!data.country) data.country = 'México'
-            if(isCreate) {
-                data.role = 'admin'
-                response = await CRUD.create(adminsEndpoint, data)
+            if (!data.country) data.country = 'México'
+
+            const validatorResult = await validateRequest('admin', data)
+            if (!validatorResult.error) {
+                if(isCreate) {
+                    data.role = 'admin'
+                    response = await CRUD.create(adminsEndpoint, data)
+                } else {
+                    response = await CRUD.update(adminsEndpoint, data.id, data)
+                }
+                if (response.data) {
+                    toast.success('Datos actualizados con éxito')
+                    isCreate ?
+                        this.props.history.push('/administradores/')
+                        : this.props.history.push(`/administradores/${data.id}/`)
+                } else {
+                    toast.error('WTF')
+                }
             } else {
-                response = await CRUD.update(adminsEndpoint, data.id, data)
+                validatorResult.errors.forEach(errorMessage =>
+                    toast.error(errorMessage)
+                )
             }
-            if (response.data) {
-                toast.success('Datos actualizados con éxito')
-                isCreate ?
-                    this.props.history.push('/administradores/')
-                    : this.props.history.push(`/administradores/${data.id}/`)
-            } else {
-                toast.error('WTF')
-            }
+
         } catch (error) {
             const { data } = error.response
             console.log(data)

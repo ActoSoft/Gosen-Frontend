@@ -9,15 +9,17 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => {
         <Route {...rest} render={ (propsRoute) =>
             auth.isAuthenticated()
                 ?
-                <div>
+                <>
                     <div className="navbar-container">
                         <Navbar {...propsRoute} />
                     </div>
-                    <Component { ...propsRoute } { ...rest } />
+                    <div className="main-container">
+                        <Component { ...propsRoute } { ...rest } />
+                    </div>
                     <footer className="footer-container">
                         <Footer />
                     </footer>
-                </div>
+                </>
                 : <Redirect to="/login" />
         } />
     )

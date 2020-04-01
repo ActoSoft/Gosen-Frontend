@@ -85,10 +85,9 @@ class PotentialEmployeeForm extends Component {
         const { user } = data
         let hasError = false
 
-        await Object.keys(user).map(attr => {
+        Object.keys(user).forEach(attr => {
 
             let name
-
             switch (attr) {
             case 'first_name':
                 name = 'Nombre'
@@ -112,7 +111,7 @@ class PotentialEmployeeForm extends Component {
             }
         })
 
-        await Object.keys(data).map(attr => {
+        Object.keys(data).forEach(attr => {
 
             let name
             if(attr === 'user') return false

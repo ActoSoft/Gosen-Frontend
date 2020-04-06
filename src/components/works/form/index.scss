@@ -1,0 +1,22 @@
+@import "../../../variables.scss";
+
+.work-form-col {
+    padding: 0 5vw;
+}
+
+.form-work {
+    color: $white;
+    font-size: 1.5em;
+}
+
+.work-buttons {
+    margin: 0 20px !important;
+}
+
+.flex-direction-column {
+    flex-direction: column !important;
+}
+
+.work-rows-margin-vertical {
+    margin-top: 2vh;
+}

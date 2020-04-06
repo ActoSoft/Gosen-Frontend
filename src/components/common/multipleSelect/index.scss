@@ -1,0 +1,32 @@
+@import '../../../variables.scss';
+
+.ant-select-open .ant-select-selection{
+    box-shadow: none;
+    border-color: $white;
+}
+.ant-select-selection{
+    background: $black;
+    border-radius: 15px;
+    border-color: $white;
+    
+    &:hover, &:focus, &:active{
+        border-color: $white;
+    }
+    .ant-select-selection__rendered{
+        background: $black;
+        border-radius: 15px;
+
+        .ant-select-selection__choice{
+            background: $black;
+            border-radius: 15px;
+            border: 1px solid $white;
+            color: $white;
+            svg{
+                color: $white;
+            }
+        }
+    }
+}
+.ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item-selected .ant-select-selected-icon, .ant-select-dropdown.ant-select-dropdown--multiple .ant-select-dropdown-menu-item-selected:hover .ant-select-selected-icon{
+    color: $white
+}

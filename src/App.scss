@@ -1,0 +1,27 @@
+@import "./variables.scss";
+
+.navlink {
+    color: $white;
+    text-align: right;
+    text-decoration: none;
+    width: 100%;
+}
+.ant-popover-inner-content {
+    background-color: black;
+    .ant-popover-message {
+        font-family: 'Roboto', sans-serif;
+        color: white;
+    }
+    .ant-popover-buttons {
+        font-family: 'Roboto', sans-serif;
+        .ant-btn-primary {
+            background-color: $main-background;
+            color: $primary;
+            border-color: $primary;
+        }
+    }
+}
+
+.main-container {
+    min-height: 80vh;
+}

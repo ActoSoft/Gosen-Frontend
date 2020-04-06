@@ -1,0 +1,153 @@
+@import '../../../variables.scss';
+
+.row-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .ant-col {
+        margin: 3vh 0;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        p {
+            margin-bottom: 0;
+            margin-top: 0;
+            color: $white;
+            font-size: 3em;
+            font-weight: 600;
+        }
+        .add-icon {
+            margin-left: 2vw;
+            svg {
+                font-size: 40px;
+                fill: $primary;
+            }
+        }
+    }
+}
+
+.row-table {
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+.ant-table-header-column {
+    color: $primary !important;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.ant-table table {
+    border-radius: 10px !important;
+}
+
+thead, th, tbody {
+    background-color: #000 !important;
+}
+
+th {
+    border-bottom: 0 !important;
+    text-align: center !important;
+}
+
+tr {
+    color: $white !important;
+    font-size: 1rem;
+    font-weight: 500;
+    &:hover{
+        td {
+            background-color: $primary !important;
+            color: $black !important;
+        }
+    }
+}
+
+tbody:before {
+    content: "";
+    display: block;
+    height: 1vh;
+    width: 100%;
+    background: $main-background;
+}
+
+td {
+    text-align: center;
+    border-bottom: none !important;
+}
+
+// .anticon {
+//     &:hover, &:focus, &:active, &:visited {
+//         background-color: $primary-light !important;
+//     }
+// }
+
+.ant-table-filter-dropdown {
+    background-color: $third !important;
+    div {
+        input {
+            border-color: $primary-light;
+            background-color: $third !important;
+            color: $primary;
+            &::placeholder {
+                color: rgba($primary, 0.3) !important;
+            }
+            &:focus, &:hover, &:active {
+                border-color: $primary;
+            }
+        }
+
+        .ant-btn-primary {
+            border: 0 !important;
+            background-color: $primary !important;
+            color: $black !important;
+        }
+
+        .clean-button {
+            border: 0 !important;
+            background-color: $black !important;
+            color: $primary !important;
+        }
+    }
+}
+
+.ant-pagination {
+    .ant-pagination-prev, .ant-pagination-next {
+        a {
+            background-color: $primary !important;
+            color: $black !important;
+            border-color: transparent !important;
+            border-width: 0 !important;
+        }
+    }
+    .ant-pagination-item {
+        border-color: transparent !important;
+        background-color: $third;
+        border-width: 0 !important;
+        a {
+            background-color: $third;
+            color: $primary-light;
+        }
+
+        &:hover, &:active, &:focus {
+            border-width: 1px !important;
+            border-color: $primary !important;
+        }
+    }
+
+    .ant-pagination-item-active {
+        border-width: 1px !important;
+        border-color: $primary !important;
+    }
+}
+
+.no-data {
+    width: 100%;
+    text-align: center;
+    color: $white;
+    font-size: 2em;
+}

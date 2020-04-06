@@ -1,0 +1,28 @@
+@import "../../../variables.scss";
+
+.service-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.services {
+    justify-content: center;
+    .header-text-container-update {
+        p {
+            width: 100%;
+            text-align: center;
+            font-size: 3em;
+            color: $white;
+        }
+        .buttons-service-form {
+            text-align: center;
+        }
+    }
+}
+
+.form {
+    .column-services {
+        width: 50%;
+    }
+}

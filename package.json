@@ -3,15 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "antd": "^3.19.3",
+    "axios": "^0.18.1",
+    "firebase-tools": "^7.2.2",
+    "joi": "^14.3.1",
+    "joi-browser": "^13.4.0",
+    "moment": "^2.24.0",
+    "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-highlight-words": "^0.16.0",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "^3.4.1",
+    "react-toastify": "^5.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .js \"src/**/*.{js,jsx}\"",
+    "deploy": "./node_modules/.bin/firebase deploy"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,0 +1,137 @@
+@import "../../../variables.scss";
+
+
+
+.label-images-create {
+    margin-bottom: 0;
+    margin-right: 5vw;
+}
+
+.images-uploaded-container {
+    margin-top: 5vh;
+}
+
+.image-item-src {
+    position: relative;
+    padding: 10%;
+    max-height: 400px;
+    min-height: 400px;
+    img {
+        width: 100% !important;
+        max-height: 90%;
+    }
+}
+.icon-delete-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $white !important;
+}
+
+.no-images {
+    width: 100%;
+    text-align: center;
+    color: $white;
+    font-size: 1.5em;
+}
+
+.upload-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .upload-button-image {
+        width: 100px;
+        height: 100px;
+        background-color: $primary;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        border-radius: 5px;
+        box-shadow: 5px 5px px rgba(0,0,0,0.4);
+        .upload-button-image-icon {
+            color: $black;
+            font-size: 2em;
+        }
+        .upload-button-image-text {
+            color: $black;
+            font-size: 1.2em;
+            font-weight: 600;
+            text-align: center;
+        }
+    }
+}
+
+.product-stocks-add-container {
+    margin: 5vh;
+    p {
+        width: 100%;
+        color: $white;
+        text-align: center;
+    }
+}
+
+.label-stocks-registered {
+    width: 100%;
+    text-align: center;
+    font-size: 3em;
+    color: $white;
+}
+.stock-registered-container {
+    width: 100%;
+    background-color: $primary;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 5px;
+    margin-bottom: 5vh;
+
+    p {
+        font-size: 1.5em;
+        color: $black;
+        text-align: left;
+        font-weight: 600;
+    }
+
+    .qty-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 20%;
+        p {
+            font-size: 1.2em;
+            margin-right: 10%;
+            margin-bottom: 0;
+        }
+    }
+
+    .btn-update-stocks {
+        background-color: black;
+        color: $white;
+        font-size: 1em;
+        padding: 10px;
+    }
+    .btn-delete-stocks {
+        background-color: red;
+        color: $white;
+        font-size: 1em;
+        padding: 10px;
+        margin-top: 2vh;
+    }
+}
+
+.icon-delete-stock {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    border-radius: 50%;
+    font-size: 1.2em;
+    padding-right: 0;
+    padding: 5px;
+    color: $black !important;
+}

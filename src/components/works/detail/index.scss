@@ -1,0 +1,91 @@
+@import "../../../variables.scss";
+.work-rows {
+    width: 100%;
+    .work-label {
+        color: $primary;
+        font-size: 1em;
+    }
+
+    .work-value {
+        color: $white;
+        font-size: 1.5em;
+    }
+
+    .many-work-values {
+        margin-bottom: 0;
+        font-size: 1.2em !important;
+    }
+
+    .work-link {
+        font-weight: 600;
+        text-decoration: underline;
+        &:hover {
+            text-decoration-color: $primary !important;
+        }
+    }
+}
+
+.work-label-title {
+    font-size: 3em;
+    color: $white;
+    text-align: center;
+}
+
+.add-payment-work-button {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.historial-payment-works-button {
+    background-color: $black;
+    color: $primary;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.work-input {
+    width: 100%;
+}
+
+.add-payment-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.work-input-label {
+    color: white;
+    font-size: 1.2em;
+    margin-bottom: 0;
+}
+
+.no-margin-bottom {
+    margin-bottom: 0;
+}
+
+.work-vertical-space {
+    margin: 15px 0;
+}
+
+.work-arrow-left {
+    position: absolute;
+    left: 0;
+}
+
+.transaction-card {
+    background-color: $primary;
+    border-radius: 5px;
+    margin: 20px 0;
+    padding: 10px 0 5px 0;
+    text-align: center;
+    color: $black;
+    .transaction-value {
+        font-size: 1.2em;
+        font-weight: 600;
+    }
+    .transaction-amount {
+        font-size: 1.5em;
+        font-weight: 700;
+    }
+}

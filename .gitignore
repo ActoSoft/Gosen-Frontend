@@ -25,4 +25,5 @@ yarn-error.log*
 package-lock.json
 .vscode/
 .firebase/
+.firebaserc
 firebase-debug.log

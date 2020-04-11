@@ -95,6 +95,12 @@ const productInStockSchema = Joi.object({
     qty: Joi.number().min(1).required(),
 })
 
+const stockSchema = Joi.object({
+    name: Joi.string().required(),
+    address: Joi.string().required(),
+    description: Joi.string()
+})
+
 const schemas = {
     user: userSchema,
     userAdmin: userAdminSchema,
@@ -107,7 +113,8 @@ const schemas = {
     client: clientSchema,
     service: serviceSchema,
     product: productSchema,
-    productInStock: productInStockSchema
+    productInStock: productInStockSchema,
+    stock: stockSchema
 }
 
 const validateRequest = async (schema, data) => {

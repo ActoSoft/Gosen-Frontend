@@ -59,7 +59,7 @@ const UploadProducts = ({
                         <MainButton
                             text='Guardar producto en almacén'
                             disabled={selectedProduct ? false : true}
-                            onClick={() => handleSaveProductInStock()}
+                            onClick={handleSaveProductInStock}
                         />
                     </Col>
                 </Row>

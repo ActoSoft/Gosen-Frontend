@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import Form from './form'
 import CRUD, { post } from '../../../services'
 import UploadProducts from './uploadProducts'
+import { validateRequest } from '../../../validators'
 
 class StockForm extends Component {
     constructor(props) {
@@ -74,22 +75,29 @@ class StockForm extends Component {
         // TODO: Validations
         const { data, isCreate } = this.state
         try {
-            let response
-            if(isCreate) {
-                response = await CRUD.create(stocksEndpoint, data)
+            const validatorResult = await validateRequest('stock', data)
+            if (!validatorResult.error ) {
+                let response
+                if(isCreate) {
+                    response = await CRUD.create(stocksEndpoint, data)
+                } else {
+                    delete data.works
+                    response = await CRUD.update(stocksEndpoint, data.id, data)
+                }
+                if (response.data) {
+                    toast.success(`Almacén ${isCreate ? 'creado' : 'editado'} con éxito`)
+                    this.setState({
+                        isFormVisible: false,
+                        isProductsVisible: true,
+                        newStockId: response.data.id
+                    })
+                } else {
+                    toast.error('WTF')
+                }
             } else {
-                delete data.works
-                response = await CRUD.update(stocksEndpoint, data.id, data)
-            }
-            if (response.data) {
-                toast.success(`Almacén ${isCreate ? 'creado' : 'editado'} con éxito`)
-                this.setState({
-                    isFormVisible: false,
-                    isProductsVisible: true,
-                    newStockId: response.data.id
-                })
-            } else {
-                toast.error('WTF')
+                validatorResult.errors.forEach(errorMessage =>
+                    toast.error(errorMessage)
+                )
             }
         } catch (error) {
             const { data } = error.response
@@ -137,19 +145,28 @@ class StockForm extends Component {
         }
 
         try {
-            const response = await post(`${stocksEndpoint}save_product/`, body)
 
-            if (response.data) {
-                toast.success('Producto registrado en almacén con éxito')
-                const stockProducts = response.data.products.filter(product => !product.product.deteled)
-                this.setState({
-                    products: this.excludeProductsOnStock(allProducts, stockProducts),
-                    stockProducts,
-                    selectedProduct: null,
-                    newQty: 0
-                })
+            const validatorResult = await validateRequest('productInStock', body)
+            console.log(validatorResult)
+
+            if (!validatorResult.error) {
+                const response = await post(`${stocksEndpoint}save_product/`, body)
+                if (response.data) {
+                    toast.success('Producto registrado en almacén con éxito')
+                    const stockProducts = response.data.products.filter(product => !product.product.deteled)
+                    this.setState({
+                        products: this.excludeProductsOnStock(allProducts, stockProducts),
+                        stockProducts,
+                        selectedProduct: null,
+                        newQty: 0
+                    })
+                } else {
+                    toast.error('Algo falló al registrar el producto dentro del almacén')
+                }
             } else {
-                toast.error('Algo falló al registrar el producto dentro del almacén')
+                validatorResult.errors.forEach(errorMessage =>
+                    toast.error(errorMessage)
+                )
             }
         } catch (error) {
             console.log(error)
@@ -236,7 +253,6 @@ class StockForm extends Component {
             selectedProduct,
             newQty
         } = this.state
-        console.log(model)
         return (
             <div className="body-container">
                 <Form

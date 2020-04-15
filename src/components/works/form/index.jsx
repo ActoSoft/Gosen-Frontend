@@ -13,6 +13,7 @@ import './index.scss'
 import moment from 'moment'
 import { Skeleton } from 'antd'
 import { statuses, getWorkStatusByValue } from '../../../consts'
+import { validateRequest } from '../../../validators'
 
 class WorkForm extends Component {
     constructor(props) {
@@ -255,20 +256,27 @@ class WorkForm extends Component {
             body.removedEmployees = getDifferenceBetweenTwoArrays(removedEmployees, newEmployees)
         }
         try {
-            let response
-            if (isCreate) {
-                response = await post(`${worksEndpoint}create_work/`, body)
-            } else {
-                response = await post(`${worksEndpoint}update_work/`, body)
-            }
-
-            if (response.data) {
-                toast.success(`Trabajo ${isCreate ? 'creado' : 'actualizado'} con éxito`)
-                if(isCreate) {
-                    setTimeout(() => window.location.assign('/trabajos/'), 3000)
+            const validatorResult = await validateRequest('work', body)
+            if (!validatorResult.error) {
+                let response
+                if (isCreate) {
+                    response = await post(`${worksEndpoint}create_work/`, body)
                 } else {
-                    setTimeout(() => window.location.assign(`/trabajos/${workId}/`), 3000)
+                    response = await post(`${worksEndpoint}update_work/`, body)
                 }
+
+                if (response.data) {
+                    toast.success(`Trabajo ${isCreate ? 'creado' : 'actualizado'} con éxito`)
+                    if(isCreate) {
+                        setTimeout(() => window.location.assign('/trabajos/'), 3000)
+                    } else {
+                        setTimeout(() => window.location.assign(`/trabajos/${workId}/`), 3000)
+                    }
+                }
+            } else {
+                validatorResult.errors.forEach(errorMessage =>
+                    toast.error(errorMessage)
+                )
             }
         } catch (error) {
             toast.error(`Algo falló al ${isCreate ? 'crear' : 'actualizar'}. Intenta más tarde`)

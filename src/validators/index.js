@@ -101,6 +101,23 @@ const stockSchema = Joi.object({
     description: Joi.string()
 })
 
+const workSchema = Joi.object({
+    clientId: Joi.number().required(),
+    serviceId: Joi.number().required(),
+    employeesId: Joi.array().items(Joi.number()).min(1).required(),
+    dateStart: Joi.string().required().min(4),
+    dateEnd: Joi.string().required().min(4),
+    description: Joi.string().required(),
+    qty: Joi.number().min(1).required(),
+    total: Joi.number().min(1).required(),
+    payed: Joi.number().min(1).required(),
+    toPay: Joi.number().min(1).required(),
+    status: Joi.string().required(),
+    id: Joi.alternatives().try(Joi.number(), null).required(),
+    newEmployees: Joi.array().items(Joi.number()).optional(),
+    removeEmployees: Joi.array().items(Joi.number()).optional()
+})
+
 const schemas = {
     user: userSchema,
     userAdmin: userAdminSchema,
@@ -114,7 +131,8 @@ const schemas = {
     service: serviceSchema,
     product: productSchema,
     productInStock: productInStockSchema,
-    stock: stockSchema
+    stock: stockSchema,
+    work: workSchema,
 }
 
 const validateRequest = async (schema, data) => {

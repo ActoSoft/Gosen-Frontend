@@ -19,7 +19,7 @@ export default class StocksList extends Component {
                     name: 'address'
                 },
                 {
-                    title: 'Description',
+                    title: 'Descripción',
                     name: 'description'
                 }
             ]
